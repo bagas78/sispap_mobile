@@ -155,6 +155,12 @@
             </a>
           </li>
 
+          <li class="whatsapp">
+            <a href="<?php echo base_url() ?>wa">
+              <i class="fa fa-whatsapp"></i> <span>Notif Whatsapp</span>
+            </a>
+          </li>
+
           <li class="treeview kontak">
             <a href="#">
               <i class="fa fa-users"></i> <span>Kontak</span>

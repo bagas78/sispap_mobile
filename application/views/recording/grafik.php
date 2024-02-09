@@ -9,7 +9,7 @@
             <div class="box-header with-border">
 
               <br/>
-
+ 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -107,7 +107,7 @@
 
           {
             fillColor           : '#dd4b39',
-            data                : [<?php foreach($data as $d){ if ($d['ayam']) { echo $d['ayam'].","; } } ?>]
+            data                : [<?php foreach($data as $d){ if ($d['afkir']) { echo $d['afkir'].","; } } ?>]
           },
 
         <?php endif ?>

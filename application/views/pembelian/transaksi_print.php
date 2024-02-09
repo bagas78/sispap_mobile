@@ -20,7 +20,7 @@
   		}
   		.tit{
   			border-width: 2px;
-		    border-style: solid;
+		    border-style: solid; 
 		    padding: 0.5%;
 		    font-weight: bold;
 		    font-size: x-large;
@@ -37,51 +37,61 @@
 </head>
 <body>
 
-	<div class="box">
+	<div class="box" style="padding: 0;">
 
 		<div class="row">
 
-			<div class="col-md-4 col-xs-6" align="left">
-				<table style="font-weight: bold; width: 100%;">
+			<div class="col-md-12">
+				<table border="0" style="font-weight: bold;" class="table table-responsive table-borderless">
 					<tr>
-						<td style="padding:1%;">Faktur</td>
-						<td style="padding:1%;"> : &nbsp;&nbsp;&nbsp;<?=@$data[0]['pembelian_faktur']?></td>
+						<td style="border-top: 0;">Faktur</td>
+						<td style="border-top: 0;">:</td>
+						<td style="border-top: 0;" align="right"><?=@$data[0]['pembelian_faktur']?></td>
 					</tr>
 					<tr>
-						<td style="padding:1%;">Tanggal</td>
-						<td style="padding:1%;"> : &nbsp;&nbsp;&nbsp;<?= date_format(date_create(@$data[0]['pembelian_tanggal']), 'd M Y') ?></td>
+						<td style="border-top: 0;">Tanggal</td>
+						<td style="border-top: 0;">:</td>
+						<td style="border-top: 0;" align="right"><?= date_format(date_create(@$data[0]['pembelian_tanggal']), 'd M Y') ?></td>
 					</tr>
 					<tr>
-						<td style="padding:1%;">Transaksi</td>
-						<td style="padding:1%;"> : &nbsp;&nbsp;&nbsp;<?=@$data[0]['user_nama']?></td>
+						<td style="border-top: 0;">Transaksi</td>
+						<td style="border-top: 0;">:</td>
+						<td style="border-top: 0;" align="right"><?=@$data[0]['user_nama']?></td>
 					</tr>
 				</table>
 			</div>
 
-			<div class="clearfix"></div>
+			<div class="clearfix" style="margin-top: 30px;"></div>
 
 			<div class="col-md-12" align="center">
 				<span class="tit">FAKTUR TAGIHAN</span>
 			</div>
 
-			<div class="clearfix" style="margin-bottom: 1%;"></div>
+			<div class="clearfix" style="margin-bottom: 30px;"></div>
+
+			<div class="col-md-12">
+				<table border="0" style="font-weight: bold;" class="table table-responsive table-borderless">
+					<tr>
+						<td style="border-top: 0;">Nama</td>
+						<td style="border-top: 0;">:</td>
+						<td style="border-top: 0;" colspan="4"><?=@$data[0]['kontak_nama'].' ( '.@$data[0]['kontak_tlp'].' )'?></td>
+					<tr>
+						<td style="border-top: 0;">Alamat</td>
+						<td style="border-top: 0;">:</td>
+						<td style="border-top: 0;" colspan="4"><?=@$data[0]['kontak_alamat']?></td>
+					</tr>
+				</table>
+			</div>
 
 			<div class="col-md-12">
 			
-				<table class="table table-responsive table-borderless">
-					<thead>
-						<tr>
-							<td>Nama &nbsp;&nbsp;&nbsp;</td>
-							<td colspan="5">: <?=@$data[0]['kontak_nama'].' ( '.@$data[0]['kontak_tlp'].' )'?></td>
-						<tr>
-							<td style="border-top: 0;">Alamat &nbsp;&nbsp;&nbsp;</td>
-							<td style="border-top: 0;" colspan="5">: <?=@$data[0]['kontak_alamat']?></td>
-						</tr>
+				<table border="0" class="table table-responsive table-borderless" style="width: 100%;">
+					<thead>						
 						<tr>
 							<th width="70">No</th>
 							<th>Barang</th>
 							<th class="r">Qty</th>
-							<th class="r">Potongan</th>
+							<th hidden class="r">Potongan</th>
 							<th class="r">Harga</th>
 							<th class="r">Subtotal</th>
 						</tr>
@@ -94,7 +104,7 @@
 								<td><?=$i?></td>
 								<td><?=@$val['barang_nama']?></td>
 								<td class="r"><?=@$val['pembelian_barang_qty'].' '.@$val['barang_satuan']?></td>
-								<td class="r"><?=@$val['pembelian_barang_diskon'].' %'?></td>
+								<td hidden class="r"><span class="diskon"><?=@$val['pembelian_barang_diskon']?></span></td>
 								<td class="r"><?=number_format(@$val['pembelian_barang_harga'])?></td>
 								<td class="subtotal r"><?=number_format(@$val['pembelian_barang_subtotal'])?></td>
 							</tr>
@@ -103,17 +113,17 @@
 						<?php endforeach ?>
 
 						<tr>
-							<td colspan="4"></td>
+							<td colspan="3"></td>
 							<td class="r">Total</td>
 							<td class="r"><span id="total"></span></td>
 						</tr> 
 						<tr>
-							<td style="border-top: 0;" colspan="4">Jatuh Tempo : <?php @$d = date_create(@$data[0]['pembelian_jatuh_tempo']); echo date_format($d, 'd M Y') ?></td>
+							<td style="border-top: 0;" colspan="3">Jatuh Tempo : <?php @$d = date_create(@$data[0]['pembelian_jatuh_tempo']); echo date_format($d, 'd M Y') ?></td>
 							<td style="border-top: 0;" class="r">PPN (<span id="ppn"><?=@$data[0]['pembelian_ppn']?></span>%)</td>
 							<td style="border-top: 0;" class="r"><span id="ppn_total"></span></td>
 						</tr>
 						<tr>
-							<td style="border-top: 0;" colspan="4">Keterangan : <?=@$data[0]['pembelian_keterangan']?></td>
+							<td style="border-top: 0;" colspan="3">Keterangan : <?=@$data[0]['pembelian_keterangan']?></td>
 							<td style="border-top: 0;" class="r"><b>Total</b></td>
 							<td style="border-top: 0;" class="r"><b id="total_akhir"></b></td>
 						</tr>
@@ -122,7 +132,7 @@
 				</table>
 			</div>
 
-			<div class="clearfix"></div><br/>
+			<!-- <div class="clearfix"></div><br/>
 
 			<div class="col-md-6 col-xs-6">
 				<center>
@@ -139,7 +149,7 @@
 				<p>( ___________________  )</p>
 				</center>
 			</div>
-
+ -->
 		</div>
 
 	</div>

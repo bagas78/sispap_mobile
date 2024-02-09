@@ -12,7 +12,7 @@ class Report extends CI_Controller{
 	    $this->load->view('report/harian');
 	    $this->load->view('v_template_admin/admin_footer');
 	}
-	function get_data(){
+	function get_data(){ 
 
 		$where = array('report_hapus' => 0);
 
@@ -56,6 +56,13 @@ class Report extends CI_Controller{
 		$db = $this->query_builder->add('t_report',$set);
 
 		if ($db == 1) {
+
+			//library notif
+			$get = $this->query_builder->view_row("SELECT * FROM t_report WHERE report_user = '$user' ORDER BY report_id DESC LIMIT 1");
+			
+			$id = $get['report_id'];
+			$this->notif->kandang($id);
+
 			$this->session->set_flashdata('success','Data berhasil di tambah');
 		} else {
 			$this->session->set_flashdata('gagal','Data gagal di tambah');

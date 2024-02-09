@@ -17,7 +17,7 @@ class Profile extends CI_Controller{
 			redirect(base_url('login')); 
 		}
 	}
-	function update($id){
+	function update($id){ 
 		$data = $this->input->post();
 
 		if (@$_FILES['foto']['name']) {

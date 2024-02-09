@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2024 at 11:16 PM
+-- Generation Time: Feb 09, 2024 at 09:57 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -241,12 +241,12 @@ INSERT INTO `t_barang` (`barang_id`, `barang_kode`, `barang_kategori`, `barang_s
 (11, 'KB005', '2', '0', 'Ayam Mati', 'ekor', '2023-02-27', 1),
 (12, 'KB006', '3', '0', 'Layer Concentrate CAL 9 Mash', 'kg', '2023-02-27', 1),
 (13, 'KB007', '3', '0', 'Pakan Ayam Sinta', 'kg', '2023-02-27', 1),
-(14, 'KB008', '3', '10', 'K62 New Hope', 'kg', '2023-02-27', 1),
+(14, 'KB008', '3', '0', 'K62 New Hope', 'kg', '2023-02-27', 1),
 (15, 'KB009', '3', '0', 'K36 Malindo', 'kg', '2023-02-27', 1),
 (16, 'KB0010', '3', '0', 'Phokpand', 'kg', '2023-02-27', 1),
 (17, 'KB0011', '4', '0', 'NEOBRO', 'pcs', '2023-02-27', 1),
 (18, 'KB0012', '4', '0', 'Viterna', 'pcs', '2023-02-27', 1),
-(19, 'KB0013', '4', '0', 'Masamix Bro Premix', 'pcs', '2023-02-27', 1),
+(19, 'KB0013', '4', '10', 'Masamix Bro Premix', 'pcs', '2023-02-27', 1),
 (24, 'KB0014', '2', '0', 'Ayam Afkir', 'ekor', '2023-02-28', 1),
 (27, 'KB0014', '5', '0', 'Ayam Petelur Sussex', 'ekor', '2023-05-03', 0),
 (28, 'KB0015', '5', '51456', 'Ayam Petelur Coklat/Hibrida', 'ekor', '2023-05-03', 0),
@@ -268,7 +268,7 @@ INSERT INTO `t_barang` (`barang_id`, `barang_kode`, `barang_kategori`, `barang_s
 (45, 'KB0031', '4', '40', 'AGNERAL', 'pcs', '2023-07-29', 0),
 (46, 'KB0032', '3', '0', 'GUMBONAL', 'kg', '2023-07-29', 1),
 (47, 'KB0033', '4', '19', 'MEDIVAC AI', 'pcs', '2023-07-29', 0),
-(48, 'KB0034', '4', '7', 'KOLERIDIN-K', 'pcs', '2023-07-29', 0),
+(48, 'KB0034', '4', '17', 'KOLERIDIN-K', 'pcs', '2023-07-29', 0),
 (49, 'KB0035', '4', '1300', 'L-MATHE', 'pcs', '2023-07-29', 0),
 (50, 'KB0036', '4', '1175', 'LYSHINE', 'pcs', '2023-07-29', 0),
 (51, 'KB0037', '4', '0', 'CYPROTHIL', 'pcs', '2023-07-29', 1),
@@ -290,15 +290,15 @@ INSERT INTO `t_barang` (`barang_id`, `barang_kode`, `barang_kategori`, `barang_s
 (67, 'KB0053', '1', '0', 'KATUL H. AGUS', 'kg', '2023-08-05', 1),
 (68, 'KB0054', '3', '10112', 'JAGUNG PAK HUSEN', 'kg', '2023-08-05', 0),
 (69, 'KB0055', '3', '159050', 'JAGUNG', 'kg', '2023-08-05', 0),
-(70, 'KB0056', '3', '41116', 'KATUL', 'kg', '2023-08-05', 0),
+(70, 'KB0056', '3', '41126', 'KATUL', 'kg', '2023-08-05', 0),
 (71, 'KB0057', '3', '8020', 'BKK', 'kg', '2023-08-05', 0),
-(72, 'KB0058', '3', '10639', 'MBM', 'kg', '2023-08-05', 0),
-(73, 'KB0059', '3', '0', 'MENIR BATU', 'kg', '2023-08-05', 0),
+(72, 'KB0058', '3', '10649', 'MBM', 'kg', '2023-08-05', 0),
+(73, 'KB0059', '3', '10', 'MENIR BATU', 'kg', '2023-08-05', 0),
 (74, 'KB0060', '2', '0', 'MAXI', 'ekor', '2023-08-05', 1),
 (75, 'KB0061', '2', '0', 'AYAM HIDUP', 'ekor', '2023-08-05', 1),
 (76, 'KB0062', '2', '0', 'AYAM MATI', 'ekor', '2023-08-05', 0),
 (77, 'KB0063', '2', '0', 'AYAM AFKIR', 'kg', '2023-08-05', 0),
-(78, 'KB0064', '1', '13', 'TELUR MERAH', 'tray', '2023-08-05', 0),
+(78, 'KB0064', '1', '8', 'TELUR MERAH', 'tray', '2023-08-05', 0),
 (79, 'KB0065', '4', '2', 'NOZZLE SOCOREX', 'pcs', '2023-08-14', 0),
 (80, 'KB0066', '4', '2', 'SOCOREX SPARE VALVE', 'pcs', '2023-08-14', 0),
 (81, 'KB0067', '4', '2', 'VALVE', 'pcs', '2023-08-14', 0),
@@ -355,7 +355,7 @@ INSERT INTO `t_barang` (`barang_id`, `barang_kode`, `barang_kategori`, `barang_s
 (132, 'KB00118', '4', '25', 'SODIUM BIKARBONAT', 'kg', '2023-11-13', 0),
 (133, 'KB00119', '4', '60', 'FORTEVIT', 'pcs', '2023-11-19', 0),
 (134, 'KB00120', '3', '0', 'GANDUM', 'kg', '2023-11-21', 0),
-(135, 'KB00120', '3', '5787', 'GANDUM', 'kg', '2023-11-21', 0),
+(135, 'KB00120', '3', '5797', 'GANDUM', 'kg', '2023-11-21', 0),
 (136, 'KB00122', '4', '20', 'FLAVOR', 'kg', '2023-11-22', 0),
 (137, 'KB00123', '4', '2', 'DIATOMITE SPECTRA', 'kg', '2023-11-25', 0);
 
@@ -863,6 +863,30 @@ INSERT INTO `t_level` (`level_id`, `level_nama`, `level_doc`, `level_telur`, `le
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_notif`
+--
+
+CREATE TABLE `t_notif` (
+  `notif_id` int(11) NOT NULL,
+  `notif_api` text DEFAULT NULL,
+  `notif_tujuan` text DEFAULT NULL,
+  `notif_pembelian` text DEFAULT NULL,
+  `notif_penjualan` text DEFAULT NULL,
+  `notif_vaksin` text DEFAULT NULL,
+  `notif_kandang` text DEFAULT NULL,
+  `notif_tanggal` date DEFAULT curdate()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t_notif`
+--
+
+INSERT INTO `t_notif` (`notif_id`, `notif_api`, `notif_tujuan`, `notif_pembelian`, `notif_penjualan`, `notif_vaksin`, `notif_kandang`, `notif_tanggal`) VALUES
+(2, '85dd8e1ba30f5f4270c839f6ddce4e624050a8cf', '082213691550', 'on', 'on', 'on', 'on', '2024-02-07');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_pakan`
 --
 
@@ -1228,7 +1252,11 @@ INSERT INTO `t_pembelian` (`pembelian_id`, `pembelian_user`, `pembelian_nomor`, 
 (191, 2, 'PB-271123-167', 'J121123000431', 7, 'BAMBANG', 'belum', '2023-01-23', '', '1', '0', '114000', '2023-11-26', 1),
 (192, 2, 'PB-271123-168', '1211230001561', 7, 'BAMBANG', 'belum', '2024-01-23', '', '10', '0', '608250', '2023-11-26', 0),
 (193, 2, 'PB-271123-169', 'J121123000431', 7, 'BAMBANG', 'belum', '2024-01-20', '', '1', '0', '114000', '2023-11-26', 0),
-(194, 2, 'PB-040224-170', 'COBA1234', 7, 'Mas Bro', 'lunas', '2024-02-04', '-', '10', '0', '200000', '2024-02-04', 0);
+(198, 2, 'PB-070224-170', 'PT0000123', 7, 'Mas Bro', 'lunas', '2024-02-07', '-', '10', '0', '120000', '2024-02-07', 0),
+(199, 2, 'PB-070224-171', 'COBA12345', 11, 'Mas Bro', 'lunas', '2024-02-07', '-', '10', '0', '50000', '2024-02-07', 0),
+(200, 2, 'PB-070224-172', 'COBALAGI1111', 10, 'Mas Bro', 'lunas', '2024-02-07', '-', '10', '0', '120000', '2024-02-07', 0),
+(201, 2, 'PB-070224-173', 'LAGILAGI123', 11, 'Mas Bro', 'lunas', '2024-02-07', '-', '10', '0', '50000', '2024-02-07', 0),
+(202, 2, 'PB-070224-174', 'TIDAKNOTIF123', 9, 'Mas Bro', 'lunas', '2024-02-07', '-', '10', '0', '120000', '2024-02-07', 0);
 
 -- --------------------------------------------------------
 
@@ -1451,7 +1479,12 @@ INSERT INTO `t_pembelian_barang` (`pembelian_barang_id`, `pembelian_barang_nomor
 (234, 'PB-271123-167', '4', '105', '152000', '25', '1', '114000', '2023-11-26'),
 (235, 'PB-271123-168', '4', '89', '81100', '25', '10', '608250', '2023-11-26'),
 (236, 'PB-271123-169', '4', '105', '152000', '25', '1', '114000', '2023-11-26'),
-(237, 'PB-040224-170', '3', '14', '20000', '0', '10', '200000', '2024-02-04');
+(239, 'PB-070224-172', '3', '135', '12000', '0', '10', '120000', '2024-02-07'),
+(240, 'PB-070224-170', '3', '73', '12000', '0', '10', '120000', '2024-02-07'),
+(241, 'PB-070224-171', '3', '72', '5000', '0', '10', '50000', '2024-02-07'),
+(242, 'PB-070224-172', '3', '70', '12000', '0', '10', '120000', '2024-02-07'),
+(243, 'PB-070224-173', '4', '19', '5000', '0', '10', '50000', '2024-02-07'),
+(244, 'PB-070224-174', '4', '48', '12000', '0', '10', '120000', '2024-02-07');
 
 -- --------------------------------------------------------
 
@@ -1479,7 +1512,8 @@ CREATE TABLE `t_penjualan` (
 --
 
 INSERT INTO `t_penjualan` (`penjualan_id`, `penjualan_user`, `penjualan_kontak`, `penjualan_nomor`, `penjualan_status`, `penjualan_jatuh_tempo`, `penjualan_keterangan`, `penjualan_qty`, `penjualan_ppn`, `penjualan_total`, `penjualan_tanggal`, `penjualan_hapus`) VALUES
-(34, 3, '29', 'PJ-050224-1', 'lunas', '2024-02-05', '-', '2', 0, '60000', '2024-02-05', 0);
+(34, 3, '29', 'PJ-050224-1', 'lunas', '2024-02-05', '-', '2', 0, '60000', '2024-02-05', 0),
+(35, 2, '29', 'PJ-070224-2', 'lunas', '2024-02-07', '-', '5', 0, '35000', '2024-02-07', 0);
 
 -- --------------------------------------------------------
 
@@ -1505,7 +1539,8 @@ CREATE TABLE `t_penjualan_barang` (
 --
 
 INSERT INTO `t_penjualan_barang` (`penjualan_barang_id`, `penjualan_barang_nomor`, `penjualan_barang_kategori`, `penjualan_barang_barang`, `penjualan_barang_harga`, `penjualan_barang_diskon`, `penjualan_barang_stok`, `penjualan_barang_qty`, `penjualan_barang_subtotal`, `penjualan_barang_tanggal`) VALUES
-(39, 'PJ-050224-1', '1', '78', '30000', '0', '  15', '2', '60000', '2024-02-05');
+(39, 'PJ-050224-1', '1', '78', '30000', '0', '  15', '2', '60000', '2024-02-05'),
+(40, 'PJ-070224-2', '1', '78', '7000', '0', '  13', '5', '35000', '2024-02-07');
 
 -- --------------------------------------------------------
 
@@ -1665,7 +1700,8 @@ CREATE TABLE `t_report` (
 --
 
 INSERT INTO `t_report` (`report_id`, `report_user`, `report_kandang`, `report_kondisi_kandang`, `report_kondisi_suhu`, `report_catatan`, `report_tanggal`, `report_hapus`) VALUES
-(2, '2', '4', 'Kotor', '80 %', 'Tidak ada catatan', '2024-02-05', 0);
+(2, '2', '4', 'Kotor', '80 %', 'Tidak ada catatan', '2024-02-05', 0),
+(3, '2', '22', 'Lumayan Bersih', '60%', 'catatan', '2024-02-07', 0);
 
 -- --------------------------------------------------------
 
@@ -1714,7 +1750,7 @@ CREATE TABLE `t_vaksin` (
 
 INSERT INTO `t_vaksin` (`vaksin_id`, `vaksin_jadwal`, `vaksin_kandang`, `vaksin_ayam`, `vaksin_status`, `vaksin_tanggal`, `vaksin_hapus`) VALUES
 (12, '3', 4, 28, 1, '2024-01-01', 0),
-(16, '3', 4, 28, 0, '2024-01-07', 0);
+(16, '3', 4, 28, 1, '2024-01-07', 0);
 
 -- --------------------------------------------------------
 
@@ -1815,6 +1851,12 @@ ALTER TABLE `t_kontak`
 --
 ALTER TABLE `t_level`
   ADD PRIMARY KEY (`level_id`);
+
+--
+-- Indexes for table `t_notif`
+--
+ALTER TABLE `t_notif`
+  ADD PRIMARY KEY (`notif_id`);
 
 --
 -- Indexes for table `t_pakan`
@@ -2013,6 +2055,12 @@ ALTER TABLE `t_level`
   MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `t_notif`
+--
+ALTER TABLE `t_notif`
+  MODIFY `notif_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `t_pakan`
 --
 ALTER TABLE `t_pakan`
@@ -2046,25 +2094,25 @@ ALTER TABLE `t_pekerjaan`
 -- AUTO_INCREMENT for table `t_pembelian`
 --
 ALTER TABLE `t_pembelian`
-  MODIFY `pembelian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
+  MODIFY `pembelian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
 
 --
 -- AUTO_INCREMENT for table `t_pembelian_barang`
 --
 ALTER TABLE `t_pembelian_barang`
-  MODIFY `pembelian_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
+  MODIFY `pembelian_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
 
 --
 -- AUTO_INCREMENT for table `t_penjualan`
 --
 ALTER TABLE `t_penjualan`
-  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `t_penjualan_barang`
 --
 ALTER TABLE `t_penjualan_barang`
-  MODIFY `penjualan_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `penjualan_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `t_piutang`
@@ -2112,7 +2160,7 @@ ALTER TABLE `t_recording_barang`
 -- AUTO_INCREMENT for table `t_report`
 --
 ALTER TABLE `t_report`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `t_user`

@@ -2,7 +2,7 @@
  
       <div class="row">
         <div class="col-md-3">
-
+ 
           <!-- Profile Image -->
           <div class="box ">
             <div class="box-body box-profile">
@@ -75,7 +75,7 @@
                <!-- /.tab-pane -->
 
               <div class="active  tab-pane" id="settings">
-                <form method="post" action="<?php echo @$this->server->online()?>profile/update/<?php echo $this->session->userdata('id'); ?>" class="form-horizontal" enctype="multipart/form-data">
+                <form method="post" action="<?=base_url()?>profile/update/<?php echo $this->session->userdata('id'); ?>" class="form-horizontal" enctype="multipart/form-data">
 
                   <!--hidden-->
                   <input type="hidden" name="url" value="<?=@$this->server->offline()?>">
@@ -138,7 +138,7 @@
 
               <div class="tab-pane" id="security">
                
-                <form id="form" method="post" action="<?php echo @$this->server->online()?>profile/update_password/<?php echo $this->session->userdata('id'); ?>" class="form-horizontal">
+                <form id="form" method="post" action="<?=base_url()?>profile/update_password/<?php echo $this->session->userdata('id'); ?>" class="form-horizontal">
 
                   <!--hidden-->
                   <input type="hidden" name="url" value="<?=@$this->server->offline()?>">

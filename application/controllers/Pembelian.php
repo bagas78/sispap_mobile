@@ -13,7 +13,7 @@ class Pembelian extends CI_Controller{
 		    $this->load->view('v_template_admin/admin_header',$data);
 		    $this->load->view('pembelian/transaksi');
 		    $this->load->view('v_template_admin/admin_footer');
-
+ 
 		} 
 		else{
 			redirect(base_url('login')); 
@@ -123,6 +123,7 @@ class Pembelian extends CI_Controller{
 
 			//update stok
 			$this->stok->update_barang();
+			$this->notif->pembelian($nomor);
 
 			$this->session->set_flashdata('success','Data berhasil di rubah');
 
@@ -175,7 +176,7 @@ class Pembelian extends CI_Controller{
 			$data['kategori_data'] = $this->query_builder->view("SELECT * FROM t_barang_kategori");
 
 		    $this->load->view('v_template_admin/admin_header',$data);
-		    $this->load->view('pembelian/transaksi_add_mobile');
+		    $this->load->view('pembelian/'.$this->ui->view('transaksi_add'));
 		    $this->load->view('pembelian/transaksi_edit');
 		    $this->load->view('v_template_admin/admin_footer');
 

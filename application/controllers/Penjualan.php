@@ -134,6 +134,7 @@ class penjualan extends CI_Controller{
 
 			//update stok
 			$this->stok->update_barang();
+			$this->notif->penjualan($nomor);
 
 			$this->session->set_flashdata('success','Data berhasil di rubah');
 

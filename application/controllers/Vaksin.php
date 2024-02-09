@@ -14,7 +14,7 @@ class Vaksin extends CI_Controller{
 	    $this->load->view('v_template_admin/admin_footer');
 	}
 	function jadwal_get_data(){ 
-
+ 
 		$where = array('vaksin_jadwal_hapus' => 0);
 
 	    $data = $this->m_vaksin_jadwal->get_datatables($where);
@@ -184,6 +184,10 @@ class Vaksin extends CI_Controller{
 		$db = $this->query_builder->update('t_vaksin',$set,$where);
 		
 		if ($db == 1) {
+
+			//library notif
+			$this->notif->vaksin($id);
+
 			$this->session->set_flashdata('success','Data berhasil di simpan');
 		} else {
 			$this->session->set_flashdata('gagal','Data gagal di simpan');
