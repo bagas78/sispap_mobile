@@ -63,8 +63,9 @@ class Notif {
         $pembayaran = $db['pembelian_status'];
         $total = $db['pembelian_total'];
         $tanggal = date_format(date_create($db['pembelian_tanggal']) ,'d/m/Y');
+        $keterangan = $db['pembelian_keterangan'];
 
-        $pesan = 'Transaksi : '.$transaksi.'%0a'.'Faktur : '.$faktur.'%0a'.'Sales : '.$sales.'%0a'.'Pembayaran : '.$pembayaran.'%0a'.'Total : '.$total.'%0a'.'Tanggal : '.$tanggal.'%0a';
+        $pesan = 'Transaksi : '.$transaksi.'%0a'.'Faktur : '.$faktur.'%0a'.'Sales : '.$sales.'%0a'.'Pembayaran : '.$pembayaran.'%0a'.'Total : '.$total.'%0a'.'Tanggal : '.$tanggal.'%0a'.'keterangan : '.$keterangan;
 
         $this->send($pesan);
 
@@ -88,8 +89,9 @@ class Notif {
         $pembayaran = $db['penjualan_status'];
         $total = $db['penjualan_total'];
         $tanggal = date_format(date_create($db['penjualan_tanggal']) ,'d/m/Y');
+        $keterangan = $db['penjualan_keterangan'];
 
-        $pesan = 'Transaksi : '.$transaksi.'%0a'.'Nomor : '.$nomor.'%0a'.'Pelanggan : '.$pelanggan.'%0a'.'Pembayaran : '.$pembayaran.'%0a'.'Total : '.$total.'%0a'.'Tanggal : '.$tanggal.'%0a';
+        $pesan = 'Transaksi : '.$transaksi.'%0a'.'Nomor : '.$nomor.'%0a'.'Pelanggan : '.$pelanggan.'%0a'.'Pembayaran : '.$pembayaran.'%0a'.'Total : '.$total.'%0a'.'Tanggal : '.$tanggal.'%0a'.'Keterangan : '.$keterangan;
 
         $this->send($pesan);
 
@@ -136,7 +138,7 @@ class Notif {
         $suhu = $db['report_kondisi_suhu'];
         $tanggal = date_format(date_create($db['report_tanggal']) ,'d/m/Y');
 
-        $pesan = 'Transaksi : '.$transaksi.'%0a'.'Kandang : '.$kandang.'%0a'.'Kondisi : '.$kondisi.'%0a'.'Suhu : '.$suhu.'%0a'.'Tanggal : '.$tanggal.'%0a';
+        $pesan = 'Laporan '.$transaksi.'%0a'.'Kandang : '.$kandang.'%0a'.'Kondisi : '.$kondisi.'%0a'.'Suhu : '.$suhu.'%0a'.'Tanggal : '.$tanggal.'%0a';
 
         $this->send($pesan);
 
