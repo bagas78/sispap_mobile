@@ -5,6 +5,7 @@ class Laporan extends CI_Controller{
 		parent::__construct();
 		$this->load->model('m_laporan_pembelian');
 		$this->load->model('m_laporan_penjualan');
+		$this->load->model('m_laporan_pengeluaran');
 	} 
 	function pembelian(){  
 		if ( $this->session->userdata('login') == 1) {
@@ -82,6 +83,44 @@ class Laporan extends CI_Controller{
 			redirect(base_url('login'));
 		}
 	} 
+	function pengeluaran(){  
+		if ( $this->session->userdata('login') == 1) {
+
+			//filter sum
+			if (@$_POST['tanggal']) {
+				
+				$dt = explode('-', $_POST['tanggal']);	
+				$bln = $dt[1];
+				$thn = $dt[0];
+
+			}else{
+
+				$bln = date('m');
+				$thn = date('Y');
+			}
+
+			//sum tahun
+			$sum_tahun = $this->db->query("SELECT SUM(a.pengeluaran_barang_subtotal) AS total FROM t_pengeluaran_barang AS a JOIN t_pengeluaran AS b ON a.pengeluaran_barang_nomor = b.pengeluaran_nomor WHERE b.pengeluaran_hapus = 0 AND date_format(b.pengeluaran_tanggal, '%Y') = '$thn'")->row_array();
+			$data['sum_tahun'] = $sum_tahun['total'];
+
+			//sum bulan
+			$sum_bulan = $this->db->query("SELECT SUM(a.pengeluaran_barang_subtotal) AS total FROM t_pengeluaran_barang AS a JOIN t_pengeluaran AS b ON a.pengeluaran_barang_nomor = b.pengeluaran_nomor WHERE b.pengeluaran_hapus = 0 AND date_format(b.pengeluaran_tanggal, '%Y') = '$thn' AND date_format(b.pengeluaran_tanggal, '%m') = '$bln'")->row_array();
+			$data['sum_bulan'] = $sum_bulan['total'];
+
+			$data['tahun_'] = $thn;
+			$data['bulan_'] = $bln;
+
+			$data['title'] = 'Laporan Pembelian';
+
+		    $this->load->view('v_template_admin/admin_header',$data);
+		    $this->load->view('laporan/pengeluaran');
+		    $this->load->view('v_template_admin/admin_footer');
+ 
+		}
+		else{
+			redirect(base_url('login'));
+		}
+	} 
 	function get_data($jenis, $bulan = '', $tahun = ''){
 
 		if ($jenis == 'pembelian') {
@@ -92,13 +131,24 @@ class Laporan extends CI_Controller{
 			$total = $this->m_laporan_pembelian->count_all($where);
 			$filter = $this->m_laporan_pembelian->count_filtered($where);
 
-		}else{
+		}
+
+		if ($jenis == 'penjualan') {
 
 			$where = array('penjualan_hapus' => 0, 'DATE_FORMAT(penjualan_barang_tanggal, "%m") =' => $bulan, 'DATE_FORMAT(penjualan_barang_tanggal, "%Y") =' => $tahun);
 
 		    $data = $this->m_laporan_penjualan->get_datatables($where);
 			$total = $this->m_laporan_penjualan->count_all($where);
 			$filter = $this->m_laporan_penjualan->count_filtered($where);
+		}
+
+		if ($jenis == 'pengeluaran') {
+
+			$where = array('pengeluaran_hapus' => 0, 'DATE_FORMAT(pengeluaran_barang_tanggal, "%m") =' => $bulan, 'DATE_FORMAT(pengeluaran_barang_tanggal, "%Y") =' => $tahun);
+
+		    $data = $this->m_laporan_pengeluaran->get_datatables($where);
+			$total = $this->m_laporan_pengeluaran->count_all($where);
+			$filter = $this->m_laporan_pengeluaran->count_filtered($where);
 		}
 
 		$output = array(

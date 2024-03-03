@@ -15,7 +15,7 @@
 }
 
 /* The slider */
-.slider {
+.slider { 
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -88,9 +88,16 @@ input:checked + .slider:before {
                 <input type="text" name="api" class="form-control" required id="api">
             </div>
 
-            <div class="form-group">
-                <label>Tujuan</label>
-                <input type="number" name="tujuan" class="form-control" required id="tujuan">
+            <div id="paste" class="form-group row">
+                
+                <div class="col-md-11 col-xs-9">
+                    <label>Tujuan</label>
+                    <input type="number" name="tujuan[]" class="form-control tujuan" required>    
+                </div>
+                <div class="col-md-1 col-xs-1">
+                    <button style="margin-top: 26px;" onclick="clone()" type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                </div>
+
             </div>
 
             <table class="table table-responsive table-bordered">
@@ -155,6 +162,16 @@ input:checked + .slider:before {
       </div>
       <!-- /.box -->
 
+        <!-- copy -->
+        <div id="copy" hidden>
+          <div class="col-md-11 col-xs-9" style="margin-top: 10px;">
+                <input required type="number" name="tujuan[]" class="form-control tujuan" required>    
+            </div>
+            <div class="col-md-1 col-xs-1" style="margin-top: 10px;">
+                <button onclick="$(this).parents('div#copy').remove()" type="button" class="btn btn-danger"><i class="fa fa-minus"></i></button>
+            </div>  
+        </div>
+
 <script type="text/javascript">
 
     //id
@@ -163,7 +180,33 @@ input:checked + .slider:before {
     
     //atribute
     $('#api').val('<?=@$data['notif_api']?>');
-    $('#tujuan').val('<?=@$data['notif_tujuan']?>');
+    
+    
+    //clone
+    <?php $count = count(@$tujuan) - 1; ?>
+    <?php for ($i = 0; $i < $count; $i++): ?>
+
+        clone();
+
+    <?php endfor ?>
+
+    //insert table
+    <?php foreach(@$tujuan as $key => $val): ?>
+
+        $('.tujuan:eq(<?=$key?>)').val('<?=$val?>');
+
+    <?php endforeach ?>
+
+    // <?php if (@$tujuan): ?>
+        
+    //     <?php foreach ($tujuan as $key): ?>
+            
+    //         clone();
+
+    //     <?php endforeach ?>
+
+    // <?php endif ?>
+
 
     if ('<?=@$data['notif_pembelian']?>' == 'on') {
 
@@ -184,5 +227,13 @@ input:checked + .slider:before {
 
         $('#kandang').attr('checked', true);
     } 
+
+
+    //multiple no WA
+    function clone(){
+        
+        $('#paste').append($('#copy').clone().removeAttr('hidden'));
+
+    }
 
 </script>

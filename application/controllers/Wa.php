@@ -7,6 +7,7 @@ class Wa extends CI_Controller{
 	function index(){
 
 		$data['data'] = $this->query_builder->view_row("SELECT * FROM t_notif");
+		$data['tujuan'] = explode(',', $data['data']['notif_tujuan']);
 
 		$data['title'] = 'Notif Whatsapp';
 
@@ -20,7 +21,7 @@ class Wa extends CI_Controller{
 
 		$set = array(
 						'notif_api' => strip_tags(@$_POST['api']),
-						'notif_tujuan' => strip_tags(@$_POST['tujuan']),
+						'notif_tujuan' => strip_tags(implode(',', @$_POST['tujuan'])),
 						'notif_pembelian' => strip_tags(@$_POST['pembelian']),
 						'notif_penjualan' => strip_tags(@$_POST['penjualan']),
 						'notif_vaksin' => strip_tags(@$_POST['vaksin']),

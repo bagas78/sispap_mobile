@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2024 at 09:57 AM
+-- Generation Time: Mar 03, 2024 at 05:34 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -882,7 +882,7 @@ CREATE TABLE `t_notif` (
 --
 
 INSERT INTO `t_notif` (`notif_id`, `notif_api`, `notif_tujuan`, `notif_pembelian`, `notif_penjualan`, `notif_vaksin`, `notif_kandang`, `notif_tanggal`) VALUES
-(2, '85dd8e1ba30f5f4270c839f6ddce4e624050a8cf', '082213691550', 'on', 'on', 'on', 'on', '2024-02-07');
+(2, '85dd8e1ba30f5f4270c839f6ddce4e624050a8cf', '082213691550,085855011542', 'on', 'on', 'on', 'on', '2024-02-07');
 
 -- --------------------------------------------------------
 
@@ -1489,6 +1489,56 @@ INSERT INTO `t_pembelian_barang` (`pembelian_barang_id`, `pembelian_barang_nomor
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_pengeluaran`
+--
+
+CREATE TABLE `t_pengeluaran` (
+  `pengeluaran_id` int(11) NOT NULL,
+  `pengeluaran_user` text DEFAULT NULL,
+  `pengeluaran_nomor` text DEFAULT NULL,
+  `pengeluaran_keterangan` text DEFAULT NULL,
+  `pengeluaran_jatuh_tempo` text DEFAULT NULL,
+  `pengeluaran_qty` text DEFAULT NULL,
+  `pengeluaran_ppn` text DEFAULT NULL,
+  `pengeluaran_total` text DEFAULT NULL,
+  `pengeluaran_tanggal` date DEFAULT curdate(),
+  `pengeluaran_hapus` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t_pengeluaran`
+--
+
+INSERT INTO `t_pengeluaran` (`pengeluaran_id`, `pengeluaran_user`, `pengeluaran_nomor`, `pengeluaran_keterangan`, `pengeluaran_jatuh_tempo`, `pengeluaran_qty`, `pengeluaran_ppn`, `pengeluaran_total`, `pengeluaran_tanggal`, `pengeluaran_hapus`) VALUES
+(2, '2', 'PG-010324-2', 'Nasi goreng untuk makan siang kandang 1', '2024-03-01', '10', '0', '120000', '2024-03-01', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_pengeluaran_barang`
+--
+
+CREATE TABLE `t_pengeluaran_barang` (
+  `pengeluaran_barang_id` int(11) NOT NULL,
+  `pengeluaran_barang_nomor` text DEFAULT NULL,
+  `pengeluaran_barang_barang` text DEFAULT NULL,
+  `pengeluaran_barang_diskon` text DEFAULT NULL,
+  `pengeluaran_barang_harga` text DEFAULT NULL,
+  `pengeluaran_barang_qty` text DEFAULT NULL,
+  `pengeluaran_barang_subtotal` text DEFAULT NULL,
+  `pengeluaran_barang_tanggal` date DEFAULT curdate()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t_pengeluaran_barang`
+--
+
+INSERT INTO `t_pengeluaran_barang` (`pengeluaran_barang_id`, `pengeluaran_barang_nomor`, `pengeluaran_barang_barang`, `pengeluaran_barang_diskon`, `pengeluaran_barang_harga`, `pengeluaran_barang_qty`, `pengeluaran_barang_subtotal`, `pengeluaran_barang_tanggal`) VALUES
+(1, 'PG-010324-2', 'Nasi Goreng', '0', '12000', '10', '120000', '2024-03-01');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_penjualan`
 --
 
@@ -1706,6 +1756,33 @@ INSERT INTO `t_report` (`report_id`, `report_user`, `report_kandang`, `report_ko
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_satuan`
+--
+
+CREATE TABLE `t_satuan` (
+  `satuan_id` int(11) NOT NULL,
+  `satuan_nama` text DEFAULT NULL,
+  `satuan_singkatan` text DEFAULT NULL,
+  `satuan_jumlah` text DEFAULT NULL,
+  `satuan_keterangan` text DEFAULT NULL,
+  `satuan_tanggal` date DEFAULT curdate(),
+  `satuan_hapus` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t_satuan`
+--
+
+INSERT INTO `t_satuan` (`satuan_id`, `satuan_nama`, `satuan_singkatan`, `satuan_jumlah`, `satuan_keterangan`, `satuan_tanggal`, `satuan_hapus`) VALUES
+(1, 'Kilo Gram', 'kg', '10', 'kiloan untuk telur', '2024-03-03', 0),
+(2, 'Tray', 'tray', '30', '30 butir telur', '2024-03-03', 0),
+(3, 'Ekor', 'ekor', '1', 'jumlah satu ayam', '2024-03-03', 0),
+(4, 'Picis', 'pcs', '1', 'jumlah satu barang', '2024-03-03', 0),
+(5, 'Butir', 'btr', '1', 'jumlah satu butir telur', '2024-03-03', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_user`
 --
 
@@ -1901,6 +1978,18 @@ ALTER TABLE `t_pembelian_barang`
   ADD PRIMARY KEY (`pembelian_barang_id`);
 
 --
+-- Indexes for table `t_pengeluaran`
+--
+ALTER TABLE `t_pengeluaran`
+  ADD PRIMARY KEY (`pengeluaran_id`);
+
+--
+-- Indexes for table `t_pengeluaran_barang`
+--
+ALTER TABLE `t_pengeluaran_barang`
+  ADD PRIMARY KEY (`pengeluaran_barang_id`);
+
+--
 -- Indexes for table `t_penjualan`
 --
 ALTER TABLE `t_penjualan`
@@ -1959,6 +2048,12 @@ ALTER TABLE `t_recording_barang`
 --
 ALTER TABLE `t_report`
   ADD PRIMARY KEY (`report_id`);
+
+--
+-- Indexes for table `t_satuan`
+--
+ALTER TABLE `t_satuan`
+  ADD PRIMARY KEY (`satuan_id`);
 
 --
 -- Indexes for table `t_user`
@@ -2058,7 +2153,7 @@ ALTER TABLE `t_level`
 -- AUTO_INCREMENT for table `t_notif`
 --
 ALTER TABLE `t_notif`
-  MODIFY `notif_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `notif_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `t_pakan`
@@ -2101,6 +2196,18 @@ ALTER TABLE `t_pembelian`
 --
 ALTER TABLE `t_pembelian_barang`
   MODIFY `pembelian_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
+
+--
+-- AUTO_INCREMENT for table `t_pengeluaran`
+--
+ALTER TABLE `t_pengeluaran`
+  MODIFY `pengeluaran_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `t_pengeluaran_barang`
+--
+ALTER TABLE `t_pengeluaran_barang`
+  MODIFY `pengeluaran_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t_penjualan`
@@ -2161,6 +2268,12 @@ ALTER TABLE `t_recording_barang`
 --
 ALTER TABLE `t_report`
   MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `t_satuan`
+--
+ALTER TABLE `t_satuan`
+  MODIFY `satuan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `t_user`

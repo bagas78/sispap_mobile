@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/dist/css/skins/_all-skins.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/morris.js/morris.css">
-  <!-- jvectormap -->
+  <!-- jvectormap --> 
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/jvectormap/jquery-jvectormap.css">
   <!-- Date Picker -->
   <link rel="stylesheet" href="<?php echo base_url() ?>adminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
@@ -222,6 +222,18 @@
             </ul>
           </li>
 
+          <li class="treeview satuan">
+            <a href="#">
+              <i class="fa fa-cubes"></i> <span>Satuan</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="<?=base_url('satuan')?>"><i class="fa fa-circle-o"></i> Barang</a></li>
+            </ul>
+          </li>
+
           <li class="treeview kandang">
             <a href="#">
               <i class="fa fa-recycle"></i> <span>Produksi</span>
@@ -251,6 +263,19 @@
                   <small style="display: none;" class="label pull-right bg-primary hutang_notif"></small>
                 </a>
               </li>
+            </ul>
+          </li>
+
+          <li class="treeview pengeluaran">
+            <a href="#">
+              <i class="fa fa-arrows-alt"></i> <span>Pengeluaran</span>
+              <span class="pull-right-container"> 
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="<?=base_url('pengeluaran/transaksi')?>"><i class="fa fa-circle-o"></i> Transaksi</a></li>
             </ul>
           </li>
 
@@ -307,6 +332,7 @@
             <ul class="treeview-menu">
               <li><a href="<?=base_url('laporan/pembelian')?>"><i class="fa fa-circle-o"></i> Pembelian</a></li>
               <li><a href="<?=base_url('laporan/penjualan')?>"><i class="fa fa-circle-o"></i> Penjualan</a></li>
+              <li><a href="<?=base_url('laporan/pengeluaran')?>"><i class="fa fa-circle-o"></i> Pengeluaran</a></li>
             </ul>
           </li>
 
