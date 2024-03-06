@@ -14,7 +14,7 @@
     <section class="content">
  
       <!-- Default box -->
-      <div class="box"> 
+      <div class="box">  
         <div class="box-header with-border">
 
           <br/>
@@ -176,30 +176,30 @@
 
           <div class="clearfix"></div><br/>
 
-          <!-- premix -->
+          <!-- OBAT -->
 
-          <!-- <div class="col-md-12 col-om premix_sub">
+          <div class="col-md-12 col-om premix_sub">
 
-            <h4 align="center" class="tit"><b>-- PREMIX --</b></h4>
+            <h4 align="center" class="tit"><b>-- OBAT --</b></h4>
 
             <table class="table">
               <thead>
                 <tr>
-                  <th width="500">Premix</th>
-                  <th width="500">Stok Premix</th>
-                  <th width="500">Jumlah Premix</th>
+                  <th width="500">Obat</th>
+                  <th width="500">Stok Obat</th>
+                  <th width="500">Jumlah Obat</th>
                   <th width="500" hidden>Kategori</th>
                   <th width="1">
-                    <button type="button" onclick="clone('premix')" class="add btn btn-success btn-sm"><i class="fa fa-plus"></i></button>
+                    <button type="button" onclick="clone('obat')" class="add btn btn-success btn-sm"><i class="fa fa-plus"></i></button>
                   </th>
                 </tr>
               </thead>
-              <tbody id="paste_premix"></tbody>
+              <tbody id="paste_obat"></tbody>
             </table>
 
           </div>
 
-            <div class="clearfix"></div><br/> -->
+            <div class="clearfix"></div><br/>
 
             <div id="submit" class="col-md-12 row">
               <button type="submit" class="btn btn-primary">Simpan <i class="fa fa-check"></i></button>
@@ -228,7 +228,7 @@
     <td>
       <div class="input-group">
         <input id="ayam_berat" type="number" name="ayam_berat[]" class="form-control ayam_berat" required value="0" min="0">
-        <span class="input-group-addon">Kg
+        <span class="input-group-addon">kg</span>
       </div>
     </td>
     <td>
@@ -324,29 +324,29 @@
       <button type="button" class="remove btn btn-danger btn-sm" onclick="$(this).closest('tr').remove()"><i class="fa fa-minus"></i></button>
     </td>
   </tr>
-  <tr id="copy_premix" hidden>
+  <tr id="copy_obat" hidden>
     <td>
-      <select id="premix" class="form-control premix" required name="premix[]">
+      <select id="obat" class="form-control obat" required name="obat[]">
         <option value="" hidden>-- Pilih --</option>
-        <?php foreach ($premix_data as $value): ?>
-          <option value="<?=@$value['premix_id']?>"><?=@$value['premix_nama']?></option>
+        <?php foreach ($obat_data as $value): ?>
+          <option value="<?=@$value['barang_id']?>"><?=@$value['barang_nama']?></option>
         <?php endforeach ?>
       </select>
     </td>
     <td>
       <div class="input-group">
-        <input id="premix_stok" readonly value="0" min="0" type="number" name="premix_stok[]" class="form-control premix_stok" required>
-        <span class="input-group-addon premix_satuan"></span>
+        <input id="obat_stok" readonly value="0" min="0" type="number" name="obat_stok[]" class="form-control obat_stok" required>
+        <span class="input-group-addon obat_satuan"></span>
       </div>
     </td>
     <td>
       <div class="input-group">
-        <input id="premix_jumlah" value="0" min="0" type="number" name="premix_jumlah[]" class="form-control premix_jumlah" required>
-        <span class="input-group-addon premix_satuan"></span>
+        <input id="obat_jumlah" value="0" min="0" type="number" name="obat_jumlah[]" class="form-control obat_jumlah" required>
+        <span class="input-group-addon obat_satuan"></span>
       </div>
     </td>
     <td hidden>
-       <input value="premix" type="text" name="premix_kategori[]" class="form-control premix_kategori">
+       <input value="obat" type="text" name="obat_kategori[]" class="form-control obat_kategori">
     </td>
     <td>
       <button type="button" class="remove btn btn-danger btn-sm" onclick="$(this).closest('tr').remove()"><i class="fa fa-minus"></i></button>
@@ -382,6 +382,7 @@ $(document).on('change', '#kandang', function() {
     });
 
 });
+
 
 //stok pakan
 $(document).on('change', '#pakan', function() {
@@ -426,7 +427,7 @@ $(document).on('change', '#pakan', function() {
           var val = $.parseJSON(data);
 
           stok.val(val.pakan_stok);
-          satuan.text(val.pakan_satuan);
+          satuan.text(val.satuan_singkatan);
 
         });
      }
@@ -436,7 +437,7 @@ $(document).on('change', '#pakan', function() {
 });
 
 //stok premix
-$(document).on('change', '#premix', function() {
+$(document).on('change', '#obat', function() {
     
   var nama = $(this).prop('name').replace("[]","");  
   var id = $(this).val();
@@ -473,12 +474,12 @@ $(document).on('change', '#premix', function() {
      }else{
 
         //get data
-        $.get('<?=base_url('recording/get_premix/')?>'+id, function(data) {
+        $.get('<?=base_url('recording/get_barang/')?>'+id, function(data) {
       
           var val = $.parseJSON(data);
 
-          stok.val(val.premix_stok);
-          satuan.text(val.premix_satuan);
+          stok.val(val.barang_stok);
+          satuan.text(val.satuan_singkatan);
 
         });
      }
@@ -488,7 +489,7 @@ $(document).on('change', '#premix', function() {
 });
 
 //satuan afkir dan telur
-$(document).on('change', '#afkir, #telur', function() {
+$(document).on('change', '#afkir, #telur, #obat', function() {
 
   var id = $(this).val();
   var nama = $(this).prop('name').replace("[]", "");  
@@ -527,7 +528,7 @@ $(document).on('change', '#afkir, #telur', function() {
           
           var val = $.parseJSON(data);
 
-          satuan.text(val.barang_satuan);
+          satuan.text(val.satuan_singkatan);
 
         });
 
@@ -539,6 +540,7 @@ $(document).on('change', '#afkir, #telur', function() {
 
 //copy paste
 function clone(target){
+
   //paste
   $('#paste_'+target).prepend($('#copy_'+target).clone().removeAttr('hidden'));
 
@@ -572,7 +574,7 @@ $(document).on('keyup | change', '.afkir_jumlah', function() {
 });
 
 //cek stok pakan dan premix
-$(document).on('keyup | change', '.pakan_jumlah, .premix_jumlah', function() {
+$(document).on('keyup | change', '.pakan_jumlah, .obat_jumlah', function() {
 
   var nama = $(this).prop('name').replace("[]", "");
   var stok = $(this).closest('tr').find('#'+nama.replace('jumlah', 'stok'));

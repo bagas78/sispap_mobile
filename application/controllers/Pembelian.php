@@ -73,6 +73,10 @@ class Pembelian extends CI_Controller{
 		$data = $this->query_builder->view("SELECT * FROM t_barang WHERE barang_kategori ='$kategori'");
 		echo json_encode($data);
 	}
+	function get_satuan($id){
+		$data = $this->query_builder->view_row("SELECT * FROM t_barang as a JOIN t_satuan as b ON a.barang_satuan = b.satuan_id WHERE barang_id ='$id'");
+		echo json_encode($data);
+	}
 	function transaksi_save(){
 
 		$nomor = strip_tags($_POST['nomor']);
@@ -156,7 +160,7 @@ class Pembelian extends CI_Controller{
 	}
 	function transaksi_print($id){
 		$data['title'] = 'Pembelian';
-		$data['data'] = $this->query_builder->view("SELECT * FROM t_pembelian as a JOIN t_pembelian_barang as b ON a.pembelian_nomor = b.pembelian_barang_nomor JOIN t_barang as c ON b.pembelian_barang_barang = c.barang_id JOIN t_user as d ON a.pembelian_user = d.user_id JOIN t_kontak as e ON a.pembelian_kontak = e.kontak_id WHERE a.pembelian_id = '$id'");
+		$data['data'] = $this->query_builder->view("SELECT * FROM t_pembelian as a JOIN t_pembelian_barang as b ON a.pembelian_nomor = b.pembelian_barang_nomor JOIN t_barang as c ON b.pembelian_barang_barang = c.barang_id LEFT JOIN t_user as d ON a.pembelian_user = d.user_id LEFT JOIN t_kontak as e ON a.pembelian_kontak = e.kontak_id LEFT JOIN t_satuan as f ON c.barang_satuan = f.satuan_id WHERE a.pembelian_id = '$id'");
 		$this->load->view('pembelian/transaksi_print',$data);
 	}
 	function transaksi_view($id){

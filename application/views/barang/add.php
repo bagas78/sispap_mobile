@@ -2,7 +2,7 @@
     <!-- Main content --> 
     <section class="content">
 
-      <!-- Default box -->
+      <!-- Default box --> 
       <div class="box"> 
         <div class="box-header with-border">
 
@@ -15,10 +15,7 @@
         </div>
         <div class="box-body">
          
-          <form class="bg-alice" action="<?=base_url('barang/save/'.@$kategori)?>" method="POST" accept-charset="utf-8">
-            
-            <!--hidden-->
-            <input type="hidden" name="kategori" value="<?=@$kategori_id?>" class="kategori">
+          <form class="bg-alice" action="<?=base_url('barang/save/'.@$title)?>" method="POST" accept-charset="utf-8">
 
             <div class="row">
               <div class="col-lg-6">
@@ -28,6 +25,25 @@
                   <input readonly="" type="text" name="kode" class="kode form-control" required value="<?=@$kode?>">
                 </div>
                 <div class="form-group">
+                  <label>Kategori</label>
+                  <select name="kategori" required class="form-control kategori">
+                    <option value="" hidden>-- Pilih --</option> 
+                    <?php foreach ($kategori_data as $v): ?>
+                      <option value="<?=$v['barang_kategori_id']?>"><?=$v['barang_kategori_nama']?></option>  
+                    <?php endforeach ?> 
+                  </select>
+
+                  <script type="text/javascript">
+                    
+                    $('.kategori').val('<?=$kategori_id?>').change().css({
+                      'background': '#EEEEEE',
+                      'pointer-events': 'none'
+                    });
+
+                  </script>
+
+                </div>
+                <div class="form-group">
                   <label>Nama</label>
                   <input type="text" name="nama" class="nama form-control" required>
                 </div>
@@ -35,11 +51,9 @@
                   <label>Satuan</label>
                   <select name="satuan" class="satuan form-control" required>
                     <option value="" hidden>-- Pilih --</option>
-                    <option value="kg">Kg</option>
-                    <option value="ekor">Ekor</option>
-                    <option value="pcs">Pcs</option>
-                    <option value="tray">Tray</option>
-                    <option value="butir">Butir</option>
+                    <?php foreach ($satuan_data as $v): ?>
+                      <option value="<?=$v['satuan_id']?>"><?=$v['satuan_singkatan']?></option>  
+                    <?php endforeach ?>
                   </select>
                 </div>
 
@@ -58,7 +72,3 @@
         
       </div>
       <!-- /.box -->
-
-<script type="text/javascript">
-  //$('.satuan').val('<?=@$satuan?>').change().css('pointer-events', 'none');
-</script>

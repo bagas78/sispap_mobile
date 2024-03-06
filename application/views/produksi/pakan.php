@@ -62,7 +62,7 @@
                         { "data": "pakan_kode"},
                         { "data": "pakan_nama"},
                         { "data": "pakan_stok"},
-                        { "data": "pakan_satuan"},
+                        { "data": "satuan_singkatan"},
                         { "data": "pakan_id",
                         "render": 
                         function( data ) {

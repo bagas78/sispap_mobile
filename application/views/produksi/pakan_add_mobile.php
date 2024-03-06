@@ -70,8 +70,9 @@
                   <label>Satuan</label>
                   <select id="satuan" name="satuan" required class="form-control" required>
                     <option hidden>-- Pilih --</option>
-                    <option value="kg">Kg</option>
-                    <option value="pcs">Pcs</option>
+                    <?php foreach ($satuan_data as $v): ?>
+                      <option value="<?=$v['satuan_id']?>"><?=$v['satuan_singkatan']?></option>
+                    <?php endforeach ?>
                   </select>
                 </div>
               </div>
@@ -264,7 +265,7 @@ $(document).on('change', '#pakan', function() {
           var val = $.parseJSON(data);
 
           stok.val(val.barang_stok);
-          satuan.text(val.barang_satuan);
+          satuan.text(val.satuan_singkatan);
 
         });
      }

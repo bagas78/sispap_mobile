@@ -7,7 +7,7 @@
         <div class="box-header with-border">
 
           <div hidden align="left" class="back">
-            <a href="<?= @$_SERVER['HTTP_REFERER'] ?>"><button type="button" class="btn bg-navy"><i class="fa fa-arrow-left"></i> Kembali</button></a>
+            <a href="<?= @$_SERVER['HTTP_REFERER'] ?>"><button type="button" class="btn bg-navy"><i class="fa fa-arrow-left"></i> Kembali</button></a> 
           </div>
 
           <div class="box-tools pull-right">
@@ -96,7 +96,10 @@
                         <input type="number" name="harga[]" class="harga form-control" required min="1" value="0" step="0.01">
                       </td>
                       <td>
-                        <input type="number" name="qty[]" class="qty form-control" required min="1" value="0" step="0.01">
+                        <div class="input-group">
+                          <input id="qty"  type="number" name="qty[]" class="form-control qty" required min="1" value="0" step="0.01">
+                          <span class="input-group-addon satuan"></span>
+                        </div>
                       </td>
                       <td>
                         <input type="number" name="diskon[]" class="diskon form-control" required min="0" value="0" step="0.01">
@@ -196,7 +199,8 @@
     //push array
     var id = $(this).val();
     var index = $(this).closest('tr').index();
-    var arr = new Array(); 
+    var arr = new Array();
+    var target = $(this); 
 
     //cek array exist
     if (id != null) {
@@ -217,6 +221,15 @@
           //reset value
           $(this).closest('tr').find('select').val('').change();
           $(this).closest('tr').find('input').val(0);
+       }else{
+
+          $.get('<?=base_url('pembelian/get_satuan/')?>'+id, function(data) {
+            
+            var val = $.parseJSON(data);
+
+            target.closest('div').find('.satuan').text(val['satuan_singkatan']);
+
+          });
        }
     }
 

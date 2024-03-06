@@ -7,7 +7,7 @@ class Barang extends CI_Controller{
 		$this->load->model('m_stok_gudang');
 		$this->load->model('m_stok_kandang');
 	}
-	function index($id){
+	function index($id){ 
 
 		$get = $this->query_builder->view_row("SELECT * FROM t_barang_kategori WHERE barang_kategori_id = '$id'");
 
@@ -37,12 +37,13 @@ class Barang extends CI_Controller{
 		echo json_encode($output);
 	}
 	function add($id){ 
-		
+	
+		$data['satuan_data'] = $this->query_builder->view("SELECT * FROM t_satuan WHERE satuan_hapus = 0"); 
+		$data['kategori_data'] = $this->query_builder->view("SELECT * FROM t_barang_kategori");
+
 		$get = $this->query_builder->view_row("SELECT * FROM t_barang_kategori WHERE barang_kategori_id = '$id'");
-		$data['kategori'] = $get['barang_kategori_nama'];
 		$data['kategori_id'] = $get['barang_kategori_id'];
 		$data['title'] = $get['barang_kategori_nama'];
-		$data['satuan'] = $get['barang_kategori_satuan'];
 
 	    //generate kode
 	    $num = $this->query_builder->count("SELECT * FROM t_barang") + 1;
@@ -86,9 +87,10 @@ class Barang extends CI_Controller{
 	}
 	function edit($id){
 
-		$get = $this->query_builder->view_row("SELECT * FROM t_barang_kategori as a JOIN t_barang as b ON a.barang_kategori_id = b.barang_kategori WHERE b.barang_id = '$id'");
+		$data['satuan_data'] = $this->query_builder->view("SELECT * FROM t_satuan WHERE satuan_hapus = 0"); 
+		$data['kategori_data'] = $this->query_builder->view("SELECT * FROM t_barang_kategori");
 
-		$data['kategori'] = $get['barang_kategori_nama'];
+		$get = $this->query_builder->view_row("SELECT * FROM t_barang_kategori as a JOIN t_barang as b ON a.barang_kategori_id = b.barang_kategori WHERE b.barang_id = '$id'");
 		$data['kategori_id'] = $get['barang_kategori_id'];
 		$data['title'] = $get['barang_kategori_nama'];
 

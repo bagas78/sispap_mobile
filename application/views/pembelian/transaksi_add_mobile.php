@@ -177,7 +177,10 @@
                 <div class="col-xs-12 col-sm-12">
                   <div class="form-group">
                     <label>Qty Akhir</label>
-                    <input id="qty" readonly="" type="text" name="qty_akhir" class="form-control" value="0" min="0" step="0.01">
+                    <div class="input-group">
+                      <input id="qty"  type="number" name="qty[]" class="form-control qty" required min="1" value="0" step="0.01">
+                      <span class="input-group-addon satuan"></span>
+                    </div>
                   </div>
                 </div>
 
@@ -284,6 +287,15 @@
           //reset value
           $(this).closest('.row').find('select').val('').change();
           $(this).closest('.row').find('input').val(0);
+       }else{
+
+          $.get('<?=base_url('pembelian/get_satuan/')?>'+id, function(data) {
+            
+            var val = $.parseJSON(data);
+
+            target.closest('div').find('.satuan').text(val['satuan_singkatan']);
+
+          });
        }
     }
 

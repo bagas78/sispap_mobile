@@ -1,17 +1,4 @@
-<style type="text/css">
-  .tit{
-    background: black;
-    color: white;
-    padding: 0.5%;
-  }
-  .col-om{
-    background: radial-gradient(#999999a1, #9999991f);
-    padding: 1%;
-    margin: 0;
-  }
-</style>
-
-    <!-- Main content --> 
+    <!-- Main content -->  
     <section class="content"> 
 
       <!-- Default box -->
@@ -35,53 +22,45 @@
           
           <form method="POST" action="<?=base_url('produksi/pakan_save')?>">
           
-          <div class="row col-om">
+          <div class="row">
             <div class="col-md-6">
-               <div class="col-md-12">
-                <div class="form-group">
+               <div class="form-group">
                   <label>Kode Campuran</label>
                   <input readonly id="kode" type="text" name="kode" class="form-control" value="<?=@$kode?>" required>
                 </div>
-              </div>
-              <div class="col-md-12">
+
                 <div class="form-group">
                   <label>Nama Campuran</label>
                   <input id="nama" type="text" name="nama" class="form-control" value="" required placeholder="nama campuran pakan">
                 </div>
-              </div>
-              <div class="col-md-12">
+
                 <div class="form-group">
                   <label>Jumlah Produksi</label>
                   <input id="qty" type="number" name="qty" class="form-control" required min="1" value="1">
                 </div>
-              </div>
+
             </div>
 
             <div class="col-md-6">
-               <div class="col-md-12">
-                <div class="form-group">
+               
+               <div class="form-group">
                   <label>Satuan</label>
                   <select id="satuan" name="satuan" required class="form-control" required>
                     <option hidden>-- Pilih --</option>
-                    <option value="kg">Kg</option>
-                    <option value="pcs">Pcs</option>
+                    <?php foreach ($satuan_data as $v): ?>
+                      <option value="<?=$v['satuan_id']?>"><?=$v['satuan_singkatan']?></option>
+                    <?php endforeach ?>
                   </select>
                 </div>
-              </div>
-              <div class="col-md-12">
+
                 <div class="form-group">
                   <label>Keterangan</label>
                   <textarea placeholder="keterangan Pakan" id="keterangan" name="keterangan" class="form-control"></textarea>
                 </div>
-              </div>
+
             </div>
-          </div>
 
-          <div class="clearfix"></div><br/>
-
-          <div class="col-md-12 col-om pakan_sub">
-
-            <h4 align="center" class="tit"><b>-- PAKAN --</b></h4>
+          <div class="col-md-12">
 
             <table class="table">
               <thead>
@@ -145,17 +124,16 @@
                     </div>
                   </td>
                 </tr>
+                <tr>
+                  <td colspan="5" align="right">
+                    <button type="submit" class="btn btn-primary">Simpan <i class="fa fa-check"></i></button>
+                    <a href="<?= @$_SERVER['HTTP_REFERER'] ?>"><button type="button" class="btn btn-danger">Batal <i class="fa fa-times"></i></button></a>
+                  </td>
+                </tr>
               </tbody>
             </table>
 
           </div>
-
-          <div class="clearfix"></div><br/>
-
-            <div id="submit" class="col-md-12 row">
-              <button type="submit" class="btn btn-primary">Simpan <i class="fa fa-check"></i></button>
-              <a href="<?= @$_SERVER['HTTP_REFERER'] ?>"><button type="button" class="btn btn-danger">Batal <i class="fa fa-times"></i></button></a>
-            </div>
 
           </form>
 
@@ -168,6 +146,9 @@
 <script type="text/javascript">
 
 function auto(){
+
+    //border none
+    $('td').css('border-top', 'none');
 
     //harga
     var num_total = 0;
@@ -237,7 +218,7 @@ $(document).on('change', '#pakan', function() {
           var val = $.parseJSON(data);
 
           stok.val(val.barang_stok);
-          satuan.text(val.barang_satuan);
+          satuan.text(val.satuan_singkatan);
 
         });
      }

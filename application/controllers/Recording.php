@@ -73,14 +73,14 @@ class Recording extends CI_Controller{
 	}
 	function get_barang($id){
 
-		$get = $this->query_builder->view_row("SELECT * FROM t_barang WHERE barang_id = '$id'");
+		$get = $this->query_builder->view_row("SELECT * FROM t_barang as a LEFT JOIN t_satuan as b ON a.barang_satuan = b.satuan_id WHERE barang_id = '$id'");
 
 		echo json_encode($get);
 
 	}
 	function get_pakan($id){
 
-		$get = $this->query_builder->view_row("SELECT * FROM t_pakan WHERE pakan_id = '$id'");
+		$get = $this->query_builder->view_row("SELECT * FROM t_pakan as a LEFT JOIN t_satuan as b ON a.pakan_satuan = b.satuan_id WHERE pakan_id = '$id'");
 
 		echo json_encode($get);
 

@@ -1,7 +1,7 @@
 <?php
 class Dashboard extends CI_Controller{
 
-	function __construct(){
+	function __construct(){ 
 		parent::__construct();
 	} 
 	function index(){  
@@ -11,7 +11,7 @@ class Dashboard extends CI_Controller{
 		    $data['title'] = 'Dashboard'; 
 
 		    //data
-		    $get = $this->db->query("SELECT  a.barang_kategori_nama AS nama,SUM(b.barang_stok) AS stok, a.barang_kategori_satuan AS satuan FROM t_barang_kategori AS a LEFT JOIN t_barang AS b ON a.barang_kategori_id = b.barang_kategori WHERE b.barang_hapus = 0 GROUP BY a.barang_kategori_id ")->result_array();
+		    $get = $this->db->query("SELECT a.barang_kategori_nama AS nama,SUM(b.barang_stok) AS stok, c.satuan_singkatan AS satuan FROM t_barang_kategori AS a LEFT JOIN t_barang AS b ON a.barang_kategori_id = b.barang_kategori LEFT JOIN t_satuan AS c ON b.barang_satuan = c.satuan_id WHERE b.barang_hapus = 0 GROUP BY a.barang_kategori_id ")->result_array();
 
 		    //telur
 		   	$data['telur_'] = $get[0]['stok'];

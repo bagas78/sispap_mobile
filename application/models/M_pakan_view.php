@@ -67,6 +67,7 @@ class M_pakan_view extends CI_Model {
 		$this->db->select('SUM(t_pakan_qty.pakan_qty_qty) as total');
 		$this->db->where($where);
 		$this->db->join('t_pakan_qty', 't_pakan_qty.pakan_qty_kode = t_pakan.pakan_kode');
+		$this->db->join('t_satuan', 't_satuan.satuan_id = t_pakan.pakan_satuan');
 		$this->db->limit($_GET['length'], $_GET['start']);
 		$this->db->group_by('pakan_qty_tanggal'); 
 		$query = $this->db->get();
@@ -78,6 +79,7 @@ class M_pakan_view extends CI_Model {
 		$this->_get_datatables_query();
 		$this->db->where($where);
 		$this->db->join('t_pakan_qty', 't_pakan_qty.pakan_qty_kode = t_pakan.pakan_kode');
+		$this->db->join('t_satuan', 't_satuan.satuan_id = t_pakan.pakan_satuan');
 		$this->db->group_by('pakan_qty_tanggal'); 
 		$query = $this->db->get();
 		return $query->num_rows();
@@ -88,6 +90,7 @@ class M_pakan_view extends CI_Model {
 		$this->db->from($this->table);
 		$this->db->where($where);
 		$this->db->join('t_pakan_qty', 't_pakan_qty.pakan_qty_kode = t_pakan.pakan_kode');
+		$this->db->join('t_satuan', 't_satuan.satuan_id = t_pakan.pakan_satuan');
 		$this->db->group_by('pakan_qty_tanggal'); 
 		return $this->db->count_all_results();
 	}

@@ -76,7 +76,7 @@
                           }
                         },                              
                         { "data": "total"},
-                        { "data": "pakan_satuan"},
+                        { "data": "satuan_singkatan"},
                         { "data": "pakan_qty_tanggal",
                         "render": 
                         function( data ) {

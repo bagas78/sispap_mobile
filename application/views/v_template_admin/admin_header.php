@@ -206,6 +206,18 @@
             </ul>
           </li>
 
+          <li class="treeview satuan">
+            <a href="#">
+              <i class="fa fa-cubes"></i> <span>Satuan</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="<?=base_url('satuan')?>"><i class="fa fa-circle-o"></i> Barang</a></li>
+            </ul>
+          </li>
+
           <li class="treeview gudang">
             <a href="#">
               <i class="fa fa-dropbox"></i> <span>Persedian Gudang</span>
@@ -219,18 +231,6 @@
               <li class="telur_sub"><a href="<?=base_url('barang/telur')?>"><i class="fa fa-circle-o"></i> Telur</a></li>
               <li class="pakan_sub"><a href="<?=base_url('barang/pakan')?>"><i class="fa fa-circle-o"></i> Pakan</a></li>
               <li class="obat_sub"><a href="<?=base_url('barang/obat')?>"><i class="fa fa-circle-o"></i> Obat</a></li>
-            </ul>
-          </li>
-
-          <li class="treeview satuan">
-            <a href="#">
-              <i class="fa fa-cubes"></i> <span>Satuan</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="<?=base_url('satuan')?>"><i class="fa fa-circle-o"></i> Barang</a></li>
             </ul>
           </li>
 

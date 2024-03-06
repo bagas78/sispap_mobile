@@ -3,7 +3,7 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box"> 
+      <div class="box">  
         <div class="box-header with-border">
 
           <div hidden align="left" class="back">
@@ -190,9 +190,6 @@
       //append option barang
       target.append(html);
 
-      //satuan
-      $('.satuan').text(arr[0].barang_satuan);
-
     });
 
   });
@@ -202,6 +199,7 @@
     //get stok
     var barang = $(this).val();
     var stok = $(this).closest('tr').find('.stok');
+    var target = $(this);
 
     $.get('<?=base_url('penjualan/get_stok/')?>'+barang, function(data) {
         
@@ -228,11 +226,22 @@
 
        if ($.inArray(id, arr) != -1) {
 
-          warning('Barang sudah ada');
+          warning('Barang sudah ada'); 
 
           //reset value
           $(this).closest('tr').find('select').val('').change();
           $(this).closest('tr').find('input').val(0);
+          
+       }else{
+
+          $.get('<?=base_url('penjualan/get_satuan/')?>'+id, function(data) {
+            
+            var val = $.parseJSON(data);
+
+            target.closest('tr').find('.satuan').text(val['satuan_singkatan']);
+
+          });
+
        }
     }
 

@@ -21,7 +21,7 @@
     <?php foreach (@$data as $v): ?>
       <tr>
         <td><?=$v['barang_nama']?></td>
-        <td align="right"><span class="number berat"><?=$v['pakan_barang_qty']?></span> <?=$v['barang_satuan']?></td>
+        <td align="right"><span class="number berat"><?=$v['pakan_barang_qty']?></span> <?=$v['satuan_singkatan']?></td>
         <td align="right">Rp. <span class="number"><?=$v['pakan_barang_harga']?></span></td>
         <td align="right">Rp. <span class="number subtotal"><?=$v['pakan_barang_subtotal']?></span></td>
       </tr>
@@ -31,7 +31,7 @@
       <td align="right">Rp <span class="number total"></span></td>
     </tr>
     <tr>
-      <td align="right">Rp <span class="number total_qty"></span> / <?=@$data[0]['pakan_satuan']?></td>
+      <td align="right">Rp <span class="number total_qty"></span> / <?=@$data[0]['satuan_singkatan']?></td>
     </tr>
   </tbody>
 </table>

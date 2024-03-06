@@ -103,7 +103,7 @@
 							<tr>
 								<td><?=$i?></td>
 								<td><?=@$val['barang_nama']?></td>
-								<td class="r"><?=@$val['pembelian_barang_qty'].' '.@$val['barang_satuan']?></td>
+								<td class="r"><?=@$val['pembelian_barang_qty'].' '.@$val['satuan_singkatan']?></td>
 								<td hidden class="r"><span class="diskon"><?=@$val['pembelian_barang_diskon']?></span></td>
 								<td class="r"><?=number_format(@$val['pembelian_barang_harga'])?></td>
 								<td class="subtotal r"><?=number_format(@$val['pembelian_barang_subtotal'])?></td>

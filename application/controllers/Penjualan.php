@@ -5,7 +5,7 @@ class penjualan extends CI_Controller{
 		parent::__construct();
 		$this->load->model('m_penjualan');
 		$this->load->model('m_piutang');
-	} 
+	}  
 	function transaksi(){ 
 		if ( $this->session->userdata('login') == 1) {
 			$data['title'] = 'penjualan';
@@ -71,6 +71,11 @@ class penjualan extends CI_Controller{
 	function get_barang($kategori){
 
 		$data = $this->query_builder->view("SELECT * FROM t_barang WHERE barang_kategori ='$kategori' AND barang_hapus = 0");
+		echo json_encode($data);
+	}
+	function get_satuan($id){
+
+		$data = $this->query_builder->view_row("SELECT * FROM t_barang as a JOIN t_satuan as b ON a.barang_satuan = b.satuan_id WHERE barang_id ='$id'");
 		echo json_encode($data);
 	}
 	function get_stok($barang){

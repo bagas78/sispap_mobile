@@ -10,7 +10,7 @@
     margin: 0;
   }
 </style>
- 
+  
     <!-- Main content --> 
     <section class="content"> 
 
@@ -264,7 +264,7 @@ $(document).on('change', '#pakan, #obat', function() {
           var val = $.parseJSON(data);
 
           stok.val(val.barang_stok);
-          satuan.text(val.barang_satuan);
+          satuan.text(val.satuan_singkatan);
 
         });
      }

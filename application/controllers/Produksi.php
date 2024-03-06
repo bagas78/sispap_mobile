@@ -15,7 +15,7 @@ class produksi extends CI_Controller{
 	    $this->load->view('produksi/pakan');
 	    $this->load->view('v_template_admin/admin_footer');
 	}
-	function pakan_get_data(){ 
+	function pakan_get_data(){  
  
 		$where = array('pakan_hapus' => 0);
 
@@ -30,14 +30,14 @@ class produksi extends CI_Controller{
 			"data" => $data,
 		);
 		//output dalam format JSON
-		echo json_encode($output);
+		echo json_encode($output); 
 	}
 	function pakan_add(){
 		$data['title'] = 'Campur Pakan';
 
 		$data['pakan_data'] = $this->query_builder->view("SELECT * FROM t_barang WHERE barang_hapus = 0 AND barang_kategori = 3");
 
-		$data['satuan_data'] = $this->query_builder->view("SELECT * FROM t_barang WHERE barang_hapus = 0 AND barang_kategori = 3");
+		$data['satuan_data'] = $this->query_builder->view("SELECT * FROM t_satuan WHERE satuan_hapus = 0");
 
 		//generate kode
 	    $num = $this->query_builder->count("SELECT * FROM t_pakan") + 1;
@@ -250,7 +250,7 @@ class produksi extends CI_Controller{
 	}
 	function pakan_print($date){
 
-		$data['data'] = $this->query_builder->view("SELECT * FROM t_pakan as a JOIN t_pakan_barang as b ON a.pakan_kode = b.pakan_barang_kode LEFT JOIN t_barang AS c ON b.pakan_barang_barang = c.barang_id WHERE b.pakan_barang_tanggal = '$date'");
+		$data['data'] = $this->query_builder->view("SELECT * FROM t_pakan as a JOIN t_pakan_barang as b ON a.pakan_kode = b.pakan_barang_kode LEFT JOIN t_barang AS c ON b.pakan_barang_barang = c.barang_id LEFT JOIN t_satuan as d ON c.barang_satuan = d.satuan_id WHERE b.pakan_barang_tanggal = '$date'");
 
 		$this->load->view('produksi/pakan_print',$data);
 	}

@@ -95,7 +95,7 @@
 
                 <div class="col-xs-6 col-sm-6">
                   <div class="form-group">
-                    <label>Harga</label>
+                    <label>Harga</label> 
                     <input type="number" name="harga[]" class="harga form-control" required min="1" value="0" step="0.01">
                   </div>
                 </div>
@@ -226,9 +226,6 @@
       //append option barang
       target.append(html);
 
-      //satuan
-      $('.satuan').text(arr[0].barang_satuan);
-
     });
 
   });
@@ -269,6 +266,17 @@
           //reset value
           $(this).closest('.row').find('select').val('').change();
           $(this).closest('.row').find('input').val(0);
+          
+       }else{
+
+          $.get('<?=base_url('penjualan/get_satuan/')?>'+id, function(data) {
+            
+            var val = $.parseJSON(data);
+
+            target.closest('tr').find('.satuan').text(val['satuan_singkatan']);
+
+          });
+
        }
     }
 

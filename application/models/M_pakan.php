@@ -64,6 +64,7 @@ class M_pakan extends CI_Model {
 		$this->_get_datatables_query();
 		if($_GET['length'] != -1)
 		$this->db->where($where);
+		$this->db->join('t_satuan', 't_satuan.satuan_id = t_pakan.pakan_satuan');
 		$this->db->limit($_GET['length'], $_GET['start']);
 		$query = $this->db->get();
 		return $query->result();
@@ -73,6 +74,7 @@ class M_pakan extends CI_Model {
 	{
 		$this->_get_datatables_query();
 		$this->db->where($where);
+		$this->db->join('t_satuan', 't_satuan.satuan_id = t_pakan.pakan_satuan');
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
@@ -81,6 +83,7 @@ class M_pakan extends CI_Model {
 	{
 		$this->db->from($this->table);
 		$this->db->where($where);
+		$this->db->join('t_satuan', 't_satuan.satuan_id = t_pakan.pakan_satuan');
 		return $this->db->count_all_results();
 	}
 

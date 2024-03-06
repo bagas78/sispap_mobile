@@ -61,7 +61,7 @@
                         { "data": "barang_kode"},
                         { "data": "barang_nama"},
                         { "data": "barang_stok"},
-                        { "data": "barang_satuan"},
+                        { "data": "satuan_singkatan"},
                         { "data": "barang_id",
                         "render": 
                         function( data ) {
