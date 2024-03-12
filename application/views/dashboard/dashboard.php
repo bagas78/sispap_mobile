@@ -92,13 +92,13 @@
       <div class="box">
         <div class="box-header with-border">
 
-          <div class="col-md-1 col-xs-1">
+          <div class="col-md-1 col-xs-3">
             <form method="POST" action="">
               <input type="hidden" name="filter" value="1">
               <button type="submit" class="btn btn-default <?=(@$filter == 1)?'active':'' ?>">Harian <i class="fa fa-filter"></i></button>
             </form>
           </div>
-          <div class="col-md-1 col-xs-1">
+          <div class="col-md-1 col-xs-3">
             <form method="POST" action="">
               <input type="hidden" name="filter" value="2">
               <button type="submit" class="btn btn-default <?=(@$filter == 2)?'active':'' ?>">Bulanan <i class="fa fa-filter"></i></button>

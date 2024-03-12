@@ -24,7 +24,7 @@ class Gaji extends CI_Controller{
 	}
 	function get_data($bulan){
 
-		$where = array('karyawan_hapus' => 0, 'DATE_FORMAT(absen_tanggal, "%Y-%m") =' => $bulan);
+		$where = array('karyawan_hapus' => 0, 'absen_bayar' => 'belum', 'DATE_FORMAT(absen_tanggal, "%Y-%m") =' => $bulan);
 
 	    $data = $this->m_gaji->get_datatables($where);
 		$total = $this->m_gaji->count_all($where);

@@ -11,7 +11,7 @@ class Notif {
 
       $cek = $this->url->db->query("SELECT * FROM t_notif")->row_array();
 
-      return $cek;
+      return $cek; 
     }
 
     function send($text){
@@ -61,19 +61,49 @@ class Notif {
 
       if ($cek['notif_pembelian'] == 'on') {
         
-        $db = $this->url->db->query("SELECT * FROM t_pembelian WHERE pembelian_nomor = '$nomor'")->row_array();
+        $db = $this->url->db->query("SELECT * FROM t_pembelian as a JOIN t_pembelian_barang as b ON a.pembelian_nomor = b.pembelian_barang_nomor JOIN t_barang as c ON b.pembelian_barang_barang = c.barang_id WHERE a.pembelian_nomor = '$nomor'")->result_array();
 
-        $transaksi = 'pembelian';
-        $faktur = $db['pembelian_faktur'];
-        $sales = $db['pembelian_sales'];
-        $pembayaran = $db['pembelian_status'];
-        $total = $db['pembelian_total'];
-        $tanggal = date_format(date_create($db['pembelian_tanggal']) ,'d/m/Y');
-        $keterangan = $db['pembelian_keterangan'];
+        $faktur = $db[0]['pembelian_faktur'];
+        $sales = $db[0]['pembelian_sales'];
+        $pembayaran = $db[0]['pembelian_status'];
+        $tanggal = date_format(date_create($db[0]['pembelian_tanggal']) ,'d/m/Y');
+        $keterangan = $db[0]['pembelian_keterangan'];
+        $total = $db[0]['pembelian_total'];
 
-        $pesan = 'Transaksi : '.$transaksi.'%0a'.'Faktur : '.$faktur.'%0a'.'Sales : '.$sales.'%0a'.'Pembayaran : '.$pembayaran.'%0a'.'Total : '.$total.'%0a'.'Tanggal : '.$tanggal.'%0a'.'keterangan : '.$keterangan;
+        $text = '';
+        $text .= '-- Transaksi Pembelian --';
+        $text .= '%0a%0a';
+        $text .= '--------------------------';
+        $text .= '%0a';
+        $text .= 'Faktur : '.$faktur;
+        $text .= '%0a';
+        $text .= 'Sales : '.$sales;
+        $text .= '%0a';
+        $text .= 'Pembayaran : '.$pembayaran;
+        $text .= '%0a';
+        $text .= 'Tanggal : '.$tanggal;
+        $text .= '%0a';
+        $text .= 'Keterangan : '.$keterangan;
+        $text .= '%0a';
+        $text .= '--------------------------';
+        $text .= '%0a';
 
-        $this->send($pesan);
+        foreach ($db as $v) {
+          
+          $text .= '%0a';
+          $text .= $v['pembelian_barang_qty'].' x ';
+          $text .= $v['barang_nama'].' : '.number_format($v['pembelian_barang_subtotal']);
+
+        }
+
+        $text .= '%0a';
+        $text .= '--------------------------';
+        $text .= '%0a';
+        $text .= 'PPN : '.$db[0]['pembelian_ppn'].'%';
+        $text .= '%0a';
+        $text .= 'Total : '.number_format($db[0]['pembelian_total']);
+
+        $this->send($text);
 
       }else{
 

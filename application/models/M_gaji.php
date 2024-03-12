@@ -3,7 +3,7 @@
 class M_gaji extends CI_Model { 
 	
 	//nama tabel
-	var $table = 't_karyawan'; 
+	var $table = 't_karyawan';  
 
 	//kolom yang di tampilkan
 	var $column_order = array(null,'karyawan_nama','karyawan_kode','kandang_nama'); 
@@ -63,7 +63,7 @@ class M_gaji extends CI_Model {
 	{
 		$this->_get_datatables_query();
 		if($_GET['length'] != -1)
-		$this->db->select("SUM(CASE WHEN absen_bayar != '' THEN absen_upah ELSE 0 END) AS total, SUM(CASE WHEN absen_bayar = 'sudah' THEN absen_upah ELSE 0 END) AS lunas, SUM(CASE WHEN absen_bayar = 'belum' THEN absen_upah ELSE 0 END) AS sisa, karyawan_id AS id, karyawan_nama AS nama, karyawan_jenis AS jenis");
+		$this->db->select("absen_karyawan as id, SUM(absen_upah) AS total, karyawan_nama AS nama, karyawan_jenis AS jenis");
 		$this->db->where($where);
 		$this->db->join('t_kandang', 't_kandang.kandang_id = t_karyawan.karyawan_kandang');
 		$this->db->join('t_absen', 't_absen.absen_karyawan = t_karyawan.karyawan_id', 'left');

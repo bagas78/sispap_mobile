@@ -2,7 +2,7 @@
     .title{
         background: black;
         color: white;
-        padding: 1%;
+        padding: 1%; 
     }
 </style>
 
@@ -42,9 +42,7 @@
             <tr>
               <th>Nama</th>
               <th>Jenis</th>
-              <th>Upah Total</th>
-              <th>Upah Lunas</th>
-              <th>Upah Sisa</th>
+              <th>Upah Total / Sisa</th>
               <th width="30">Action</th>
             </tr>
             </thead>
@@ -125,18 +123,6 @@
                         "render": 
                         function( data ) {
                             return "<span> Rp. "+number_format(data)+"</span>";
-                          }
-                        },
-                        { "data": "lunas",
-                        "render": 
-                        function( data ) {
-                            return "<span> Rp. "+number_format(data)+"</span>";
-                          }
-                        },
-                        { "data": "sisa",
-                        "render": 
-                        function( data ) {
-                            return "<span class='sisa'> Rp. "+number_format(data)+"</span>";
                           }
                         },
                         { "data": "id",
