@@ -12,7 +12,7 @@ class Recording extends CI_Controller{
 	    $this->load->view('recording/index');
 	    $this->load->view('v_template_admin/admin_footer');
 	}
-	function harian_get(){
+	function harian_get(){ 
 
 		$level = $this->session->userdata('level');
 		$user = $this->session->userdata('id');
@@ -59,7 +59,7 @@ class Recording extends CI_Controller{
 		$data['ayam_data'] = $this->query_builder->view("SELECT * FROM t_barang WHERE barang_hapus = 0 AND barang_kategori = 5");
 
 		//obat
-		$data['obat_data'] = $this->query_builder->view("SELECT * FROM t_barang WHERE barang_hapus = 0 AND barang_kategori = 4");
+		$data['obat_data'] = $this->query_builder->view("SELECT * FROM t_barang WHERE barang_hapus = 0 AND barang_kategori = 4 AND barang_stok > 0");
 
 		//generate nomor
 		$get = $this->query_builder->count("SELECT * FROM t_recording");
@@ -110,6 +110,8 @@ class Recording extends CI_Controller{
 						'recording_kandang' => strip_tags(@$_POST['kandang']),
 						'recording_bobot' => strip_tags(@$_POST['bobot']),
 						'recording_populasi' => strip_tags(@$_POST['populasi']),
+						'recording_suhu' => strip_tags(@$_POST['suhu']),
+						'recording_catatan' => strip_tags(@$_POST['catatan']),
 					);
 
 		$db = $this->query_builder->add('t_recording', $set);
@@ -122,7 +124,7 @@ class Recording extends CI_Controller{
 
 				for ($i = 0; $i < $ayam; ++$i) {
 				
-					$this->query_builder->add('t_recording_barang', ['recording_barang_nomor' => $nomor, 'recording_barang_barang' => $_POST['ayam'][$i], 'recording_barang_berat' => $_POST['ayam_berat'][$i], 'recording_barang_gejala' => $_POST['ayam_gejala'][$i], 'recording_barang_obat' => $_POST['ayam_obat'][$i], 'recording_barang_kategori' => $_POST['ayam_kategori'][$i]]);
+					$this->query_builder->add('t_recording_barang', ['recording_barang_nomor' => $nomor, 'recording_barang_barang' => $_POST['ayam'][$i], 'recording_barang_berat' => $_POST['ayam_berat'][$i], 'recording_barang_gejala' => $_POST['ayam_gejala'][$i], 'recording_barang_obat' => $_POST['ayam_obat'][$i], 'recording_barang_obat_jumlah' => $_POST['ayam_obat_jumlah'][$i], 'recording_barang_kategori' => $_POST['ayam_kategori'][$i]]);
 				}				
 			}
 
@@ -209,8 +211,11 @@ class Recording extends CI_Controller{
 		//data
 		$data['data'] = $this->query_builder->view_row("SELECT * FROM t_recording WHERE recording_id = '$id'");
 
-		//barang
+		//barang = ayam, afkir, telur
 		$data['barang_data'] = $this->query_builder->view("SELECT * FROM t_recording as a JOIN t_recording_barang as b ON a.recording_nomor = b.recording_barang_nomor JOIN t_barang as c ON b.recording_barang_barang = c.barang_id WHERE a.recording_id = '$id'");
+
+		//barang = pakan campur
+		$data['barang_data_pakan'] = $this->query_builder->view("SELECT * FROM t_recording as a JOIN t_recording_barang as b ON a.recording_nomor = b.recording_barang_nomor JOIN t_pakan as c ON b.recording_barang_barang = c.pakan_id WHERE a.recording_id = '$id'");
 
 		//kandang
 		$data['kandang_data'] = $this->query_builder->view("SELECT * FROM t_kandang WHERE kandang_hapus = 0");
@@ -236,7 +241,7 @@ class Recording extends CI_Controller{
 		$data['title'] = 'Recording Harian';
 
 	    $this->load->view('v_template_admin/admin_header',$data);
-	    $this->load->view('recording/add_mobile');
+	    $this->load->view('recording/'.$this->ui->view('add'));
 	    $this->load->view('recording/view');
 	    $this->load->view('v_template_admin/admin_footer');
 	}
@@ -245,8 +250,11 @@ class Recording extends CI_Controller{
 		//data
 		$data['data'] = $this->query_builder->view_row("SELECT * FROM t_recording WHERE recording_id = '$id'");
 
-		//barang
+		//barang = ayam, afkir, telur
 		$data['barang_data'] = $this->query_builder->view("SELECT * FROM t_recording as a JOIN t_recording_barang as b ON a.recording_nomor = b.recording_barang_nomor JOIN t_barang as c ON b.recording_barang_barang = c.barang_id WHERE a.recording_id = '$id'");
+
+		//barang = pakan campur
+		$data['barang_data_pakan'] = $this->query_builder->view("SELECT * FROM t_recording as a JOIN t_recording_barang as b ON a.recording_nomor = b.recording_barang_nomor JOIN t_pakan as c ON b.recording_barang_barang = c.pakan_id WHERE a.recording_id = '$id'");
 
 		//kandang
 		$data['kandang_data'] = $this->query_builder->view("SELECT * FROM t_kandang WHERE kandang_hapus = 0");
@@ -274,7 +282,7 @@ class Recording extends CI_Controller{
 		$data['edit'] = 1;
 
 	    $this->load->view('v_template_admin/admin_header',$data);
-	    $this->load->view('recording/add_mobile');
+	    $this->load->view('recording/'.$this->ui->view('add'));
 	    $this->load->view('recording/view');
 	    $this->load->view('v_template_admin/admin_footer');
 	}
@@ -288,6 +296,8 @@ class Recording extends CI_Controller{
 						'recording_kandang' => strip_tags(@$_POST['kandang']),
 						'recording_bobot' => strip_tags(@$_POST['bobot']),
 						'recording_populasi' => strip_tags(@$_POST['populasi']),
+						'recording_suhu' => strip_tags(@$_POST['suhu']),
+						'recording_catatan' => strip_tags(@$_POST['catatan']),
 					);
 
 		$where = ['recording_id' => $id];
@@ -304,7 +314,7 @@ class Recording extends CI_Controller{
 
 				for ($i = 0; $i < $ayam; ++$i) {
 				
-					$this->query_builder->add('t_recording_barang', ['recording_barang_nomor' => $nomor, 'recording_barang_barang' => $_POST['ayam'][$i], 'recording_barang_berat' => $_POST['ayam_berat'][$i], 'recording_barang_gejala' => $_POST['ayam_gejala'][$i], 'recording_barang_obat' => $_POST['ayam_obat'][$i], 'recording_barang_kategori' => $_POST['ayam_kategori'][$i]]);
+					$this->query_builder->add('t_recording_barang', ['recording_barang_nomor' => $nomor, 'recording_barang_barang' => $_POST['ayam'][$i], 'recording_barang_berat' => $_POST['ayam_berat'][$i], 'recording_barang_gejala' => $_POST['ayam_gejala'][$i], 'recording_barang_obat' => $_POST['ayam_obat'][$i], 'recording_barang_obat_jumlah' => $_POST['ayam_obat_jumlah'][$i], 'recording_barang_kategori' => $_POST['ayam_kategori'][$i]]);
 				}				
 			}
 

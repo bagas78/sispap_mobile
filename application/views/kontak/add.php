@@ -12,7 +12,7 @@
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fa fa-times"></i></button>
           </div>
-        </div>
+        </div> 
         <div class="box-body">
          
           <form class="bg-alice" action="<?=base_url('kontak/save')?>" method="POST" accept-charset="utf-8">
@@ -41,7 +41,7 @@
               <div class="col-lg-6">
               
                 <div class="form-group">
-                  <label>No. Telepon</label>
+                  <label>Nomor Whatsapp</label>
                   <input type="number" name="tlp" class="tlp form-control" required>
                 </div>
                 <div class="form-group">

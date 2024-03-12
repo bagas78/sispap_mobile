@@ -1,7 +1,7 @@
  <?php
 class Stok{  
   protected $sql;
-  function __construct(){
+  function __construct(){ 
         $this->sql = &get_instance();
   }
   function update_kandang(){
@@ -43,7 +43,7 @@ class Stok{
       $pembelian = $this->sql->db->query("SELECT b.pembelian_barang_barang AS barang, SUM(b.pembelian_barang_qty) AS jumlah FROM t_pembelian AS a JOIN t_pembelian_barang AS b ON a.pembelian_nomor = b.pembelian_barang_nomor WHERE a.pembelian_hapus = 0 GROUP BY b.pembelian_barang_barang")->result_array();
 
       //pakan produksi
-      $pakan = $this->sql->db->query("SELECT b.pakan_qty_kode AS kode ,SUM(b.pakan_qty_qty) AS jumlah FROM t_pakan AS a JOIN t_pakan_qty AS b ON a.pakan_kode = b.pakan_qty_kode WHERE a.pakan_hapus = 0 GROUP BY b.pakan_qty_kode ")->result_array();
+      $pakan = $this->sql->db->query("SELECT b.pakan_qty_kode AS kode ,SUM(b.pakan_qty_qty) AS jumlah FROM t_pakan AS a JOIN t_pakan_qty AS b ON a.pakan_kode = b.pakan_qty_kode WHERE a.pakan_hapus = 0 GROUP BY b.pakan_qty_kode")->result_array();
 
       $pakan_produksi = $this->sql->db->query("SELECT a.pakan_barang_barang AS barang, SUM(a.pakan_barang_qty) AS jumlah FROM t_pakan_barang AS a JOIN t_pakan AS b ON a.pakan_barang_kode = b.pakan_kode WHERE b.pakan_hapus = 0 GROUP BY a.pakan_barang_barang")->result_array(); 
 
@@ -57,6 +57,9 @@ class Stok{
       $kandang = $this->sql->db->query("SELECT SUM(kandang_log_jumlah) AS jumlah, kandang_log_barang AS barang FROM t_kandang_log AS a JOIN t_kandang AS b ON a.kandang_log_kandang = b.kandang_id WHERE b.kandang_hapus = 0 GROUP BY a.kandang_log_barang")->result_array();
       
       $recording = $this->sql->db->query("SELECT a.recording_kandang AS kandang, b.recording_barang_barang AS barang, b.recording_barang_kategori AS kategori, SUM(b.recording_barang_jumlah) AS jumlah FROM t_recording AS a JOIN t_recording_barang AS b ON a.recording_nomor = b.recording_barang_nomor WHERE a.recording_hapus = 0 GROUP BY a.recording_kandang, b.recording_barang_barang")->result_array();
+
+      //recording obat
+      $obat = $this->sql->db->query("SELECT b.recording_barang_obat AS barang , SUM(b.recording_barang_obat_jumlah) AS jumlah FROM t_recording AS a JOIN t_recording_barang AS b ON a.recording_nomor = b.recording_barang_nomor WHERE a.recording_hapus = 0 AND b.recording_barang_obat != '' GROUP BY b.recording_barang_obat")->result_array();
 
       //recording produksi
 
@@ -162,6 +165,15 @@ class Stok{
             break;
         }
 
+      }
+
+      //obat
+      foreach ($obat as $val) {
+
+        $jumlah = $val['jumlah'];
+        $barang = $val['barang'];
+
+        $this->sql->db->query("UPDATE t_barang SET barang_stok = barang_stok - {$jumlah} WHERE barang_id = {$barang}");
       }
 
       return;

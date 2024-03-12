@@ -24,8 +24,9 @@ class Wa extends CI_Controller{
 						'notif_tujuan' => strip_tags(implode(',', @$_POST['tujuan'])),
 						'notif_pembelian' => strip_tags(@$_POST['pembelian']),
 						'notif_penjualan' => strip_tags(@$_POST['penjualan']),
+						'notif_pengeluaran' => strip_tags(@$_POST['pengeluaran']),
 						'notif_vaksin' => strip_tags(@$_POST['vaksin']),
-						'notif_kandang' => strip_tags(@$_POST['kandang']), 
+						'notif_recording' => strip_tags(@$_POST['recording']), 
 					);
 
 		if (@$id) {

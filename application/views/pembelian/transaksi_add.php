@@ -16,10 +16,14 @@
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fa fa-times"></i></button>
           </div> 
-        </div>
+        </div> 
         <div class="box-body">
           
           <form action="<?=base_url('pembelian/transaksi_save');?>" method="post">
+
+            <!-- hidden action hack -->
+            <input type="hidden" name="struk" value="0" id="struk">
+            <input type="hidden" value="0" id="send">
               
             <div class="row">
               <div class="col-md-6">
@@ -115,7 +119,7 @@
                     <tr>
                       <td colspan="4"></td>
                       <td align="right">Qty Akhir</td>
-                      <td><input id="qty" readonly="" type="text" name="qty_akhir" class="form-control" value="0" min="0" step="0.01"></td>
+                      <td><input id="qty_akhir" readonly="" type="text" name="qty_akhir" class="form-control" value="0" min="0" step="0.01"></td>
                     </tr>
 
                     <tr>
@@ -259,7 +263,7 @@
     });
 
     //qty akhir
-    $('#qty').val(qty);
+    $('#qty_akhir').val(qty);
 
     //ppn
     var ppn = Number($('#ppn').val()) * Number(total) / 100;
@@ -277,5 +281,47 @@
   }
 
   auto();
+
+  $("form").on("submit", function(){
+     
+    swal({
+      title: "Kirim struk ke suplier?",
+      text: "",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((send) => {
+      
+      if (send) {
+
+        //kirim struk
+        $('#struk').val(1);
+        $('#send').val(1);
+        $('form').submit();
+        
+      }else{
+
+        //tidak kirim struk
+        $('#struk').val(0);
+        $('#send').val(1);
+        $('form').submit();
+
+      }
+
+    });
+    
+    //kirim post
+    if ($('#send').val() == 1) {
+        
+      //kirim
+      return true;
+    }else{
+
+      //tidak
+      return false;
+    } 
+  
+  })
 
 </script>

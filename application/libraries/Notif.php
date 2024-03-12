@@ -7,7 +7,7 @@ class Notif {
         $this->url = &get_instance();
     }
 
-    function cek(){
+    function cek(){ 
 
       $cek = $this->url->db->query("SELECT * FROM t_notif")->row_array();
 
@@ -18,31 +18,37 @@ class Notif {
 
       $db = $this->url->db->query("SELECT * FROM t_notif")->row_array();
 
+      $arr = explode(',', $db['notif_tujuan']);
+
       if (@$db) {
-        
-        $apikey= $db['notif_api'];
-        $tujuan= $db['notif_tujuan'];
-        $pesan= $text;
 
-        $curl = curl_init();
+        foreach ($arr as $v) {
+            
+          $apikey= $db['notif_api'];
+          $tujuan= $v;
+          $pesan= $text;
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://starsender.online/api/sendText?message='.rawurlencode($pesan).'&tujuan='.rawurlencode($tujuan.'@s.whatsapp.net'),
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-          CURLOPT_HTTPHEADER => array(
-            'apikey: '.$apikey
-          ),
-        ));
+          $curl = curl_init();
 
-        $response = curl_exec($curl);
+          curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://starsender.online/api/sendText?message='.rawurlencode($pesan).'&tujuan='.rawurlencode($tujuan.'@s.whatsapp.net'),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_HTTPHEADER => array(
+              'apikey: '.$apikey
+            ),
+          ));
 
-        curl_close($curl);
+          $response = curl_exec($curl);
+
+          curl_close($curl);
+
+        }
 
       }
 
@@ -101,20 +107,22 @@ class Notif {
       }
 
     }
-    function vaksin($id) {
+    function vaksin($kandang, $ayam, $jadwal) {
       
       $cek = $this->cek();
 
       if ($cek['notif_vaksin'] == 'on') {
 
-        $db = $this->url->db->query("SELECT * FROM t_vaksin AS a LEFT JOIN t_kandang AS b ON a.vaksin_kandang = b.kandang_id LEFT JOIN t_barang AS c ON a.vaksin_ayam = c.barang_id WHERE a.vaksin_status = 1 AND a.vaksin_id = '$id'")->row_array();
+        //get database
+        $db1 = $this->url->db->query("SELECT * FROM t_kandang WHERE kandang_id = '$kandang'")->row_array();
+        $db2 = $this->url->db->query("SELECT * FROM t_barang WHERE barang_id = '$ayam'")->row_array();
 
-        $transaksi = 'vaksin';
-        $kandang = $db['kandang_nama'];
-        $ayam = $db['barang_nama'];
-        $tanggal = date_format(date_create($db['penjualan_tanggal']) ,'d/m/Y');
+        $transaksi = 'Pengingat Vaksin';
+        $text_kandang = $db1['kandang_nama'];
+        $text_ayam = $db2['barang_nama'];
+        $text_jadwal = date_format(date_create($jadwal) ,'d/m/Y');
 
-        $pesan = 'Transaksi : '.$transaksi.'%0a'.'Kandang : '.$kandang.'%0a'.'Jenis Ayam : '.$ayam.'%0a'.'Tanggal : '.$tanggal.'%0a';
+        $pesan = 'Transaksi : '.$transaksi.'%0a'.'Kandang : '.$text_kandang.'%0a'.'Jenis Ayam : '.$text_ayam.'%0a'.'Tanggal : '.$text_jadwal.'%0a';
 
         $this->send($pesan);
 
@@ -124,13 +132,13 @@ class Notif {
       }
 
     }
-    function kandang($id) { 
+    function recording($id) { 
 
       $cek = $this->cek();
 
-      if ($cek['notif_kandang'] == 'on') {
+      if ($cek['notif_recording'] == 'on') {
       
-        $db = $this->url->db->query("SELECT * FROM t_report AS a LEFT JOIN t_kandang AS b ON a.report_kandang = b.kandang_id WHERE a.report_id = '$id'")->row_array();
+        //$db = $this->url->db->query("SELECT * FROM t_report AS a LEFT JOIN t_kandang AS b ON a.report_kandang = b.kandang_id WHERE a.report_id = '$id'")->row_array();
 
         $transaksi = 'kondisi kandang';
         $kandang = $db['kandang_nama'];
@@ -148,4 +156,115 @@ class Notif {
       }
 
     }
+    function struk_pembelian($nomor) {
+      
+      $db1 = $this->url->db->query("SELECT * FROM t_pembelian as a JOIN t_pembelian_barang as b ON a.pembelian_nomor = b.pembelian_barang_nomor LEFT JOIN t_barang as c ON b.pembelian_barang_barang = c.barang_id LEFT JOIN t_kontak as d ON a.pembelian_kontak = d.kontak_id WHERE a.pembelian_nomor = '$nomor'")->result_array();
+
+      $tanggal = date_format(date_create($db1[0]['pembelian_tanggal']), 'd/m/Y');
+
+      $text = '';
+      $text .= '-- Struk Pembelian --';
+      $text .= '%0a%0a';
+      $text .= 'Tanggal : '.$tanggal;
+      $text .= '%0a';
+      $text .= '--------------------------';
+
+      foreach ($db1 as $v) {
+          
+        $text .= '%0a';
+        $text .= $v['pembelian_barang_qty'].' x ';
+        $text .= $v['barang_nama'].' : '.number_format($v['pembelian_barang_subtotal']);
+
+      }
+
+      $text .= '%0a';
+      $text .= '--------------------------';
+      $text .= '%0a';
+      $text .= 'PPN : '.$db1[0]['pembelian_ppn'].'%';
+      $text .= '%0a';
+      $text .= 'Total : '.number_format($db1[0]['pembelian_total']);
+
+      ///////////////////////// API WA ///////////////////////////////////
+
+      $db2 = $this->url->db->query("SELECT * FROM t_notif")->row_array();
+
+      $apikey= $db2['notif_api'];
+      $tujuan= $db1[0]['kontak_tlp'];
+      $pesan= $text;
+
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://starsender.online/api/sendText?message='.rawurlencode($pesan).'&tujuan='.rawurlencode($tujuan.'@s.whatsapp.net'),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_HTTPHEADER => array(
+          'apikey: '.$apikey
+        ),
+      ));
+
+      $response = curl_exec($curl);
+
+  }
+
+  function struk_penjualan($nomor) {
+      
+      $db1 = $this->url->db->query("SELECT * FROM t_penjualan as a JOIN t_penjualan_barang as b ON a.penjualan_nomor = b.penjualan_barang_nomor LEFT JOIN t_barang as c ON b.penjualan_barang_barang = c.barang_id LEFT JOIN t_kontak as d ON a.penjualan_kontak = d.kontak_id WHERE a.penjualan_nomor = '$nomor'")->result_array();
+
+      $tanggal = date_format(date_create($db1[0]['penjualan_tanggal']), 'd/m/Y');
+
+      $text = '';
+      $text .= '-- Struk Penjualan --';
+      $text .= '%0a%0a';
+      $text .= 'Tanggal : '.$tanggal;
+      $text .= '%0a';
+      $text .= '--------------------------';
+
+      foreach ($db1 as $v) {
+          
+        $text .= '%0a';
+        $text .= $v['penjualan_barang_qty'].' x ';
+        $text .= $v['barang_nama'].' : '.number_format($v['penjualan_barang_subtotal']);
+
+      }
+
+      $text .= '%0a';
+      $text .= '--------------------------';
+      $text .= '%0a';
+      $text .= 'PPN : '.$db1[0]['penjualan_ppn'].'%';
+      $text .= '%0a';
+      $text .= 'Total : '.number_format($db1[0]['penjualan_total']);
+
+      ///////////////////////// API WA ///////////////////////////////////
+
+      $db2 = $this->url->db->query("SELECT * FROM t_notif")->row_array();
+
+      $apikey= $db2['notif_api'];
+      $tujuan= $db1[0]['kontak_tlp'];
+      $pesan= $text;
+
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://starsender.online/api/sendText?message='.rawurlencode($pesan).'&tujuan='.rawurlencode($tujuan.'@s.whatsapp.net'),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_HTTPHEADER => array(
+          'apikey: '.$apikey
+        ),
+      ));
+
+      $response = curl_exec($curl);
+
+  }
 }

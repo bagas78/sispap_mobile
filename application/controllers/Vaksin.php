@@ -6,7 +6,7 @@ class Vaksin extends CI_Controller{
 		$this->load->model('m_vaksin_jadwal');
 		$this->load->model('m_vaksin');
 	}  
-	function jadwal(){
+	function jadwal(){ 
 		$data['title'] = 'Jadwal Vaksinasi';
 
 	    $this->load->view('v_template_admin/admin_header',$data);
@@ -160,7 +160,7 @@ class Vaksin extends CI_Controller{
 	    $this->load->view('v_template_admin/admin_footer');
 	}
 
-	function reminder_get_data(){ 
+	function reminder_get_data(){  
 
 		$where = array('vaksin_hapus' => 0);
 
@@ -184,9 +184,6 @@ class Vaksin extends CI_Controller{
 		$db = $this->query_builder->update('t_vaksin',$set,$where);
 		
 		if ($db == 1) {
-
-			//library notif
-			$this->notif->vaksin($id);
 
 			$this->session->set_flashdata('success','Data berhasil di simpan');
 		} else {
@@ -238,6 +235,9 @@ class Vaksin extends CI_Controller{
 
 	            		$this->db->set($set);
 	            		$this->db->insert('t_vaksin');
+						
+						//library notif
+						$this->notif->vaksin($kandang, $ayam, $jadwal);
 	            	}
 	            }
 
@@ -264,10 +264,46 @@ class Vaksin extends CI_Controller{
 
 	            		$this->db->set($set);
 	            		$this->db->insert('t_vaksin');
+
+	            		//library notif
+						$this->notif->vaksin($kandang, $ayam, $jadwal);
 	            	}
 	            }
             }	
 			
 		}
+	}
+	function test(){
+		
+      	//get database
+	    $db = $this->db->query("SELECT * FROM t_penjualan as a JOIN t_penjualan_barang as b ON a.penjualan_nomor = b.penjualan_barang_nomor LEFT JOIN t_barang as c ON b.penjualan_barang_barang = c.barang_id WHERE a.penjualan_nomor = 'PJ-130324-2'")->result_array();
+
+	    $tanggal = date_format(date_create($db[0]['penjualan_tanggal']), 'd/m/Y');
+
+	    $text = '';
+	    $text .= '-- Struk Penjualan --';
+	    $text .= '<br/><br/>';
+	    $text .= 'Tanggal : '.$tanggal;
+	    $text .= '<br/>';
+	    $text .= '--------------------------';
+
+	    foreach ($db as $v) {
+	        
+	        $text .= '<br/>';
+			$text .= $v['penjualan_barang_qty'].' x ';
+			$text .= $v['barang_nama'].' : '.number_format($v['penjualan_barang_subtotal']);
+
+	    }
+
+	    $text .= '<br/>';
+		$text .= '--------------------------';
+		$text .= '<br/>';
+		$text .= 'PPN : '.$db[0]['penjualan_ppn'].'%';
+		$text .= '<br/>';
+		$text .= 'Total : '.number_format($db[0]['penjualan_total']);
+
+	    print_r($text);
+
+		//$this->notif->struk('PB-120324-2');
 	}
 }

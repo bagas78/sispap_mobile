@@ -305,7 +305,7 @@ function notif(){
     // $('form').attr('action', durl);
     // $('.fa-trash').closest('td').find('.btn-danger').attr("onclick", "del('<?=$_SERVER['REQUEST_URI']?>')");
 
-    setTimeout(function() {
+    setTimeout(function() { 
         notif();
     }, 100);
 }

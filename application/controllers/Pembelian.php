@@ -81,6 +81,7 @@ class Pembelian extends CI_Controller{
 
 		$nomor = strip_tags($_POST['nomor']);
 		$status = strip_tags($_POST['status']);
+		$struk = strip_tags($_POST['struk']);
 
 		//pembelian
 		$set1 = array(
@@ -128,6 +129,11 @@ class Pembelian extends CI_Controller{
 			//update stok
 			$this->stok->update_barang();
 			$this->notif->pembelian($nomor);
+
+			//kirim struk
+			if ($struk == 1) {
+				$this->notif->struk_pembelian($nomor);
+			}
 
 			$this->session->set_flashdata('success','Data berhasil di rubah');
 

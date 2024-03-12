@@ -24,7 +24,7 @@
             <tr>
               <th>Kode <?= (@$jenis == 's')?'Supplier':'Pelanggan' ?></th>
               <th>Nama</th>
-              <th>No Telephone</th>
+              <th>Nomor Whatsapp</th>
               <th>Nomor Rekening</th>
               <th>Bank</th>
               <th>Kode</th>

@@ -15,7 +15,7 @@
  
       <!-- Default box -->
       <div class="box">  
-        <div class="box-header with-border">
+        <div class="box-header with-border"> 
 
           <br/>
 
@@ -73,6 +73,20 @@
                 </div>
               </div>
             </div>
+
+            <div class="col-md-6"> 
+              <div class="form-group">
+                <label>Kondisi Suhu</label>
+                <input id="suhu" type="text" name="suhu" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Catatan</label>
+                <textarea class="form-control" name="catatan" id="catatan" required></textarea>
+              </div>
+            </div>
+
           </div>
 
           <div class="clearfix"></div><br/>
@@ -90,6 +104,7 @@
                   <th width="500">Berat Ayam</th>
                   <th width="500">Gejala Klinis</th>
                   <th width="500">Pemberian Obat</th>
+                  <th width="500">Jumlah Obat</th>
                   <th width="500" hidden>Kategori</th>
                   <th width="1">
                     <button type="button" onclick="clone('ayam')" class="add btn btn-success btn-sm"><i class="fa fa-plus"></i></button>
@@ -178,7 +193,7 @@
 
           <!-- OBAT -->
 
-          <div class="col-md-12 col-om premix_sub">
+          <!-- <div class="col-md-12 col-om premix_sub">
 
             <h4 align="center" class="tit"><b>-- OBAT --</b></h4>
 
@@ -199,7 +214,7 @@
 
           </div>
 
-            <div class="clearfix"></div><br/>
+            <div class="clearfix"></div><br/> -->
 
             <div id="submit" class="col-md-12 row">
               <button type="submit" class="btn btn-primary">Simpan <i class="fa fa-check"></i></button>
@@ -243,7 +258,9 @@
         <?php endforeach ?>
       </select>
     </td>
-
+    <td>
+       <input type="number" name="ayam_obat_jumlah[]" class="form-control ayam_obat_jumlah" value="0" min="0">
+    </td>
     <td hidden>
        <input value="ayam" type="text" name="ayam_kategori[]" class="form-control ayam_kategori">
     </td>

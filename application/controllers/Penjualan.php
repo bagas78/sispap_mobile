@@ -94,6 +94,7 @@ class penjualan extends CI_Controller{
 
 		$nomor = strip_tags($_POST['nomor']);
 		$status = strip_tags($_POST['status']);
+		$struk = strip_tags($_POST['struk']);
 
 		//penjualan
 		$set1 = array(
@@ -140,6 +141,11 @@ class penjualan extends CI_Controller{
 			//update stok
 			$this->stok->update_barang();
 			$this->notif->penjualan($nomor);
+
+			//kirim struk
+			if ($struk == 1) {
+				$this->notif->struk_penjualan($nomor);
+			}
 
 			$this->session->set_flashdata('success','Data berhasil di rubah');
 

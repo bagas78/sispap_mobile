@@ -8,26 +8,27 @@ $('#populasi').val('<?=@$data['recording_populasi']?>');
 $('#mati').val('<?=@$data['recording_mati']?>');
 $('#afkir').val('<?=@$data['recording_afkir']?>');
 $('#bobot').val('<?=@$data['recording_bobot']?>');
+$('#suhu').val('<?=@$data['recording_suhu']?>');
+$('#catatan').val('<?=@$data['recording_catatan']?>');
 $('form').attr('action', '<?=base_url('recording/update/'.@$data['recording_id'])?>');
 
 //index loop 
-<?php $a = 1;?>
+<?php $d = 1;?>
+<?php $a = 1;?> 
 <?php $t = 1;?>
-<?php $p = 1;?>
-<?php $o = 1;?>
 
 <?php foreach ($barang_data as $v): ?>
 
 	//ayam 
 	<?php if($v['recording_barang_kategori'] == 'ayam'): ?>
 
-		<?php if($a - 0): ?>
+		<?php if($d - 0): ?>
 
 			clone('ayam');
 
 		<?php endif ?>
 
-	<?php $a++ ?>
+	<?php $d++ ?>
 
 	<?php endif ?>
 
@@ -57,40 +58,12 @@ $('form').attr('action', '<?=base_url('recording/update/'.@$data['recording_id']
 
 	<?php endif ?>
 
-	//pakan
-	<?php if($v['recording_barang_kategori'] == 'pakan'): ?>
-
-		<?php if($p - 0): ?>
-
-			clone('pakan');
-
-		<?php endif ?>
-
-	<?php $p++ ?>
-
-	<?php endif ?>
-
-	//premix
-	<?php if($v['recording_barang_kategori'] == 'premix'): ?>
-
-		<?php if($o - 0): ?>
-
-			clone('premix');
-
-		<?php endif ?>
-
-	<?php $o++ ?>
-
-	<?php endif ?>
-
 <?php endforeach ?>
 
 //insert data
 <?php $i_d = 0; ?>
 <?php $i_a = 0; ?>
 <?php $i_t = 0; ?>
-<?php $i_p = 0; ?>
-<?php $i_o = 0; ?>
 <?php foreach(@$barang_data as  $key => $v): ?>
 
 	//ayam
@@ -100,6 +73,7 @@ $('form').attr('action', '<?=base_url('recording/update/'.@$data['recording_id']
 		$('.ayam_berat:eq(<?=$i_d?>)').val('<?=$v['recording_barang_berat']?>');
 		$('.ayam_gejala:eq(<?=$i_d?>)').val('<?=$v['recording_barang_gejala']?>');
 		$('.ayam_obat:eq(<?=$i_d?>)').val('<?=$v['recording_barang_obat']?>').change();
+		$('.ayam_obat_jumlah:eq(<?=$i_d?>)').val('<?=$v['recording_barang_obat_jumlah']?>');
 
 		<?php $i_d++; ?>
 	<?php endif ?>
@@ -122,27 +96,26 @@ $('form').attr('action', '<?=base_url('recording/update/'.@$data['recording_id']
 		<?php $i_t++; ?>
 	<?php endif ?>
 
+<?php endforeach ?>
+
+//pakan campur
+<?php foreach ($barang_data_pakan as $v): ?>
+
+	//pakan campur 
+	clone('pakan');
+
+<?php endforeach ?>
+
+//insert campur
+<?php $i_p = 0; ?>
+<?php foreach(@$barang_data_pakan as  $key => $v): ?>
+
 	//pakan
-	<?php if($v['barang_kategori'] == 3): ?>
 		
-		$('.pakan:eq(<?=$i_p?>)').val('<?=$v['recording_barang_barang']?>');
-		$('.pakan_stok:eq(<?=$i_p?>)').val('<?=$v['recording_barang_stok']?>');
-		$('.pakan_jumlah:eq(<?=$i_p?>)').val('<?=$v['recording_barang_jumlah']?>');
-		$('.pakan_satuan').text('<?=$v['barang_satuan']?>');
+	$('.pakan:eq(<?=$i_p?>)').val('<?=$v['recording_barang_barang']?>').change();
+	$('.pakan_jumlah:eq(<?=$i_p?>)').val('<?=$v['recording_barang_jumlah']?>');
 
-		<?php $i_p++; ?>
-	<?php endif ?>
-
-	//premix
-	<?php if($v['barang_kategori'] == 4): ?>
-		
-		$('.premix:eq(<?=$i_o?>)').val('<?=$v['recording_barang_barang']?>');
-		$('.premix_stok:eq(<?=$i_o?>)').val('<?=$v['recording_barang_stok']?>');
-		$('.premix_jumlah:eq(<?=$i_o?>)').val('<?=$v['recording_barang_jumlah']?>');
-		$('.premix_satuan').text('<?=$v['barang_satuan']?>');
-
-		<?php $i_o++; ?>
-	<?php endif ?>
+	<?php $i_p++; ?>
 
 <?php endforeach ?>
 

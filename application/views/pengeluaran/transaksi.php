@@ -25,6 +25,7 @@
               <th>Nomor</th>
               <th>User</th>
               <th>Tanggal</th>
+              <th>Lampiran</th>
               <th width="60">Action</th>
             </tr>
             </thead>
@@ -63,6 +64,12 @@
                         "render": 
                         function( data ) {
                             return "<span>"+moment(data).format("DD/MM/YYYY")+"</span>";
+                          }
+                        }, 
+                        { "data": "pengeluaran_lampiran",
+                        "render": 
+                        function( data ) {
+                            return "<a target='_BLANK' href='<?=base_url('assets/lampiran/')?>"+data+"'><button class='btn-xs btn btn-primary'>Lihat <i class='fa fa-eye'></i></button></a>";
                           }
                         },  
                         { "data": "pengeluaran_id",

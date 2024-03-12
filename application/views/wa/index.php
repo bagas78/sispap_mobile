@@ -127,6 +127,15 @@ input:checked + .slider:before {
                         </td>
                     </tr>
                     <tr>
+                        <td>PENGELUARAN</td>
+                        <td>
+                           <label class="switch">
+                              <input type="checkbox" name="pengeluaran" id="pengeluaran">
+                              <span class="slider round"></span>
+                            </label> 
+                        </td>
+                    </tr>
+                    <tr>
                         <td>JADWAL VAKSINASI</td>
                         <td>
                            <label class="switch">
@@ -136,10 +145,10 @@ input:checked + .slider:before {
                         </td>
                     </tr>
                     <tr>
-                        <td>KONDISI KANDANG</td>
+                        <td>RECORDING / KONDISI KANDANG</td>
                         <td>
                            <label class="switch">
-                              <input type="checkbox" name="kandang" id="kandang">
+                              <input type="checkbox" name="recording" id="recording">
                               <span class="slider round"></span>
                             </label> 
                         </td>
@@ -165,7 +174,7 @@ input:checked + .slider:before {
         <!-- copy -->
         <div id="copy" hidden>
           <div class="col-md-11 col-xs-9" style="margin-top: 10px;">
-                <input required type="number" name="tujuan[]" class="form-control tujuan" required>    
+                <input value="" required type="number" name="tujuan[]" class="form-control tujuan" required>    
             </div>
             <div class="col-md-1 col-xs-1" style="margin-top: 10px;">
                 <button onclick="$(this).parents('div#copy').remove()" type="button" class="btn btn-danger"><i class="fa fa-minus"></i></button>
@@ -197,16 +206,6 @@ input:checked + .slider:before {
 
     <?php endforeach ?>
 
-    // <?php if (@$tujuan): ?>
-        
-    //     <?php foreach ($tujuan as $key): ?>
-            
-    //         clone();
-
-    //     <?php endforeach ?>
-
-    // <?php endif ?>
-
 
     if ('<?=@$data['notif_pembelian']?>' == 'on') {
 
@@ -218,21 +217,27 @@ input:checked + .slider:before {
         $('#penjualan').attr('checked', true);
     } 
 
+    if ('<?=@$data['notif_pengeluaran']?>' == 'on') {
+
+        $('#pengeluaran').attr('checked', true);
+    } 
+
     if ('<?=@$data['notif_vaksin']?>' == 'on') {
 
         $('#vaksin').attr('checked', true);
     } 
 
-    if ('<?=@$data['notif_kandang']?>' == 'on') {
+    if ('<?=@$data['notif_recording']?>' == 'on') {
 
-        $('#kandang').attr('checked', true);
+        $('#recording').attr('checked', true);
     } 
 
 
     //multiple no WA
     function clone(){
         
-        $('#paste').append($('#copy').clone().removeAttr('hidden'));
+        //$('#copy').find('input').val('');
+        $('#copy').clone().removeAttr('hidden').appendTo('#paste');
 
     }
 

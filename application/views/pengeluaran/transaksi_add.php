@@ -1,3 +1,11 @@
+<style type="text/css">
+  .lm{
+    background: #3c8dbc;
+    padding: 0.5% 1% 0.5% 1%;
+    border-radius: 5px;
+    color: white;
+  }
+</style>
 
     <!-- Main content --> 
     <section class="content">
@@ -15,11 +23,11 @@
               <i class="fa fa-minus"></i></button>
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fa fa-times"></i></button>
-          </div> 
+          </div>  
         </div>
         <div class="box-body">
           
-          <form action="<?=base_url('pengeluaran/transaksi_save');?>" method="post">
+          <form action="<?=base_url('pengeluaran/transaksi_save');?>" method="post" enctype="multipart/form-data">
               
             <div class="row">
               <div class="col-md-6">
@@ -29,13 +37,17 @@
                 </div>
                 <div class="form-group">
                   <label>Jatuh Tempo</label>
-                  <input type="date" required name="jatuh tempo" class="jatuh_tempo form-control" value="<?=date('Y-m-d')?>">
+                  <input type="date" required name="jatuh_tempo" class="jatuh_tempo form-control" value="<?=date('Y-m-d')?>">
                 </div>                
               </div>
               <div class="col-md-6">
                 <div class="form-group">
+                  <label>Lampiran</label>
+                  <input type="file" name="lampiran" class="lampiran form-control" value="">
+                </div>   
+                <div class="form-group">
                   <label>Keterangan</label>
-                  <textarea name="keterangan" class="keterangan form-control" style="height: 110px;"></textarea>
+                  <textarea name="keterangan" class="keterangan form-control"></textarea>
                 </div>
               </div>
 

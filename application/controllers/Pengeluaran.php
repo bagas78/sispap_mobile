@@ -2,7 +2,7 @@
 class Pengeluaran extends CI_Controller{
 
 	function __construct(){
-		parent::__construct();
+		parent::__construct(); 
 		$this->load->model('m_pengeluaran');
 	} 
 	function transaksi(){ 
@@ -66,12 +66,52 @@ class Pengeluaran extends CI_Controller{
 		$nomor = strip_tags($_POST['nomor']);
 		$status = strip_tags($_POST['status']);
 
+		//upload lampiran
+		if (@$_FILES['lampiran']['name']) {
+			
+			//replace Karakter name foto
+	        $filename = $_FILES['lampiran']['name'];
+
+	        //replace name foto
+	        $type = explode(".", $filename);
+	        $no = count($type) - 1;
+	        $new_name = md5($i.time()).'.'.$type[$no];
+
+			//config uplod foto
+			  $config = array(
+			  'upload_path' 	=> './assets/lampiran',
+			  'allowed_types' 	=> "gif|jpg|png|jpeg",
+			  'overwrite' 		=> TRUE,
+			  'file_name'       => $new_name,
+			  );
+
+			//upload foto
+			$this->load->library('upload', $config);
+
+			if ($this->upload->do_upload('lampiran')) {
+
+				//sukses upload
+			    $lampiran = $new_name;
+
+			}else{
+
+				//gagal upload
+				$lampiran = '';
+			}
+			
+		}else{
+
+			//foto kosong
+			$lampiran = '';
+		}
+
 		//pembelian
 		$set1 = array(
 						'pengeluaran_user' => $this->session->userdata('id'),
 						'pengeluaran_nomor' => $nomor,
 						'pengeluaran_jatuh_tempo' => strip_tags($_POST['jatuh_tempo']),
 						'pengeluaran_keterangan' => strip_tags($_POST['keterangan']),
+						'pengeluaran_lampiran' => $lampiran,
 						'pengeluaran_ppn' => strip_tags($_POST['ppn']),
 						'pengeluaran_qty' => strip_tags(str_replace(',', '', $_POST['qty_akhir'])),
 						'pengeluaran_total' => strip_tags(str_replace(',', '', $_POST['total'])),

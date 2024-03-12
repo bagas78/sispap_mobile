@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2024 at 02:28 AM
+-- Generation Time: Mar 12, 2024 at 08:42 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -235,12 +235,12 @@ CREATE TABLE `t_barang` (
 --
 
 INSERT INTO `t_barang` (`barang_id`, `barang_kode`, `barang_kategori`, `barang_stok`, `barang_nama`, `barang_satuan`, `barang_tanggal`, `barang_hapus`) VALUES
-(140, 'KB001', '5', '800', 'Ayam Petelur Putih', '3', '2024-03-05', 0),
+(140, 'KB001', '5', '-200', 'Ayam Petelur Putih', '3', '2024-03-05', 0),
 (141, 'KB002', '5', '0', 'Ayam Petelur Coklat/Hibrida', '3', '2024-03-05', 0),
 (142, 'KB003', '5', '0', 'Ayam Petelur Sussex', '3', '2024-03-05', 0),
 (143, 'KB004', '2', '0', 'AYAM AFKIR', '3', '2024-03-05', 0),
 (144, 'KB005', '2', '0', 'AYAM MATI', '3', '2024-03-05', 0),
-(145, 'KB006', '1', '0', 'TELUR MERAH', '2', '2024-03-05', 0),
+(145, 'KB006', '1', '8', 'TELUR MERAH', '2', '2024-03-05', 0),
 (146, 'KB007', '3', '5', 'GANDUM', '1', '2024-03-05', 0),
 (147, 'KB008', '3', '0', 'MENIR BATU', '1', '2024-03-05', 0),
 (148, 'KB009', '3', '0', 'MBM', '1', '2024-03-05', 0),
@@ -248,8 +248,8 @@ INSERT INTO `t_barang` (`barang_id`, `barang_kode`, `barang_kategori`, `barang_s
 (150, 'KB0011', '3', '0', 'KATUL', '1', '2024-03-05', 0),
 (151, 'KB0012', '3', '0', 'JAGUNG', '1', '2024-03-05', 0),
 (152, 'KB0013', '3', '0', 'JAGUNG PAK HUSEN', '1', '2024-03-05', 0),
-(153, 'KB0014', '4', '100', 'DIATOMITE SPECTRA', '4', '2024-03-05', 0),
-(154, 'KB0015', '4', '0', 'FLAVOR', '4', '2024-03-05', 0),
+(153, 'KB0014', '4', '-10', 'DIATOMITE SPECTRA', '4', '2024-03-05', 0),
+(154, 'KB0015', '4', '5', 'FLAVOR', '4', '2024-03-05', 0),
 (155, 'KB0016', '4', '0', 'FORTEVIT', '4', '2024-03-05', 0),
 (156, 'KB0017', '4', '0', 'SODIUM BIKARBONAT', '4', '2024-03-05', 0),
 (157, 'KB0018', '4', '0', 'MEDIVAC ND GMB', '4', '2024-03-05', 0);
@@ -489,7 +489,7 @@ CREATE TABLE `t_kandang` (
 --
 
 INSERT INTO `t_kandang` (`kandang_id`, `kandang_kode`, `kandang_nama`, `kandang_alamat`, `kandang_luas`, `kandang_keterangan`, `kandang_ayam`, `kandang_tanggal`, `kandang_hapus`) VALUES
-(4, 'KD001', 'Kandang timur', 'Plumpung rejo', '1000', '-', '100', '2023-05-13', 0),
+(4, 'KD001', 'Kandang timur', 'Plumpung rejo', '1000', '-', '80', '2023-05-13', 0),
 (5, 'KD002', 'Kandang barat', 'Plumpung rejo', '1500', '-', '100', '2023-05-13', 0);
 
 -- --------------------------------------------------------
@@ -571,60 +571,8 @@ CREATE TABLE `t_kontak` (
 --
 
 INSERT INTO `t_kontak` (`kontak_id`, `kontak_jenis`, `kontak_kode`, `kontak_nama`, `kontak_alamat`, `kontak_tlp`, `kontak_bank`, `kontak_rek`, `kontak_tanggal`, `kontak_hapus`) VALUES
-(2, 's', 'SP001', 'Setiawan Nugroho', '-', '085775334552', '1', '763201007520530', '2023-02-22', 1),
-(3, 's', 'SP002', 'Heru Setiawan ', '-', '085700600500', '1', '733601013479531', '2023-02-22', 1),
-(4, 'p', 'PL001', 'Bagas Pramono', '-', '085855011542', '1', '016601020870538', '2023-02-22', 1),
-(5, 'p', 'PL002', 'Suroto AS', '-', '087666444333', '1', '478201003567778', '2023-02-22', 1),
-(7, 's', 'SP003', 'MEDION ARDHIKA PRATAMA', 'BLITAR', '000', '8', '0083806777', '2023-07-27', 0),
-(8, 's', 'SP004', 'PT.SARANA VETERINARIA JAYA ABADI', 'TAMAN TEKNO BSD SEKTOR XI BLOK J2/5 TANGGERANG SELATAN', '02175880369', '8', '8990301612', '2023-07-29', 0),
-(9, 's', 'SP005', 'PT MULTIFARMA SATWA MAJU', 'JL.AYA PAUNG PAMJANG NO.81 LEGO-TANGGERANG', '0215979876', '8', '000', '2023-07-29', 0),
-(10, 's', 'SP006', 'MULTI EDITAS UTAMA', 'JL.PERINTIS KEMERDEKAAN KOMMP.RUKO PERTAMA BORDI TEXTILL CENTRE BLOK A-4 TASIKMALAYA ', '026532794', '8', '0540401888', '2023-07-29', 0),
-(11, 's', 'SP007', 'AHMAD LUDOYO', 'LUDOYO', '000', '8', '0901314399', '2023-07-29', 0),
-(12, 's', 'SP008', 'PT.AGRINUSA JAYA SENTOSA', 'JL.RAYA JUANDA SEDATIAGUNG.SIDOARJO', '0318671623', '8', '000', '2023-07-29', 0),
-(13, 's', 'SP009', 'PT.LEWI MANUNGGAL', 'BLITAR', '000', '8', '000', '2023-07-29', 0),
-(14, 's', 'SP0010', 'PT.SAVETA', 'BLITAR', '000', '8', '000', '2023-07-29', 1),
-(15, 's', 'SP0011', 'PT.BCAF', 'BLITAR', '000', '8', '000', '2023-08-01', 0),
-(16, 's', 'SP0012', 'PAK KHUSEN', 'BLITAR', '00', '8', '00', '2023-08-05', 0),
-(17, 's', 'SP0013', 'PA NOR', 'BLITAR', '00', '8', '00', '2023-08-05', 0),
-(18, 's', 'SP0014', 'PAK BUDI', 'BLITAR', '000', '8', '000', '2023-08-05', 0),
-(19, 's', 'SP0015', 'PA AGUS', 'BLITAR', '00', '8', '00', '2023-08-05', 0),
-(20, 's', 'SP0016', 'DOC', 'BLITAR', '999999', '8', '999999', '2023-08-07', 0),
-(21, 's', 'SP0017', 'PT.PIMAIMAS CITRA   ', ' MUGI GRIYA JAKARTA', '8308471', '8', '000', '2023-08-14', 0),
-(22, 's', 'SP0018', 'PT.BINA CITRA AGRO FARMA', 'TANGGERANG SELATAN-INDONESIA', '082112408105', '8', '7314424939', '2023-08-17', 0),
-(23, 's', 'SP0019', 'PT.PAKAN SERASI', 'JAKARTA', '5480686', '8', '000', '2023-08-17', 0),
-(24, 'p', 'PL003', 'BIOTEK SARANATAMA', 'BLITAR', '000', '8', '000', '2023-08-25', 1),
-(25, 's', 'SP0020', 'BIOTEK SARANATAMA', 'BLITAR', '000', '8', '000', '2023-08-25', 0),
-(26, 's', 'SP0021', 'AGRO MAKMUR SENTOSA', 'BLITAR-JAKARTA', '00', '8', '7020307719', '2023-09-02', 0),
-(27, 's', 'SP0022', 'JAYA MANDIRI AGRINDO', 'SUMBER SANAN KULON BLITAR', '085236750872', '1', '626401011716537', '2023-09-04', 1),
-(28, 'p', 'PL004', 'JUM', 'BLITAR', '00', '1', '00', '2023-09-06', 0),
-(29, 'p', 'PL005', 'HERI', 'BLITAR', '00', '1', '00', '2023-09-06', 0),
-(30, 'p', 'PL006', 'SODERI', 'BLITAR', '00', '1', '00', '2023-09-06', 0),
-(31, 'p', 'PL007', 'MIMING', 'BLITAR', '00', '1', '00', '2023-09-06', 0),
-(32, 's', 'SP0023', 'JAYA MANDIRI AGRINDO', 'SUMBER SANANKULON BLITAR', '085236750872', '1', '626401011716537', '2023-09-11', 0),
-(33, 'p', 'PL008', 'JUMA', 'BLITAR', '000', '8', '000', '2023-09-13', 0),
-(34, 's', 'SP0024', 'PT.SREEYA SEWU INDONESIA', 'JL.RAYA PARUNG KM19 DESA:  PEMEGARSARI PARUNG-OGOR JAWA BARAT', '000', '8', '000', '2023-09-18', 0),
-(35, 's', 'SP0025', 'PT.ANUGERAH PANJI JAYA  MANDIRI', 'KAWASAN INDUSTRI  MEKAR RAYA BANDUNG', '02263725181', '8', '00', '2023-09-18', 0),
-(36, 's', 'SP0026', 'PT TEKAD MANDIRI CITRA', 'BANDUNG', '0227322827', '8', '000', '2023-09-18', 0),
-(37, 's', 'SP0027', 'PT ISSU MEDIKA VETERINDO', 'BANDUNG INDONESIA', '0227835746', '8', '000', '2023-09-22', 0),
-(38, 's', 'SP0028', 'PT.YUNG SHIN  PHARMACEUTICAL INDONESIA', 'TANGGERANG BANTEN', '087720040602', '8', '00', '2023-09-29', 0),
-(39, 's', 'SP0029', 'CV.MITRA BHUWANA MANDIRI', 'JL.KRTINI  NO.11 DOKO KEDIRI', '0354694414', '8', '000', '2023-10-10', 0),
-(40, 's', 'SP0030', 'PAK BROTO', 'BLITAR', '000', '8', '000', '2023-10-30', 0),
-(41, 's', 'SP0031', 'PAK DASAR', 'BLITAR', '000', '8', '000', '2023-10-30', 0),
-(42, 's', 'SP0032', 'PAK HARI', 'BLITAR', '000', '8', '000', '2023-10-30', 0),
-(43, 's', 'SP0033', 'PA ARIF', 'BLITAR', '000', '8', '000', '2023-11-02', 1),
-(44, 's', 'SP0034', 'PAK FANDY', 'BLITAR', '000', '8', '000', '2023-11-02', 1),
-(45, 's', 'SP0035', 'PT.CHAROEN POKPHAND INDONESIA', ' Kp. Cilubang,, Bencoy, Kec. Cireunghas, Kabupaten Sukabumi, Jawa Barat 43193', '0216919999', '8', '0', '2023-11-07', 0),
-(46, 'p', 'PL009', 'PAK NANANG', 'BLITAR', '000', '8', '000', '2023-11-08', 0),
-(47, 's', 'SP0036', 'PAK UZI', 'BLITAR', '000', '8', '000', '2023-11-08', 0),
-(48, 'p', 'PL0010', 'MBAK ARI', 'BLITAR', '000', '8', '000', '2023-11-09', 0),
-(49, 'p', 'PL0011', 'PAK LINGGA', 'BLITAR', '000', '8', '000', '2023-11-13', 0),
-(50, 's', 'SP0037', 'BATU INDAH RAYA', 'JIMBE -BLITAR', '000', '8', '000', '2023-11-14', 0),
-(51, 's', 'SP0038', 'PAK KHODER', 'BLITAR', '000', '1', '000', '2023-11-21', 0),
-(52, 's', 'SP0039', 'PAK KALIM', 'BLITAR', '000', '1', '000', '2023-11-21', 0),
-(53, 's', 'SP0040', 'PAK YOYOK', 'BLITAR', '000', '1', '000', '2023-11-21', 0),
-(54, 's', 'SP0041', 'PAK SUYUT', 'BLITAR', '000', '8', '000', '2023-11-25', 0),
-(55, 's', 'SP0042', 'PAK MISDI', 'BLITAR', '000', '8', '000', '2023-11-25', 0),
-(56, 's', 'SP0043', 'PAK IQRA', 'BLITAR', '000', '8', '000', '2023-11-25', 0);
+(4, 'p', 'PL001', 'Bagas Pramono (pelanggan)', '-', '085855011542', '1', '016601020870538', '2023-02-22', 0),
+(57, 's', 'SP0044', 'Bagas Pramono (suplier)', '-', '085855011542', '1', '63767218', '2024-03-12', 0);
 
 -- --------------------------------------------------------
 
@@ -665,8 +613,9 @@ CREATE TABLE `t_notif` (
   `notif_tujuan` text DEFAULT NULL,
   `notif_pembelian` text DEFAULT NULL,
   `notif_penjualan` text DEFAULT NULL,
+  `notif_pengeluaran` text DEFAULT NULL,
   `notif_vaksin` text DEFAULT NULL,
-  `notif_kandang` text DEFAULT NULL,
+  `notif_recording` text DEFAULT NULL,
   `notif_tanggal` date DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -674,8 +623,8 @@ CREATE TABLE `t_notif` (
 -- Dumping data for table `t_notif`
 --
 
-INSERT INTO `t_notif` (`notif_id`, `notif_api`, `notif_tujuan`, `notif_pembelian`, `notif_penjualan`, `notif_vaksin`, `notif_kandang`, `notif_tanggal`) VALUES
-(2, '85dd8e1ba30f5f4270c839f6ddce4e624050a8cf', '082213691550,085855011542', 'on', 'on', 'on', 'on', '2024-02-07');
+INSERT INTO `t_notif` (`notif_id`, `notif_api`, `notif_tujuan`, `notif_pembelian`, `notif_penjualan`, `notif_pengeluaran`, `notif_vaksin`, `notif_recording`, `notif_tanggal`) VALUES
+(2, '85dd8e1ba30f5f4270c839f6ddce4e624050a8cf', '085855011542,085895222285,085800418645', 'on', 'on', 'on', 'on', 'on', '2024-02-07');
 
 -- --------------------------------------------------------
 
@@ -699,7 +648,7 @@ CREATE TABLE `t_pakan` (
 --
 
 INSERT INTO `t_pakan` (`pakan_id`, `pakan_kode`, `pakan_nama`, `pakan_satuan`, `pakan_stok`, `pakan_keterangan`, `pakan_tanggal`, `pakan_hapus`) VALUES
-(24, 'PC001', 'Pakan campur 100% HALAL', '1', '100', '-', '2024-03-05', 0);
+(24, 'PC001', 'Pakan campur 100% HALAL', '1', '80', '-', '2024-03-05', 0);
 
 -- --------------------------------------------------------
 
@@ -818,9 +767,7 @@ CREATE TABLE `t_pembelian` (
 --
 
 INSERT INTO `t_pembelian` (`pembelian_id`, `pembelian_user`, `pembelian_nomor`, `pembelian_faktur`, `pembelian_kontak`, `pembelian_sales`, `pembelian_status`, `pembelian_jatuh_tempo`, `pembelian_keterangan`, `pembelian_qty`, `pembelian_ppn`, `pembelian_total`, `pembelian_tanggal`, `pembelian_hapus`) VALUES
-(203, 2, 'PB-050324-1', 'PT0012638', 7, 'Mas Bro', 'lunas', '2024-03-05', '-', '10', '0', '1320000', '2024-03-05', 0),
-(204, 2, 'PB-050324-2', 'PT0012630', 8, 'Mas Bro', 'lunas', '2024-03-05', '-', '0', '0', '2200000', '2024-03-05', 0),
-(205, 2, 'PB-050324-3', 'PT001112', 7, 'Mas Bro', 'lunas', '2024-03-05', '-', '0', '0', '7000000', '2024-03-05', 0);
+(215, 2, 'PB-120324-1', 'PT0012638', 57, 'Mas Bro', 'lunas', '2024-03-12', '-', '15', '0', '25000', '2024-03-12', 0);
 
 -- --------------------------------------------------------
 
@@ -845,9 +792,8 @@ CREATE TABLE `t_pembelian_barang` (
 --
 
 INSERT INTO `t_pembelian_barang` (`pembelian_barang_id`, `pembelian_barang_nomor`, `pembelian_barang_kategori`, `pembelian_barang_barang`, `pembelian_barang_harga`, `pembelian_barang_diskon`, `pembelian_barang_qty`, `pembelian_barang_subtotal`, `pembelian_barang_tanggal`) VALUES
-(245, 'PB-050324-1', '3', '146', '120000', '0', '10', '1200000', '2024-03-05'),
-(246, 'PB-050324-2', '4', '153', '22000', '0', '100', '2200000', '2024-03-05'),
-(247, 'PB-050324-3', '5', '140', '7000', '0', '1000', '7000000', '2024-03-05');
+(262, 'PB-120324-1', '4', '154', '1000', '0', '5', '5000', '2024-03-12'),
+(263, 'PB-120324-1', '3', '146', '2000', '0', '10', '20000', '2024-03-12');
 
 -- --------------------------------------------------------
 
@@ -860,6 +806,7 @@ CREATE TABLE `t_pengeluaran` (
   `pengeluaran_user` text DEFAULT NULL,
   `pengeluaran_nomor` text DEFAULT NULL,
   `pengeluaran_keterangan` text DEFAULT NULL,
+  `pengeluaran_lampiran` text DEFAULT NULL,
   `pengeluaran_jatuh_tempo` text DEFAULT NULL,
   `pengeluaran_qty` text DEFAULT NULL,
   `pengeluaran_ppn` text DEFAULT NULL,
@@ -872,8 +819,8 @@ CREATE TABLE `t_pengeluaran` (
 -- Dumping data for table `t_pengeluaran`
 --
 
-INSERT INTO `t_pengeluaran` (`pengeluaran_id`, `pengeluaran_user`, `pengeluaran_nomor`, `pengeluaran_keterangan`, `pengeluaran_jatuh_tempo`, `pengeluaran_qty`, `pengeluaran_ppn`, `pengeluaran_total`, `pengeluaran_tanggal`, `pengeluaran_hapus`) VALUES
-(2, '2', 'PG-010324-2', 'Nasi goreng untuk makan siang kandang 1', '2024-03-01', '10', '0', '120000', '2024-03-01', 0);
+INSERT INTO `t_pengeluaran` (`pengeluaran_id`, `pengeluaran_user`, `pengeluaran_nomor`, `pengeluaran_keterangan`, `pengeluaran_lampiran`, `pengeluaran_jatuh_tempo`, `pengeluaran_qty`, `pengeluaran_ppn`, `pengeluaran_total`, `pengeluaran_tanggal`, `pengeluaran_hapus`) VALUES
+(6, '2', 'PG-120324-1', 'untuk beli oli gardan', 'e15f1fde3f864e6df82166d83f0afde7.jpg', '2024-03-12', '1', '0', '25000', '2024-03-12', 0);
 
 -- --------------------------------------------------------
 
@@ -897,7 +844,7 @@ CREATE TABLE `t_pengeluaran_barang` (
 --
 
 INSERT INTO `t_pengeluaran_barang` (`pengeluaran_barang_id`, `pengeluaran_barang_nomor`, `pengeluaran_barang_barang`, `pengeluaran_barang_diskon`, `pengeluaran_barang_harga`, `pengeluaran_barang_qty`, `pengeluaran_barang_subtotal`, `pengeluaran_barang_tanggal`) VALUES
-(1, 'PG-010324-2', 'Nasi Goreng', '0', '12000', '10', '120000', '2024-03-01');
+(4, 'PG-120324-1', 'Oli gardan', '0', '25000', '1', '25000', '2024-03-12');
 
 -- --------------------------------------------------------
 
@@ -920,6 +867,13 @@ CREATE TABLE `t_penjualan` (
   `penjualan_hapus` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `t_penjualan`
+--
+
+INSERT INTO `t_penjualan` (`penjualan_id`, `penjualan_user`, `penjualan_kontak`, `penjualan_nomor`, `penjualan_status`, `penjualan_jatuh_tempo`, `penjualan_keterangan`, `penjualan_qty`, `penjualan_ppn`, `penjualan_total`, `penjualan_tanggal`, `penjualan_hapus`) VALUES
+(39, 2, '4', 'PJ-130324-1', 'lunas', '2024-03-13', '-', '2', 0, '24000', '2024-03-13', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -938,6 +892,13 @@ CREATE TABLE `t_penjualan_barang` (
   `penjualan_barang_subtotal` text NOT NULL,
   `penjualan_barang_tanggal` date NOT NULL DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t_penjualan_barang`
+--
+
+INSERT INTO `t_penjualan_barang` (`penjualan_barang_id`, `penjualan_barang_nomor`, `penjualan_barang_kategori`, `penjualan_barang_barang`, `penjualan_barang_harga`, `penjualan_barang_diskon`, `penjualan_barang_stok`, `penjualan_barang_qty`, `penjualan_barang_subtotal`, `penjualan_barang_tanggal`) VALUES
+(44, 'PJ-130324-1', '1', '145', '12000', '0', '  10', '2', '24000', '2024-03-13');
 
 -- --------------------------------------------------------
 
@@ -1036,6 +997,8 @@ CREATE TABLE `t_recording` (
   `recording_kandang` text NOT NULL,
   `recording_bobot` text NOT NULL,
   `recording_populasi` text NOT NULL,
+  `recording_suhu` text NOT NULL,
+  `recording_catatan` text NOT NULL,
   `recording_hapus` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1043,8 +1006,8 @@ CREATE TABLE `t_recording` (
 -- Dumping data for table `t_recording`
 --
 
-INSERT INTO `t_recording` (`recording_id`, `recording_nomor`, `recording_user`, `recording_tanggal`, `recording_kandang`, `recording_bobot`, `recording_populasi`, `recording_hapus`) VALUES
-(284, 'RC-050224-1', '2', '2024-02-05', '20', '5', '4757', 0);
+INSERT INTO `t_recording` (`recording_id`, `recording_nomor`, `recording_user`, `recording_tanggal`, `recording_kandang`, `recording_bobot`, `recording_populasi`, `recording_suhu`, `recording_catatan`, `recording_hapus`) VALUES
+(286, 'RC-100324-1', '2', '2024-03-10', '4', '10', '100', 'sejuk poll', 'keren abis', 0);
 
 -- --------------------------------------------------------
 
@@ -1062,6 +1025,7 @@ CREATE TABLE `t_recording_barang` (
   `recording_barang_berat` text DEFAULT NULL,
   `recording_barang_gejala` text DEFAULT NULL,
   `recording_barang_obat` text DEFAULT NULL,
+  `recording_barang_obat_jumlah` int(11) DEFAULT 0,
   `recording_barang_tanggal` date DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1069,11 +1033,12 @@ CREATE TABLE `t_recording_barang` (
 -- Dumping data for table `t_recording_barang`
 --
 
-INSERT INTO `t_recording_barang` (`recording_barang_id`, `recording_barang_nomor`, `recording_barang_barang`, `recording_barang_stok`, `recording_barang_jumlah`, `recording_barang_kategori`, `recording_barang_berat`, `recording_barang_gejala`, `recording_barang_obat`, `recording_barang_tanggal`) VALUES
-(524, 'RC-050224-1', '27', '0', '0', 'ayam', '5', 'types', '59', '2024-02-05'),
-(525, 'RC-050224-1', '76', '0', '15', 'afkir', NULL, NULL, NULL, '2024-02-05'),
-(526, 'RC-050224-1', '78', '0', '15', 'telur', NULL, NULL, NULL, '2024-02-05'),
-(527, 'RC-050224-1', '14', '1220', '15', 'pakan', NULL, NULL, NULL, '2024-02-05');
+INSERT INTO `t_recording_barang` (`recording_barang_id`, `recording_barang_nomor`, `recording_barang_barang`, `recording_barang_stok`, `recording_barang_jumlah`, `recording_barang_kategori`, `recording_barang_berat`, `recording_barang_gejala`, `recording_barang_obat`, `recording_barang_obat_jumlah`, `recording_barang_tanggal`) VALUES
+(562, 'RC-100324-1', '140', '0', '0', 'ayam', '2', 'tipes', '153', 10, '2024-03-10'),
+(563, 'RC-100324-1', '144', '0', '10', 'afkir', NULL, NULL, NULL, 0, '2024-03-10'),
+(564, 'RC-100324-1', '143', '0', '10', 'afkir', NULL, NULL, NULL, 0, '2024-03-10'),
+(565, 'RC-100324-1', '145', '0', '10', 'telur', NULL, NULL, NULL, 0, '2024-03-10'),
+(566, 'RC-100324-1', '24', '80', '20', 'pakan', NULL, NULL, NULL, 0, '2024-03-10');
 
 -- --------------------------------------------------------
 
@@ -1173,8 +1138,8 @@ CREATE TABLE `t_vaksin` (
 --
 
 INSERT INTO `t_vaksin` (`vaksin_id`, `vaksin_jadwal`, `vaksin_kandang`, `vaksin_ayam`, `vaksin_status`, `vaksin_tanggal`, `vaksin_hapus`) VALUES
-(12, '3', 4, 28, 1, '2024-01-01', 0),
-(16, '3', 4, 28, 1, '2024-01-07', 0);
+(26, '5', 4, 140, 0, '2024-03-11', 0),
+(30, '5', 4, 140, 0, '2024-03-12', 0);
 
 -- --------------------------------------------------------
 
@@ -1198,7 +1163,7 @@ CREATE TABLE `t_vaksin_jadwal` (
 --
 
 INSERT INTO `t_vaksin_jadwal` (`vaksin_jadwal_id`, `vaksin_jadwal_kode`, `vaksin_jadwal_kandang`, `vaksin_jadwal_ayam`, `vaksin_jadwal_hari`, `vaksin_jadwal_keterangan`, `vaksin_jadwal_tanggal`, `vaksin_jadwal_hapus`) VALUES
-(3, 'VK001', '4', '28', '6', 'Vaksin 7 Hari Sekali', '2024-01-01', 0);
+(5, 'VK001', '4', '140', '1', '-', '2024-03-10', 0);
 
 --
 -- Indexes for dumped tables
@@ -1488,7 +1453,7 @@ ALTER TABLE `t_karyawan`
 -- AUTO_INCREMENT for table `t_kontak`
 --
 ALTER TABLE `t_kontak`
-  MODIFY `kontak_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `kontak_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `t_level`
@@ -1536,37 +1501,37 @@ ALTER TABLE `t_pekerjaan`
 -- AUTO_INCREMENT for table `t_pembelian`
 --
 ALTER TABLE `t_pembelian`
-  MODIFY `pembelian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
+  MODIFY `pembelian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
 
 --
 -- AUTO_INCREMENT for table `t_pembelian_barang`
 --
 ALTER TABLE `t_pembelian_barang`
-  MODIFY `pembelian_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=248;
+  MODIFY `pembelian_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
 
 --
 -- AUTO_INCREMENT for table `t_pengeluaran`
 --
 ALTER TABLE `t_pengeluaran`
-  MODIFY `pengeluaran_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `pengeluaran_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `t_pengeluaran_barang`
 --
 ALTER TABLE `t_pengeluaran_barang`
-  MODIFY `pengeluaran_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pengeluaran_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `t_penjualan`
 --
 ALTER TABLE `t_penjualan`
-  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `t_penjualan_barang`
 --
 ALTER TABLE `t_penjualan_barang`
-  MODIFY `penjualan_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `penjualan_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `t_piutang`
@@ -1602,13 +1567,13 @@ ALTER TABLE `t_premix_qty`
 -- AUTO_INCREMENT for table `t_recording`
 --
 ALTER TABLE `t_recording`
-  MODIFY `recording_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=285;
+  MODIFY `recording_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=287;
 
 --
 -- AUTO_INCREMENT for table `t_recording_barang`
 --
 ALTER TABLE `t_recording_barang`
-  MODIFY `recording_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=528;
+  MODIFY `recording_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=567;
 
 --
 -- AUTO_INCREMENT for table `t_report`
@@ -1632,13 +1597,13 @@ ALTER TABLE `t_user`
 -- AUTO_INCREMENT for table `t_vaksin`
 --
 ALTER TABLE `t_vaksin`
-  MODIFY `vaksin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `vaksin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `t_vaksin_jadwal`
 --
 ALTER TABLE `t_vaksin_jadwal`
-  MODIFY `vaksin_jadwal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `vaksin_jadwal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

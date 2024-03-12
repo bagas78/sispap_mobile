@@ -292,7 +292,7 @@
             </ul>
           </li>
 
-          <li class="treeview report">
+          <!-- <li class="treeview report">
             <a href="#">
               <i class="fa fa-calendar-check-o"></i> <span>Report</span>
               <span class="pull-right-container">
@@ -302,7 +302,7 @@
             <ul class="treeview-menu">
               <li><a href="<?=base_url('report/harian')?>"><i class="fa fa-circle-o"></i> Harian</a></li>
             </ul>
-          </li>
+          </li> -->
 
           <li class="treeview penjualan">
             <a href="#">
