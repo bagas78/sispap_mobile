@@ -16,7 +16,7 @@
       <!-- Default box -->
       <div class="box">  
         <div class="box-header with-border"> 
-
+ 
           <br/>
 
           <div hidden align="left" id="back">
@@ -76,14 +76,14 @@
 
             <div class="col-md-6"> 
               <div class="form-group">
-                <label>Kondisi Suhu</label>
+                <label>Suhu</label>
                 <input id="suhu" type="text" name="suhu" class="form-control" required>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label>Catatan</label>
-                <textarea class="form-control" name="catatan" id="catatan" required></textarea>
+                <label>Kondisi Kandang</label>
+                <textarea class="form-control" name="kondisi" id="kondisi" required></textarea>
               </div>
             </div>
 

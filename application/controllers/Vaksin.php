@@ -274,36 +274,97 @@ class Vaksin extends CI_Controller{
 		}
 	}
 	function test(){
-		
-      	//get database
-	    $db = $this->db->query("SELECT * FROM t_penjualan as a JOIN t_penjualan_barang as b ON a.penjualan_nomor = b.penjualan_barang_nomor LEFT JOIN t_barang as c ON b.penjualan_barang_barang = c.barang_id WHERE a.penjualan_nomor = 'PJ-130324-2'")->result_array();
 
-	    $tanggal = date_format(date_create($db[0]['penjualan_tanggal']), 'd/m/Y');
+		$db1 = $this->db->query("SELECT * FROM t_recording AS a JOIN t_recording_barang AS b ON a.recording_nomor = b.recording_barang_nomor LEFT JOIN t_kandang AS c ON a.recording_kandang = c.kandang_id LEFT JOIN t_barang AS d ON b.recording_barang_barang = d.barang_id WHERE a.recording_hapus = 0 AND a.recording_id = '288'")->result_array();
 
-	    $text = '';
-	    $text .= '-- Struk Penjualan --';
-	    $text .= '<br/><br/>';
-	    $text .= 'Tanggal : '.$tanggal;
-	    $text .= '<br/>';
-	    $text .= '--------------------------';
+        $kandang = $db1[0]['kandang_nama'];
+        $kondisi = $db1[0]['recording_kondisi'];
+        $suhu = $db1[0]['recording_suhu'];
+        $populasi = $db1[0]['recording_populasi'];
+        $bobot = $db1[0]['recording_bobot'];
+        $tanggal = date_format(date_create($db1[0]['recording_tanggal']) ,'d/m/Y');
 
-	    foreach ($db as $v) {
-	        
-	        $text .= '<br/>';
-			$text .= $v['penjualan_barang_qty'].' x ';
-			$text .= $v['barang_nama'].' : '.number_format($v['penjualan_barang_subtotal']);
+        $text = '';
+        $text .= '-- Recording Kandang --';
+        $text .= '<br/><br/>';
+        $text .= '--------------------------';
+        $text .= '<br/>';
+        $text .= 'Tanggal : '.$tanggal;
+        $text .= '<br/>';
+        $text .= 'Kandang : '.$kandang;
+        $text .= '<br/>';
+        $text .= 'Populasi : '.$populasi.' Ayam';
+        $text .= '<br/>';
+        $text .= 'Rata-rata bobot : '.$bobot.' Kg';
+        $text .= '<br/>';
+        $text .= 'Suhu : '.$suhu;
+        $text .= '<br/>';
+        $text .= 'Kondisi kandang : '.$kondisi;
+        $text .= '<br/>';
+        $text .= '--------------------------';
+        $text .= '<br/>';
 
-	    }
+        //ayam
+        $text .= '( Ayam )';
+        $text .= '<br/>';
+        foreach ($db1 as $v) {
+        	if ($v['recording_barang_kategori'] == 'ayam') {
+        		
+        		$obat = $v['recording_barang_obat'];
+        		$b = $this->db->query("SELECT * FROM t_barang WHERE barang_id = '$obat'")->row_array();
 
-	    $text .= '<br/>';
-		$text .= '--------------------------';
-		$text .= '<br/>';
-		$text .= 'PPN : '.$db[0]['penjualan_ppn'].'%';
-		$text .= '<br/>';
-		$text .= 'Total : '.number_format($db[0]['penjualan_total']);
+        		$text .= $v['barang_nama'].' - '.$v['recording_barang_berat'].'Kg - '.$v['recording_barang_gejala'].' - '.$v['recording_barang_obat_jumlah'].'x '.$b['barang_nama'];
+        		$text .= '<br/>';
+        	}
+        }
 
-	    print_r($text);
+        $text .= '--------------------------';
+        $text .= '<br/>';
 
-		//$this->notif->struk('PB-120324-2');
+        //ayam
+        $text .= '( Afkir / Mati )';
+        $text .= '<br/>';
+        foreach ($db1 as $v) {
+        	if ($v['recording_barang_kategori'] == 'afkir') {
+
+        		$text .= $v['recording_barang_jumlah'].'x'.' '.$v['barang_nama'];
+        		$text .= '<br/>';
+        	}
+        }
+
+        $text .= '--------------------------';
+        $text .= '<br/>';
+
+        //ayam
+        $text .= '( Panen Telur )';
+        $text .= '<br/>';
+        foreach ($db1 as $v) {
+        	if ($v['recording_barang_kategori'] == 'telur') {
+
+        		$text .= $v['recording_barang_jumlah'].'x'.' '.$v['barang_nama'];
+        		$text .= '<br/>';
+        	}
+        }
+
+        $text .= '--------------------------';
+        $text .= '<br/>';
+
+        //ayam
+        $text .= '( Pakan )';
+        $text .= '<br/>';
+        foreach ($db1 as $v) {
+        	if ($v['recording_barang_kategori'] == 'pakan') {
+
+        		$pakan = $v['recording_barang_barang'];
+        		$p = $this->db->query("SELECT * FROM t_pakan WHERE pakan_id = '$pakan'")->row_array();
+
+        		$text .= $v['recording_barang_jumlah'].'x'.' '.$p['pakan_nama'];
+        		$text .= '<br/>';
+        	}
+        }
+        $text .= '--------------------------';
+
+        print_r($text);
+
 	}
 }

@@ -144,7 +144,7 @@ class penjualan extends CI_Controller{
 
 			//kirim struk
 			if ($struk == 1) {
-				$this->notif->struk_penjualan($nomor);
+				$this->notif->print($nomor, 'penjualan');
 			}
 
 			$this->session->set_flashdata('success','Data berhasil di rubah');

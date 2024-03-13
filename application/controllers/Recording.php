@@ -111,7 +111,7 @@ class Recording extends CI_Controller{
 						'recording_bobot' => strip_tags(@$_POST['bobot']),
 						'recording_populasi' => strip_tags(@$_POST['populasi']),
 						'recording_suhu' => strip_tags(@$_POST['suhu']),
-						'recording_catatan' => strip_tags(@$_POST['catatan']),
+						'recording_kondisi' => strip_tags(@$_POST['kondisi']),
 					);
 
 		$db = $this->query_builder->add('t_recording', $set);
@@ -179,6 +179,9 @@ class Recording extends CI_Controller{
 			//update stok
 			$this->stok->update_kandang();
 			$this->stok->update_barang();
+
+			//notif
+			$this->notif->recording($nomor);			
 
 			$this->session->set_flashdata('success', 'Data berhasil di simpan');
 		}else{
@@ -297,7 +300,7 @@ class Recording extends CI_Controller{
 						'recording_bobot' => strip_tags(@$_POST['bobot']),
 						'recording_populasi' => strip_tags(@$_POST['populasi']),
 						'recording_suhu' => strip_tags(@$_POST['suhu']),
-						'recording_catatan' => strip_tags(@$_POST['catatan']),
+						'recording_kondisi' => strip_tags(@$_POST['kondisi']),
 					);
 
 		$where = ['recording_id' => $id];

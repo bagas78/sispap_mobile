@@ -168,7 +168,7 @@
           <!-- end pakan -->
 
           <!-- premix -->
-           <div class="col-md-12">
+           <!-- <div class="col-md-12">
 
               <h4 align="center" class="tit"><b>-- PREMIX --</b></h4>
 
@@ -184,7 +184,7 @@
           
           </div>
 
-          <div class="clearfix"></div><br/>
+          <div class="clearfix"></div><br/> -->
           <!-- end premix -->
 
           <div class="col-md-12" style="margin-bottom: 3%;">

@@ -5,7 +5,7 @@
       <!-- Default box -->
       <div class="box"> 
         <div class="box-header with-border">
-
+ 
           <div hidden align="left" class="back">
             <a href="<?= @$_SERVER['HTTP_REFERER'] ?>"><button type="button" class="btn bg-navy"><i class="fa fa-arrow-left"></i> Kembali</button></a> 
           </div>
@@ -284,43 +284,49 @@
 
   $("form").on("submit", function(){
      
-    swal({
-      title: "Kirim struk ke suplier?",
-      text: "",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((send) => {
-      
-      if (send) {
+      var send = $('#send').val();
 
-        //kirim struk
-        $('#struk').val(1);
-        $('#send').val(1);
-        $('form').submit();
+      if (send == 0) {
+
+        swal({
+        title: "Kirim struk ke suplier?",
+        text: "",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((send) => {
         
+        if (send) {
+
+          //kirim struk
+          $('#struk').val(1);
+          $('#send').val(1);
+          $('form').submit();
+          
+        }else{
+
+          //tidak kirim struk
+          $('#struk').val(0);
+          $('#send').val(1);
+          $('form').submit();
+
+        }
+
+      });
+      
+      //kirim post
+      if ($('#send').val() == 1) {
+          
+        //kirim
+        return true;
       }else{
 
-        //tidak kirim struk
-        $('#struk').val(0);
-        $('#send').val(1);
-        $('form').submit();
+        //tidak
+        return false;
+      } 
 
-      }
-
-    });
-    
-    //kirim post
-    if ($('#send').val() == 1) {
-        
-      //kirim
-      return true;
-    }else{
-
-      //tidak
-      return false;
-    } 
+    }
   
   })
 

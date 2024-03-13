@@ -9,7 +9,7 @@ $('#mati').val('<?=@$data['recording_mati']?>');
 $('#afkir').val('<?=@$data['recording_afkir']?>');
 $('#bobot').val('<?=@$data['recording_bobot']?>');
 $('#suhu').val('<?=@$data['recording_suhu']?>');
-$('#catatan').val('<?=@$data['recording_catatan']?>');
+$('#kondisi').val('<?=@$data['recording_kondisi']?>');
 $('form').attr('action', '<?=base_url('recording/update/'.@$data['recording_id'])?>');
 
 //index loop 

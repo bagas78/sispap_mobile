@@ -132,7 +132,7 @@ class Pembelian extends CI_Controller{
 
 			//kirim struk
 			if ($struk == 1) {
-				$this->notif->struk_pembelian($nomor);
+				$this->notif->print($nomor, 'pembelian');
 			}
 
 			$this->session->set_flashdata('success','Data berhasil di rubah');

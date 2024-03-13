@@ -39,8 +39,8 @@ $('#ppn').val('<?=@$data[0]['pembelian_ppn']?>');
 	//barang loop
 	function barang_<?=$key?>(){
 
-		$('.barang:eq(<?=$key?>)').val('<?=$val['pembelian_barang_barang']?>').change();
-
+		$('.barang:eq(<?=$key?>)').val('<?=$val['pembelian_barang_barang']?>');
+		
 		setTimeout(function() {
 		    barang_<?=$key?>();
 		}, 100);

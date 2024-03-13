@@ -306,45 +306,51 @@
   auto();
 
   $("form").on("submit", function(){
-     
-    swal({
-      title: "Kirim struk ke pelanggan?",
-      text: "",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((send) => {
-      
-      if (send) {
 
-        //kirim struk
-        $('#struk').val(1);
-        $('#send').val(1);
-        $('form').submit();
+    var send = $('#send').val();
+
+    if (send == 0) {
+
+      swal({
+        title: "Kirim struk ke pelanggan?",
+        text: "",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((send) => {
         
+        if (send) {
+
+          //kirim struk
+          $('#struk').val(1);
+          $('#send').val(1);
+          $('form').submit();
+          
+        }else{
+
+          //tidak kirim struk
+          $('#struk').val(0);
+          $('#send').val(1);
+          $('form').submit();
+
+        }
+
+      });
+      
+      //kirim post
+      if ($('#send').val() == 1) {
+          
+        //kirim
+        return true;
       }else{
 
-        //tidak kirim struk
-        $('#struk').val(0);
-        $('#send').val(1);
-        $('form').submit();
+        //tidak
+        return false;
+      } 
 
-      }
-
-    });
-    
-    //kirim post
-    if ($('#send').val() == 1) {
-        
-      //kirim
-      return true;
-    }else{
-
-      //tidak
-      return false;
-    } 
-  
+    }
+     
   })
 
 </script>
