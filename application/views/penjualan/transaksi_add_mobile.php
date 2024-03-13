@@ -20,6 +20,10 @@
         <div class="box-body" style="padding: 0;">
           
           <form action="<?=base_url('penjualan/transaksi_save');?>" method="post">
+
+            <!-- hidden action hack -->
+            <input type="hidden" name="struk" value="0" id="struk">
+            <input type="hidden" value="0" id="send">
               
             <div class="col-md-6">
               <div class="form-group">
@@ -335,5 +339,53 @@
   }
 
   auto();
+
+  $("form").on("submit", function(){
+
+    var send = $('#send').val();
+
+    if (send == 0) {
+
+      swal({
+        title: "Kirim struk ke pelanggan?",
+        text: "",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((send) => {
+        
+        if (send) {
+
+          //kirim struk
+          $('#struk').val(1);
+          $('#send').val(1);
+          $('form').submit();
+          
+        }else{
+
+          //tidak kirim struk
+          $('#struk').val(0);
+          $('#send').val(1);
+          $('form').submit();
+
+        }
+
+      });
+      
+      //kirim post
+      if ($('#send').val() == 1) {
+          
+        //kirim
+        return true;
+      }else{
+
+        //tidak
+        return false;
+      } 
+
+    }
+     
+  })
 
 </script>

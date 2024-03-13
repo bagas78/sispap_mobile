@@ -16,7 +16,7 @@
     padding-bottom: 15px;
   }
 </style> 
-
+ 
     <!-- Main content --> 
     <section class="content">
  
@@ -246,6 +246,12 @@
             <option value="<?=@$value['barang_id']?>"><?=@$value['barang_nama']?></option>
           <?php endforeach ?>
         </select>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6">
+      <div class="form-group">
+        <label>Jumlah Obat</label>
+        <input type="number" name="ayam_obat_jumlah[]" class="form-control ayam_obat_jumlah" value="0" min="0">
       </div>
     </div>
 

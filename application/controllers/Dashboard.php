@@ -1,7 +1,7 @@
 <?php
 class Dashboard extends CI_Controller{
 
-	function __construct(){ 
+	function __construct(){  
 		parent::__construct();
 	} 
 	function index(){  
@@ -36,24 +36,37 @@ class Dashboard extends CI_Controller{
 		   	$tahun = date('Y');
 
 			if (@$_POST['filter'] == 2) {
+
+				//bulanan
+
 				//filter
 				$data['filter'] = 2;
 
-				//bulanan
+				//pembelian
 				$data['pembelian_data'] = $this->query_builder->view("SELECT SUM(pembelian_total) AS total, DATE_FORMAT(pembelian_tanggal, '%Y') AS tahun, REPLACE(DATE_FORMAT(pembelian_tanggal, '%d'), '0','') AS tanggal, REPLACE(DATE_FORMAT(pembelian_tanggal, '%m'), '0','') AS bulan FROM t_pembelian WHERE pembelian_hapus = 0 AND DATE_FORMAT(pembelian_tanggal, '%Y') = '$tahun' GROUP BY DATE_FORMAT(pembelian_tanggal, '%m')");
 
 				//penjualan
-				$data['penjualan_data'] = $this->query_builder->view("SELECT SUM(penjualan_total) AS total, DATE_FORMAT(penjualan_tanggal, '%Y') AS tahun, REPLACE(DATE_FORMAT(penjualan_tanggal, '%d'), '0','') AS tanggal, REPLACE(DATE_FORMAT(penjualan_tanggal, '%m'), '0','') AS bulan FROM t_penjualan WHERE penjualan_hapus = 0 AND DATE_FORMAT(penjualan_tanggal, '%Y') = '$tahun' GROUP BY DATE_FORMAT(penjualan_tanggal, '%m')");				
+				$data['penjualan_data'] = $this->query_builder->view("SELECT SUM(penjualan_total) AS total, DATE_FORMAT(penjualan_tanggal, '%Y') AS tahun, REPLACE(DATE_FORMAT(penjualan_tanggal, '%d'), '0','') AS tanggal, REPLACE(DATE_FORMAT(penjualan_tanggal, '%m'), '0','') AS bulan FROM t_penjualan WHERE penjualan_hapus = 0 AND DATE_FORMAT(penjualan_tanggal, '%Y') = '$tahun' GROUP BY DATE_FORMAT(penjualan_tanggal, '%m')");		
+
+				//pengeluaran
+				$data['pengeluaran_data'] = $this->query_builder->view("SELECT SUM(pengeluaran_total) AS total, DATE_FORMAT(pengeluaran_tanggal, '%Y') AS tahun, REPLACE(DATE_FORMAT(pengeluaran_tanggal, '%d'), '0','') AS tanggal, REPLACE(DATE_FORMAT(pengeluaran_tanggal, '%m'), '0','') AS bulan FROM t_pengeluaran WHERE pengeluaran_hapus = 0 AND DATE_FORMAT(pengeluaran_tanggal, '%Y') = '$tahun' GROUP BY DATE_FORMAT(pengeluaran_tanggal, '%m')");				
 
 			}else{
-				$data['filter'] = 1;
 
 				//harian
+
+				$data['filter'] = 1;
+
+				//pembelian
 				$data['pembelian_data'] = $this->query_builder->view("SELECT SUM(pembelian_total) AS total, DATE_FORMAT(pembelian_tanggal, '%Y') AS tahun, REPLACE(DATE_FORMAT(pembelian_tanggal, '%d'), '0','') AS tanggal, REPLACE(DATE_FORMAT(pembelian_tanggal, '%m'), '0','') AS bulan FROM t_pembelian WHERE pembelian_hapus = 0 AND DATE_FORMAT(pembelian_tanggal, '%Y') = '$tahun' GROUP BY pembelian_tanggal");
 
 
 				//penjualan
 				$data['penjualan_data'] = $this->query_builder->view("SELECT SUM(penjualan_total) AS total, DATE_FORMAT(penjualan_tanggal, '%Y') AS tahun, REPLACE(DATE_FORMAT(penjualan_tanggal, '%d'), '0','') AS tanggal, REPLACE(DATE_FORMAT(penjualan_tanggal, '%m'), '0','') AS bulan FROM t_penjualan WHERE penjualan_hapus = 0 AND DATE_FORMAT(penjualan_tanggal, '%Y') = '$tahun' GROUP BY penjualan_tanggal");
+
+
+				//pengeluaran
+				$data['pengeluaran_data'] = $this->query_builder->view("SELECT SUM(pengeluaran_total) AS total, DATE_FORMAT(pengeluaran_tanggal, '%Y') AS tahun, REPLACE(DATE_FORMAT(pengeluaran_tanggal, '%d'), '0','') AS tanggal, REPLACE(DATE_FORMAT(pengeluaran_tanggal, '%m'), '0','') AS bulan FROM t_pengeluaran WHERE pengeluaran_hapus = 0 AND DATE_FORMAT(pengeluaran_tanggal, '%Y') = '$tahun' GROUP BY pengeluaran_tanggal");
 			}
 
 		    $this->load->view('v_template_admin/admin_header',$data);

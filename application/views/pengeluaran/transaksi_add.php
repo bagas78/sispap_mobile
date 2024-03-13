@@ -137,6 +137,7 @@
     //reset value
     $('#copy').find('select').val('').change();
     $('#copy').find('input').val(0);
+    $('#copy').find('.barang').val('');
   }
 
   function auto(){

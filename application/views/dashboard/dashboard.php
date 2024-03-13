@@ -10,7 +10,7 @@
     background: lightgrey;
   }
   .tit{
-    max-width: fit-content;
+    max-width: fit-content; 
     background: black;
     padding: 0.5%;
     color: white; 
@@ -212,7 +212,7 @@
     exportEnabled: false,
     animationEnabled: true,
     title:{
-      text: "Grafik Pembelian | Penjualan Tahun <?=date('Y')?>"
+      text: "Grafik Pembelian | Penjualan | Pengeluaran Tahun <?=date('Y')?>"
     },
     subtitles: [{
       text: ""
@@ -274,6 +274,23 @@
       dataPoints: [
         
         <?php foreach($penjualan_data as $p): ?>
+
+          { x: new Date(<?=$p['tahun'].','.$p['bulan'].','.$p['tanggal']?>),  y: <?=$p['total']?> },
+
+        <?php endforeach ?>
+
+      ]
+    },
+    {
+      type: "spline",
+      name: "Pengeluaran",
+      axisYType: "secondary",
+      showInLegend: true,
+      xValueFormatString: "<?=(@$filter == 1)?'DD MMMM YYYY':'MMMM YYYY' ?>",
+      yValueFormatString: "Rp #,##0.#",
+      dataPoints: [
+        
+        <?php foreach($pengeluaran_data as $p): ?>
 
           { x: new Date(<?=$p['tahun'].','.$p['bulan'].','.$p['tanggal']?>),  y: <?=$p['total']?> },
 

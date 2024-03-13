@@ -17,7 +17,7 @@ class Pengeluaran extends CI_Controller{
 		else{
 			redirect(base_url('login')); 
 		}
-	}
+	} 
 	function transaksi_get(){
 
 		$level = $this->session->userdata('level');
@@ -137,6 +137,9 @@ class Pengeluaran extends CI_Controller{
 
 				$this->query_builder->add('t_pengeluaran_barang',$set2);	
 			}
+
+
+			$this->notif->pengeluaran($nomor);
 
 			$this->session->set_flashdata('success','Data berhasil di rubah');
 

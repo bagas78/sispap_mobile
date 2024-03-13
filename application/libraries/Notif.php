@@ -1,7 +1,7 @@
 <?php 
 
 class Notif {
-  protected $url;
+  protected $url; 
 
   function __construct(){
         $this->url = &get_instance();
@@ -141,10 +141,10 @@ class Notif {
         $text .= 'Keterangan : '.$keterangan;
         $text .= '%0a';
         $text .= '--------------------------';
-        $text .= '%0a';
 
         foreach ($db as $v) {
           
+          $text .= '%0a';
           $text .= $v['penjualan_barang_qty'].' x ';
           $text .= $v['barang_nama'].' : '.number_format($v['penjualan_barang_subtotal']);
 
@@ -452,4 +452,51 @@ class Notif {
       $response = curl_exec($curl);
 
   }
+  function pengeluaran($nomor) {
+
+      $cek = $this->cek();
+
+      if ($cek['notif_pengeluaran'] == 'on') {
+      
+        $db = $this->url->db->query("SELECT * FROM t_pengeluaran as a JOIN t_pengeluaran_barang as b ON a.pengeluaran_nomor = b.pengeluaran_barang_nomor WHERE a.pengeluaran_nomor = '$nomor'")->result_array();
+
+        $nomor = $db[0]['pengeluaran_nomor'];
+        $tanggal = date_format(date_create($db[0]['pengeluaran_tanggal']) ,'d/m/Y');
+        $keterangan = $db[0]['pengeluaran_keterangan'];
+        $total = $db[0]['pengeluaran_total'];
+
+        $text = '';
+        $text .= '-- Transaksi Pengeluaran --';
+        $text .= '%0a%0a';
+        $text .= '--------------------------';
+        $text .= '%0a';
+        $text .= 'Nomor : '.$nomor;
+        $text .= '%0a';
+        $text .= 'Keterangan : '.$keterangan;
+        $text .= '%0a';
+        $text .= '--------------------------';
+
+        foreach ($db as $v) {
+          
+          $text .= '%0a';
+          $text .= $v['pengeluaran_barang_qty'].' x ';
+          $text .= $v['pengeluaran_barang_barang'].' : '.number_format($v['pengeluaran_barang_subtotal']);
+
+        }
+
+        $text .= '%0a';
+        $text .= '--------------------------';
+        $text .= '%0a';
+        $text .= 'PPN : '.$db[0]['pengeluaran_ppn'].'%';
+        $text .= '%0a';
+        $text .= 'Total : '.number_format($db[0]['pengeluaran_total']);
+
+        $this->send($text);
+
+      }else{
+
+        return;
+      }
+
+    }
 }
