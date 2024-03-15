@@ -8,7 +8,7 @@ class Dashboard extends CI_Controller{
 		if ( $this->session->userdata('login') == 1) {
 
 			$data['dashboard'] = 'class="active"';  
-		    $data['title'] = 'Dashboard'; 
+		    $data['title'] = 'Dashboard';  
 
 		    //data
 		    $get = $this->db->query("SELECT a.barang_kategori_nama AS nama,SUM(b.barang_stok) AS stok, c.satuan_singkatan AS satuan FROM t_barang_kategori AS a LEFT JOIN t_barang AS b ON a.barang_kategori_id = b.barang_kategori LEFT JOIN t_satuan AS c ON b.barang_satuan = c.satuan_id WHERE b.barang_hapus = 0 GROUP BY a.barang_kategori_id ")->result_array();
@@ -69,9 +69,20 @@ class Dashboard extends CI_Controller{
 				$data['pengeluaran_data'] = $this->query_builder->view("SELECT SUM(pengeluaran_total) AS total, DATE_FORMAT(pengeluaran_tanggal, '%Y') AS tahun, REPLACE(DATE_FORMAT(pengeluaran_tanggal, '%d'), '0','') AS tanggal, REPLACE(DATE_FORMAT(pengeluaran_tanggal, '%m'), '0','') AS bulan FROM t_pengeluaran WHERE pengeluaran_hapus = 0 AND DATE_FORMAT(pengeluaran_tanggal, '%Y') = '$tahun' GROUP BY pengeluaran_tanggal");
 			}
 
+			$y = date('Y');
+			$m = date('m');
+
+			$date1 = strtotime($y.'-'.$m);
+			$date2 = strtotime($y.'-'.($m + 1));
+			$diff = $date2 - $date1;
+			$days = floor($diff / (60 * 60 * 24));
+
+			$data['hari'] = $days;
+
 		    $this->load->view('v_template_admin/admin_header',$data);
 		    $this->load->view('dashboard/dashboard');
 		    $this->load->view('v_template_admin/admin_footer');
+
 		}
 		else{
 			redirect(base_url('login'));

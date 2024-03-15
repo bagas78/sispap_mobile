@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
 <style type="text/css">
   .box-style{
     background: white;
@@ -113,7 +115,8 @@
         </div>
         <div class="box-body">
 
-          <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+          <h3 align="center">Grafik Pembelian | Penjualan | Pengeluaran <b><?=($filter == 1)? date('M Y'):'Tahun '.date('Y')?></b></h3>
+          <canvas id="myChart"></canvas>
 
         </div>
       </div>
@@ -203,116 +206,193 @@
         <!-- /.box-body -->
       </div>
 
-<script type="text/javascript">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  window.onload = function () {
+<script>
+  const ctx = document.getElementById('myChart');
 
-  var options = {
-    theme: "light2",
-    exportEnabled: false,
-    animationEnabled: true,
-    title:{
-      text: "Grafik Pembelian | Penjualan | Pengeluaran Tahun <?=date('Y')?>"
-    },
-    subtitles: [{
-      text: ""
-    }],
-    axisX: {
-      title: ""
-    },
-    axisY: {
-      title: "",
-      titleFontColor: "#4F81BC",
-      lineColor: "#4F81BC",
-      labelFontColor: "#4F81BC",
-      tickColor: "#4F81BC"
-    },
-    axisY2: {
-      title: "",
-      titleFontColor: "#C0504E",
-      lineColor: "#C0504E",
-      labelFontColor: "#C0504E",
-      tickColor: "#C0504E"
-    },
-    axisY3: {
-      title: "",
-      titleFontColor: "#C0504E",
-      lineColor: "#C0504E",
-      labelFontColor: "#C0504E",
-      tickColor: "#C0504E"
-    },
-    toolTip: {
-      shared: true
-    },
-    legend: {
-      cursor: "pointer",
-      itemclick: toggleDataSeries
-    },
-    data: [{
-      type: "spline",
-      name: "Pembelian",
-      showInLegend: true,
-      xValueFormatString: "<?=(@$filter == 1)?'DD MMMM YYYY':'MMMM YYYY' ?>",
-      yValueFormatString: "Rp #,##0.#",
-      dataPoints: [
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
 
-        <?php foreach($pembelian_data as $p): ?>
-
-          { x: new Date(<?=$p['tahun'].','.$p['bulan'].','.$p['tanggal']?>),  y: <?=$p['total']?> },
-
-        <?php endforeach ?>
-      
-      ]
-    },
-    {
-      type: "spline",
-      name: "Penjualan",
-      axisYType: "secondary",
-      showInLegend: true,
-      xValueFormatString: "<?=(@$filter == 1)?'DD MMMM YYYY':'MMMM YYYY' ?>",
-      yValueFormatString: "Rp #,##0.#",
-      dataPoints: [
+      <?php if ($filter == 2): ?>
         
-        <?php foreach($penjualan_data as $p): ?>
+        //bulanan
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
 
-          { x: new Date(<?=$p['tahun'].','.$p['bulan'].','.$p['tanggal']?>),  y: <?=$p['total']?> },
+      <?php else: ?>
 
-        <?php endforeach ?>
+        //harian
+        <?php for ($i=1; $i < $hari + 1; $i++):?>
 
-      ]
-    },
-    {
-      type: "spline",
-      name: "Pengeluaran",
-      axisYType: "secondary",
-      showInLegend: true,
-      xValueFormatString: "<?=(@$filter == 1)?'DD MMMM YYYY':'MMMM YYYY' ?>",
-      yValueFormatString: "Rp #,##0.#",
-      dataPoints: [
+          <?php echo $i.','; ?>
+
+        <?php endfor ?>
         
-        <?php foreach($pengeluaran_data as $p): ?>
+      <?php endif ?>
 
-          { x: new Date(<?=$p['tahun'].','.$p['bulan'].','.$p['tanggal']?>),  y: <?=$p['total']?> },
+      ],
+      datasets: [{
+        label: 'Pembelian',
+        data: [
+                
+                <?php if ($filter == 2): ?>
 
-        <?php endforeach ?>
+                  //bulanan
+                  <?php for ($i=1; $i < 13; $i++):?>
 
-      ]
-    }]
-  };
+                    <?php foreach ($pembelian_data as $v): ?>
+                      
+                      <?php if ($v['bulan'] == $i): ?>
+                      
+                        <?=$v['total'].','; ?>
 
-  $("#chartContainer").CanvasJSChart(options);
+                      <?php else: ?>
+                        
+                        <?='0'.','; ?>
 
-  function toggleDataSeries(e) {
-    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-      e.dataSeries.visible = false;
-    } else {
-      e.dataSeries.visible = true;
+                      <?php endif ?>
+
+                    <?php endforeach ?>
+
+                  <?php endfor ?>
+
+                <?php else: ?>
+
+                  //harian
+                  <?php for ($i=1; $i < $hari + 1; $i++):?>
+
+                    <?php foreach ($pembelian_data as $v): ?>
+
+                      <?php if ($v['tanggal'] == $i): ?>
+                      
+                        <?=$v['total'].','; ?>
+
+                      <?php else: ?>
+                        
+                        <?='0'.','; ?>
+
+                      <?php endif ?>
+
+                    <?php endforeach ?>
+
+                  <?php endfor ?>
+
+                <?php endif ?>
+
+              ],
+        borderWidth: 1
+      },
+      {
+        label: 'Penjualan',
+        data: [
+                
+                <?php if ($filter == 2): ?>
+
+                  //bulanan
+                  <?php for ($i=1; $i < 13; $i++):?>
+
+                    <?php foreach ($penjualan_data as $v): ?>
+                      
+                      <?php if ($v['bulan'] == $i): ?>
+                      
+                        <?=$v['total'].','; ?>
+
+                      <?php else: ?>
+                        
+                        <?='0'.','; ?>
+
+                      <?php endif ?>
+
+                    <?php endforeach ?>
+
+                  <?php endfor ?>
+
+                <?php else: ?>
+
+                  //harian
+                  <?php for ($i=1; $i < $hari + 1; $i++):?>
+
+                    <?php foreach ($penjualan_data as $v): ?>
+
+                      <?php if ($v['tanggal'] == $i): ?>
+                      
+                        <?=$v['total'].','; ?>
+
+                      <?php else: ?>
+                        
+                        <?='0'.','; ?>
+
+                      <?php endif ?>
+
+                    <?php endforeach ?>
+
+                  <?php endfor ?>
+
+                <?php endif ?>
+
+              ],
+        borderWidth: 1
+      },
+      {
+        label: 'Pengeluaran',
+        data: [
+                
+                <?php if ($filter == 2): ?>
+
+                  //bulanan
+                  <?php for ($i=1; $i < 13; $i++):?>
+
+                    <?php foreach ($pengeluaran_data as $v): ?>
+                      
+                      <?php if ($v['bulan'] == $i): ?>
+                      
+                        <?=$v['total'].','; ?>
+
+                      <?php else: ?>
+                        
+                        <?='0'.','; ?>
+
+                      <?php endif ?>
+
+                    <?php endforeach ?>
+
+                  <?php endfor ?>
+
+                <?php else: ?>
+
+                  //harian
+                  <?php for ($i=1; $i < $hari + 1; $i++):?>
+
+                    <?php foreach ($pengeluaran_data as $v): ?>
+
+                      <?php if ($v['tanggal'] == $i): ?>
+                      
+                        <?=$v['total'].','; ?>
+
+                      <?php else: ?>
+                        
+                        <?='0'.','; ?>
+
+                      <?php endif ?>
+
+                    <?php endforeach ?>
+
+                  <?php endfor ?>
+
+                <?php endif ?>
+
+              ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
     }
-    e.chart.render();
-  }
-
-  }
-
+  });
 </script>
-
-<script src="https://cdn.canvasjs.com/jquery.canvasjs.min.js"></script></section>
