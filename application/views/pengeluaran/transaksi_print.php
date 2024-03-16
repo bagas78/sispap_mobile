@@ -17,7 +17,7 @@
   	<style type="text/css">
   		.box{
   			padding: 3%;
-  		}
+  		} 
   		.tit{
   			border-width: 2px;
 		    border-style: solid; 
@@ -76,10 +76,7 @@
 						<tr>
 							<th width="70">No</th>
 							<th>Barang</th>
-							<th class="r">Qty</th>
-							<th hidden class="r">Potongan</th>
-							<th class="r">Harga</th>
-							<th class="r">Subtotal</th>
+							<th class="r">Jumlah</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -89,53 +86,22 @@
 							<tr>
 								<td><?=$i?></td>
 								<td><?=@$val['pengeluaran_barang_barang']?></td>
-								<td class="r"><?=@$val['pengeluaran_barang_qty']?></td>
-								<td hidden class="r"><span class="diskon"><?=@$val['pengeluaran_barang_diskon']?></span></td>
-								<td class="r"><?=number_format(@$val['pengeluaran_barang_harga'])?></td>
-								<td class="subtotal r"><?=number_format(@$val['pengeluaran_barang_subtotal'])?></td>
+								<td class="r jumlah"><?=number_format(@$val['pengeluaran_barang_jumlah'])?></td>
 							</tr>
 						
 						<?php $i++ ?>
 						<?php endforeach ?>
 
 						<tr>
-							<td colspan="3"></td>
-							<td class="r">Total</td>
+							<td colspan="1"></td>
+							<td class="r"><b>Total</b></td>
 							<td class="r"><span id="total"></span></td>
 						</tr> 
-						<tr>
-							<td style="border-top: 0;" colspan="3">Jatuh Tempo : <?php @$d = date_create(@$data[0]['pengeluaran_jatuh_tempo']); echo date_format($d, 'd M Y') ?></td>
-							<td style="border-top: 0;" class="r">PPN (<span id="ppn"><?=@$data[0]['pengeluaran_ppn']?></span>%)</td>
-							<td style="border-top: 0;" class="r"><span id="ppn_total"></span></td>
-						</tr>
-						<tr>
-							<td style="border-top: 0;" colspan="3">Keterangan : <?=@$data[0]['pengeluaran_keterangan']?></td>
-							<td style="border-top: 0;" class="r"><b>Total</b></td>
-							<td style="border-top: 0;" class="r"><b id="total_akhir"></b></td>
-						</tr>
 
 					</tbody>
 				</table>
 			</div>
 
-			<!-- <div class="clearfix"></div><br/>
-
-			<div class="col-md-6 col-xs-6">
-				<center>
-				<p>Di Buat oleh</p>
-				<br/><br/><br/>
-				<p>( ___________________  )</p>
-				</center>
-			</div>
-
-			<div class="col-md-6 col-xs-6" align="right">
-				<center>
-				<p>Penerima</p>
-				<br/><br/><br/>
-				<p>( ___________________  )</p>
-				</center>
-			</div>
- -->
 		</div>
 
 	</div>
@@ -145,21 +111,15 @@
 
 <script type="text/javascript">
 	
-	var subtotal = $('.subtotal');
+	var jumlah = $('.jumlah');
 	var total = 0;
-	$.each(subtotal, function(index, val) {
+	$.each(jumlah, function(index, val) {
 		 
 		 total += parseInt($(this).text().replace(/,/g, ''));
 		 
 	});
 
 	$('#total').text(number_format(total));
-
-	var ppn = Number($('#ppn').text()) * Number(total) / 100;
-    var final = Number(ppn) + Number(total); 
-
-    $('#ppn_total').text(number_format(ppn));
-	$('#total_akhir').text(number_format(final));
 
 	
 	//print

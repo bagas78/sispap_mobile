@@ -5,15 +5,12 @@
 	$('.back').removeAttr('hidden');
 	$('.add').remove();
 	$('.remove').remove();
-	$('.save').remove();
+	$('.save').remove(); 
 <?php endif?> 
 
 //form
 $('.nomor').val('<?=@$data[0]['pengeluaran_nomor']?>');
-$('.jatuh_tempo').val('<?=@$data[0]['pengeluaran_jatuh_tempo']?>');
 $('.keterangan').val('<?=@$data[0]['pengeluaran_keterangan']?>');
-
-$('#ppn').val('<?=@$data[0]['pengeluaran_ppn']?>');
 
 //clone table
 <?php $count = count(@$data) - 1; ?>
@@ -26,10 +23,9 @@ $('#ppn').val('<?=@$data[0]['pengeluaran_ppn']?>');
 //insert table
 <?php foreach(@$data as $key => $val): ?>
 
+	$('.kategori:eq(<?=$key?>)').val('<?=$val['pengeluaran_barang_kategori']?>').change();
 	$('.barang:eq(<?=$key?>)').val('<?=$val['pengeluaran_barang_barang']?>');
-	$('.harga:eq(<?=$key?>)').val('<?=$val['pengeluaran_barang_harga']?>');
-	$('.qty:eq(<?=$key?>)').val('<?=$val['pengeluaran_barang_qty']?>');
-	$('.diskon:eq(<?=$key?>)').val('<?=$val['pengeluaran_barang_diskon']?>');
+	$('.jumlah:eq(<?=$key?>)').val('<?=$val['pengeluaran_barang_jumlah']?>');
 
 <?php endforeach ?>
 

@@ -7,7 +7,7 @@
         <div class="box-header with-border">
  
             <div align="left">
-              <a href="<?= base_url('pengeluaran/transaksi_add') ?>"><button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</button></a>
+              <a href="<?= base_url('pengeluaran/kategori_add') ?>"><button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</button></a>
             </div> 
 
           <div class="box-tools pull-right">
@@ -22,11 +22,9 @@
           <table id="example" class="table table-bordered table-hover display nowrap" style="width: 100%;">
             <thead>
             <tr>
-              <th>Nomor</th>
-              <th>User</th>
+              <th>Nama</th>
               <th>Tanggal</th>
-              <th>Lampiran</th>
-              <th width="60">Action</th>
+              <th width="40">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -54,37 +52,22 @@
             "order"       :[],  
             
             "ajax": {
-                "url": "<?= base_url('pengeluaran/transaksi_get'); ?>",
+                "url": "<?= base_url('pengeluaran/kategori_get'); ?>",
                 "type": "GET"
             },
             "columns": [                               
-                        { "data": "pengeluaran_nomor"},
-                        { "data": "user_nama"},
-                        { "data": "pengeluaran_tanggal",
+                        { "data": "pengeluaran_kategori_nama"},
+                        { "data": "pengeluaran_kategori_tanggal",
                         "render": 
                         function( data ) {
                             return "<span>"+moment(data).format("DD/MM/YYYY")+"</span>";
                           }
                         }, 
-                        { "data": "pengeluaran_lampiran",
-                        "render": 
-                        function( data ) {
-
-                            if (data != '') {
-
-                              return "<a target='_BLANK' href='<?=base_url('assets/lampiran/')?>"+data+"'><button class='btn-xs btn btn-primary'>Lihat <i class='fa fa-eye'></i></button></a>";
-                            }else{
-
-                              return "Tidak Ada";
-                            }
-                          }
-                        },  
-                        { "data": "pengeluaran_id",
+                        { "data": "pengeluaran_kategori_id",
                         "render": 
                         function( data, type, row, meta ) {
-                            return "<a href='<?php echo base_url('pengeluaran/transaksi_view/')?>"+data+"'><button class='btn btn-xs btn-success'><i class='fa fa-eye'></i></button></a> "+
-                            "<button onclick=del('<?php echo base_url('pengeluaran/transaksi_delete/')?>"+data+"') class='btn btn-xs btn-danger'><i class='fa fa-trash'></i></button> "+
-                            "<a href='<?php echo base_url('pengeluaran/transaksi_print/')?>"+data+"'><button class='btn btn-xs btn-primary'><i class='fa fa-print'></i></button></a> ";
+                            return "<a href='<?php echo base_url('pengeluaran/kategori_edit/')?>"+data+"'><button class='btn btn-xs btn-success'><i class='fa fa-edit'></i></button></a> "+
+                            "<button onclick=del('<?php echo base_url('pengeluaran/kategori_delete/')?>"+data+"') class='btn btn-xs btn-danger'><i class='fa fa-trash'></i></button>";
                           }
                         },
                         

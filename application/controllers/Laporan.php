@@ -1,7 +1,7 @@
 <?php
 class Laporan extends CI_Controller{
 
-	function __construct(){
+	function __construct(){ 
 		parent::__construct();
 		$this->load->model('m_laporan_pembelian');
 		$this->load->model('m_laporan_penjualan');
@@ -100,11 +100,11 @@ class Laporan extends CI_Controller{
 			}
 
 			//sum tahun
-			$sum_tahun = $this->db->query("SELECT SUM(a.pengeluaran_barang_subtotal) AS total FROM t_pengeluaran_barang AS a JOIN t_pengeluaran AS b ON a.pengeluaran_barang_nomor = b.pengeluaran_nomor WHERE b.pengeluaran_hapus = 0 AND date_format(b.pengeluaran_tanggal, '%Y') = '$thn'")->row_array();
+			$sum_tahun = $this->db->query("SELECT SUM(a.pengeluaran_barang_jumlah) AS total FROM t_pengeluaran_barang AS a JOIN t_pengeluaran AS b ON a.pengeluaran_barang_nomor = b.pengeluaran_nomor WHERE b.pengeluaran_hapus = 0 AND date_format(b.pengeluaran_tanggal, '%Y') = '$thn'")->row_array();
 			$data['sum_tahun'] = $sum_tahun['total'];
 
 			//sum bulan
-			$sum_bulan = $this->db->query("SELECT SUM(a.pengeluaran_barang_subtotal) AS total FROM t_pengeluaran_barang AS a JOIN t_pengeluaran AS b ON a.pengeluaran_barang_nomor = b.pengeluaran_nomor WHERE b.pengeluaran_hapus = 0 AND date_format(b.pengeluaran_tanggal, '%Y') = '$thn' AND date_format(b.pengeluaran_tanggal, '%m') = '$bln'")->row_array();
+			$sum_bulan = $this->db->query("SELECT SUM(a.pengeluaran_barang_jumlah) AS total FROM t_pengeluaran_barang AS a JOIN t_pengeluaran AS b ON a.pengeluaran_barang_nomor = b.pengeluaran_nomor WHERE b.pengeluaran_hapus = 0 AND date_format(b.pengeluaran_tanggal, '%Y') = '$thn' AND date_format(b.pengeluaran_tanggal, '%m') = '$bln'")->row_array();
 			$data['sum_bulan'] = $sum_bulan['total'];
 
 			$data['tahun_'] = $thn;

@@ -275,6 +275,7 @@
             </span>
             </a>
             <ul class="treeview-menu">
+              <li><a href="<?=base_url('pengeluaran/kategori')?>"><i class="fa fa-circle-o"></i> Kategori</a></li>
               <li><a href="<?=base_url('pengeluaran/transaksi')?>"><i class="fa fa-circle-o"></i> Transaksi</a></li>
             </ul>
           </li>

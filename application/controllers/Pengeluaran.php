@@ -4,6 +4,7 @@ class Pengeluaran extends CI_Controller{
 	function __construct(){
 		parent::__construct(); 
 		$this->load->model('m_pengeluaran');
+		$this->load->model('m_pengeluaran_kategori');
 	} 
 	function transaksi(){ 
 		if ( $this->session->userdata('login') == 1) {
@@ -48,6 +49,9 @@ class Pengeluaran extends CI_Controller{
 		if ( $this->session->userdata('login') == 1) {
 			$data['title'] = 'Pengeluaran';
 
+			//kategori
+			$data['kategori_data'] = $this->query_builder->view("SELECT * FROM t_pengeluaran_kategori WHERE pengeluaran_kategori_hapus = 0");
+
 			//generate nomor
 			$get = $this->query_builder->count("SELECT * FROM t_pengeluaran");
 			$data['nomor'] = 'PG-'.date('dmy').'-'.($get + 1);
@@ -64,7 +68,6 @@ class Pengeluaran extends CI_Controller{
 	function transaksi_save(){
 
 		$nomor = strip_tags($_POST['nomor']);
-		$status = strip_tags($_POST['status']);
 
 		//upload lampiran
 		if (@$_FILES['lampiran']['name']) {
@@ -109,11 +112,8 @@ class Pengeluaran extends CI_Controller{
 		$set1 = array(
 						'pengeluaran_user' => $this->session->userdata('id'),
 						'pengeluaran_nomor' => $nomor,
-						'pengeluaran_jatuh_tempo' => strip_tags($_POST['jatuh_tempo']),
 						'pengeluaran_keterangan' => strip_tags($_POST['keterangan']),
 						'pengeluaran_lampiran' => $lampiran,
-						'pengeluaran_ppn' => strip_tags($_POST['ppn']),
-						'pengeluaran_qty' => strip_tags(str_replace(',', '', $_POST['qty_akhir'])),
 						'pengeluaran_total' => strip_tags(str_replace(',', '', $_POST['total'])),
 					);
 
@@ -128,11 +128,9 @@ class Pengeluaran extends CI_Controller{
 				//barang
 				$set2 = array(
 								'pengeluaran_barang_nomor' => $nomor,
+								'pengeluaran_barang_kategori' => strip_tags($_POST['kategori'][$i]),
 								'pengeluaran_barang_barang' => strip_tags($_POST['barang'][$i]),
-								'pengeluaran_barang_harga' => strip_tags(str_replace(',', '', $_POST['harga'][$i])),
-								'pengeluaran_barang_diskon' => strip_tags(str_replace(',', '', $_POST['diskon'][$i])),
-								'pengeluaran_barang_qty' => strip_tags(str_replace(',', '', $_POST['qty'][$i])),
-								'pengeluaran_barang_subtotal' => strip_tags(str_replace(',', '', $_POST['subtotal'][$i])),
+								'pengeluaran_barang_jumlah' => strip_tags(str_replace(',', '', $_POST['jumlah'][$i])),
 							);
 
 				$this->query_builder->add('t_pengeluaran_barang',$set2);	
@@ -179,6 +177,9 @@ class Pengeluaran extends CI_Controller{
 			$data['title'] = 'Pengeluaran';
 			$data['view'] = '1';
 
+			//kategori
+			$data['kategori_data'] = $this->query_builder->view("SELECT * FROM t_pengeluaran_kategori WHERE pengeluaran_kategori_hapus = 0");
+
 			//data
 			$data['data'] = $this->query_builder->view("SELECT * FROM t_pengeluaran as a JOIN t_pengeluaran_barang as b ON a.pengeluaran_nomor = b.pengeluaran_barang_nomor JOIN t_user as d ON a.pengeluaran_user = d.user_id WHERE a.pengeluaran_id = '$id'");
 
@@ -192,5 +193,127 @@ class Pengeluaran extends CI_Controller{
 		else{
 			redirect(base_url('login'));
 		}
+	}
+	function kategori(){
+
+		if ( $this->session->userdata('login') == 1) {
+			$data['title'] = 'Kategori';
+
+		    $this->load->view('v_template_admin/admin_header',$data);
+		    $this->load->view('pengeluaran/kategori');
+		    $this->load->view('v_template_admin/admin_footer');
+ 
+		} 
+		else{
+			redirect(base_url('login')); 
+		}
+	}
+	function kategori_get(){
+
+		$where = array('pengeluaran_kategori_hapus' => 0);
+
+		$data = $this->m_pengeluaran_kategori->get_datatables($where);
+		$total = $this->m_pengeluaran_kategori->count_all($where);
+		$filter = $this->m_pengeluaran_kategori->count_filtered($where);
+
+		$output = array(
+			"draw" => $_GET['draw'],
+			"recordsTotal" => $total,
+			"recordsFiltered" => $filter,
+			"data" => $data,
+		);
+		//output dalam format JSON
+		echo json_encode($output);
+	}
+	function kategori_add(){
+		if ( $this->session->userdata('login') == 1) {
+			$data['title'] = 'Kategori';
+
+		    $this->load->view('v_template_admin/admin_header',$data);
+		    $this->load->view('pengeluaran/kategori_add');
+		    $this->load->view('v_template_admin/admin_footer');
+
+		} 
+		else{
+			redirect(base_url('login'));
+		}
+	}
+	function kategori_save(){
+
+		$set = array(
+						'pengeluaran_kategori_nama' => strip_tags(@$_POST['nama']),
+						'pengeluaran_kategori_keterangan' => strip_tags(@$_POST['keterangan']), 
+					);
+
+		$save = $this->query_builder->add('t_pengeluaran_kategori',$set);
+
+		if ($save == 1) {
+
+			$this->session->set_flashdata('success','Data berhasil di simpan');
+
+		} else {
+
+			$this->session->set_flashdata('gagal','Data gagal di simpan');
+		}
+
+		redirect(base_url('pengeluaran/kategori'));
+	}
+	function kategori_edit($id){
+
+		if ( $this->session->userdata('login') == 1) {
+
+			$data['title'] = 'Kategori';
+
+			//data
+			$data['data'] = $this->query_builder->view_row("SELECT * FROM t_pengeluaran_kategori WHERE pengeluaran_kategori_id = '$id'");
+
+			
+		    $this->load->view('v_template_admin/admin_header',$data);
+		    $this->load->view('pengeluaran/kategori_add');
+		    $this->load->view('pengeluaran/kategori_edit');
+		    $this->load->view('v_template_admin/admin_footer');
+
+		} 
+		else{
+			redirect(base_url('login'));
+		}
+	}
+	function kategori_update($id){
+
+		$set = array(
+						'pengeluaran_kategori_nama' => strip_tags(@$_POST['nama']),
+						'pengeluaran_kategori_keterangan' => strip_tags(@$_POST['keterangan']), 
+					);
+
+		$where = ['pengeluaran_kategori_id' => $id];
+		$save = $this->query_builder->update('t_pengeluaran_kategori',$set,$where);
+
+		if ($save == 1) {
+
+			$this->session->set_flashdata('success','Data berhasil di rubah');
+
+		} else {
+
+			$this->session->set_flashdata('gagal','Data gagal di rubah');
+		}
+
+		redirect(base_url('pengeluaran/kategori'));
+	}
+	function kategori_delete($id){
+
+		$set = ['pengeluaran_kategori_hapus' => 1];
+		$where = ['pengeluaran_kategori_id' => $id];
+		$save = $this->query_builder->update('t_pengeluaran_kategori',$set,$where);
+
+		if ($save == 1) {
+
+			$this->session->set_flashdata('success','Data berhasil di hapus');
+
+		} else {
+
+			$this->session->set_flashdata('gagal','Data gagal di hapus');
+		}
+
+		redirect(base_url('pengeluaran/kategori'));
 	}
 }

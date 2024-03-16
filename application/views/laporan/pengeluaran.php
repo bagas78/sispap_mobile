@@ -12,7 +12,7 @@
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fa fa-times"></i></button>
           </div>
-        </div>
+        </div> 
         <div class="box-body">
 
         <form method="POST" action="<?=base_url('laporan/pengeluaran')?>">
@@ -30,9 +30,7 @@
             <thead>
             <tr>
               <th>Barang</th>
-              <th>Qty</th>
-              <th>Harga</th>
-              <th>Subtotal</th>
+              <th>Jumlah</th>
               <th>Tanggal</th>
             </tr>
             </thead>
@@ -83,14 +81,7 @@
             },
             "columns": [     
                         { "data": "pengeluaran_barang_barang"},
-                        { "data": "pengeluaran_barang_qty"},
-                        { "data": "pengeluaran_barang_harga",
-                        "render": 
-                        function( data ) {
-                            return "<span> Rp. "+number_format(data)+"</span>";
-                          }
-                        },
-                        { "data": "pengeluaran_barang_subtotal",
+                        { "data": "pengeluaran_barang_jumlah",
                         "render": 
                         function( data ) {
                             return "<span> Rp. "+number_format(data)+"</span>";
