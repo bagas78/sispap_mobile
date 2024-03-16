@@ -14,7 +14,7 @@ class Notif {
       return $cek; 
     }
 
-    function send($text){
+    function send($text){ 
 
       $db = $this->url->db->query("SELECT * FROM t_notif")->row_array();
 
@@ -479,15 +479,12 @@ class Notif {
         foreach ($db as $v) {
           
           $text .= '%0a';
-          $text .= $v['pengeluaran_barang_qty'].' x ';
-          $text .= $v['pengeluaran_barang_barang'].' : '.number_format($v['pengeluaran_barang_subtotal']);
+          $text .= $v['pengeluaran_barang_barang'].' : '.number_format($v['pengeluaran_barang_jumlah']);
 
         }
 
         $text .= '%0a';
         $text .= '--------------------------';
-        $text .= '%0a';
-        $text .= 'PPN : '.$db[0]['pengeluaran_ppn'].'%';
         $text .= '%0a';
         $text .= 'Total : '.number_format($db[0]['pengeluaran_total']);
 
