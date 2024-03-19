@@ -6,8 +6,7 @@
 	$('.add').remove();
 	$('.remove').remove();
 	$('.save').remove(); 
-<?php endif?> 
-
+<?php endif?>  
 //form
 $('.nomor').val('<?=@$data[0]['pengeluaran_nomor']?>');
 $('.keterangan').val('<?=@$data[0]['pengeluaran_keterangan']?>');
@@ -26,6 +25,7 @@ $('.keterangan').val('<?=@$data[0]['pengeluaran_keterangan']?>');
 	$('.kategori:eq(<?=$key?>)').val('<?=$val['pengeluaran_barang_kategori']?>').change();
 	$('.barang:eq(<?=$key?>)').val('<?=$val['pengeluaran_barang_barang']?>');
 	$('.jumlah:eq(<?=$key?>)').val('<?=$val['pengeluaran_barang_jumlah']?>');
+	$('.harga:eq(<?=$key?>)').val('<?=$val['pengeluaran_barang_harga']?>');
 
 <?php endforeach ?>
 

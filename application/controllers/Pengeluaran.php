@@ -1,4 +1,4 @@
-<?php
+<?php 
 class Pengeluaran extends CI_Controller{
 
 	function __construct(){
@@ -131,6 +131,7 @@ class Pengeluaran extends CI_Controller{
 								'pengeluaran_barang_kategori' => strip_tags($_POST['kategori'][$i]),
 								'pengeluaran_barang_barang' => strip_tags($_POST['barang'][$i]),
 								'pengeluaran_barang_jumlah' => strip_tags(str_replace(',', '', $_POST['jumlah'][$i])),
+								'pengeluaran_barang_harga' => strip_tags(str_replace(',', '', $_POST['harga'][$i])),
 							);
 
 				$this->query_builder->add('t_pengeluaran_barang',$set2);	

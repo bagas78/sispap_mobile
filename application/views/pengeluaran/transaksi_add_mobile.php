@@ -14,7 +14,7 @@
     <!-- Main content --> 
     <section class="content">
 
-      <!-- Default box -->
+      <!-- Default box --> 
       <div class="box"> 
         <div class="box-header with-border">
 
@@ -103,9 +103,16 @@
                 <div class="col-xs-6 col-sm-6">
                   <div class="form-group">
                     <label>Jumlah</label>
+                    <input type="number" name="jumlah[]" class="jumlah form-control" required min="1" value="0">
+                  </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-6">
+                  <div class="form-group">
+                    <label>Harga</label>
                     <div class="input-group">
                       <span class="input-group-addon">Rp</span>
-                      <input type="number" name="jumlah[]" class="jumlah form-control" required min="1" value="0" step="0.01">
+                      <input type="number" name="harga[]" class="harga form-control" required min="1" value="0" step="0.01">
                     </div>
                   </div>
                 </div>
@@ -163,15 +170,22 @@
   function auto(){
 
     //subtotal
-    var total = 0;
+    var harga = 0;
+    $.each($('.harga'), function(index, val) {
+
+      harga += Number($(this).val());
+
+    });
+
+    var jumlah = 0;
     $.each($('.jumlah'), function(index, val) {
 
-      total += Number($(this).val());;
+      jumlah += Number($(this).val());
 
     });
 
     //qty akhir
-    $('#total').val(total);
+    $('#total').val(jumlah * harga);
 
     //border none
     $('td').css('border-top', 'none');

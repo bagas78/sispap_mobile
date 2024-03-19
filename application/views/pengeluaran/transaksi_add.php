@@ -12,7 +12,7 @@
 
       <!-- Default box -->
       <div class="box"> 
-        <div class="box-header with-border">
+        <div class="box-header with-border"> 
 
           <div hidden align="left" class="back">
             <a href="<?= @$_SERVER['HTTP_REFERER'] ?>"><button type="button" class="btn bg-navy"><i class="fa fa-arrow-left"></i> Kembali</button></a>
@@ -54,6 +54,7 @@
                       <th>Kategori</th>
                       <th>Nama Barang</th>
                       <th>Jumlah</th>
+                      <th>Harga</th>
                       <th width="1"><button type="button" onclick="clone()" class="add btn btn-success btn-sm"><i class="fa fa-plus"></i></button></th>
                     </tr>
                   </thead>
@@ -71,9 +72,12 @@
                         <input required type="text" name="barang[]" class="form-control barang" placeholder="Nama Barang">
                       </td>
                       <td>
+                        <input type="number" name="jumlah[]" class="jumlah form-control" required min="1" value="0" step="0.01">
+                      </td>
+                      <td>
                         <div class="input-group">
                           <span class="input-group-addon">Rp</span>
-                          <input type="number" name="jumlah[]" class="jumlah form-control" required min="1" value="0" step="0.01">
+                          <input type="number" name="harga[]" class="harga form-control" required min="1" value="0" step="0.01">
                         </div>
                       </td>
                       <td>
@@ -82,7 +86,7 @@
                     </tr>
 
                     <tr>
-                      <td></td>
+                      <td colspan="2"></td>
                       <td align="right">Total Akhir</td>
                       <td>
                         <div class="input-group">
@@ -93,7 +97,7 @@
                     </tr>
 
                     <tr class="save">
-                      <td colspan="2"></td>
+                      <td colspan="3"></td>
                       <td align="right">
                         <button type="submit" class="btn btn-primary">Simpan <i class="fa fa-check"></i></button>
                         <a href="<?= @$_SERVER['HTTP_REFERER'] ?>"><button type="button" class="btn btn-danger">Batal <i class="fa fa-times"></i></button></a>
@@ -128,15 +132,17 @@
   function auto(){
 
     //subtotal
-    var total = 0;
+    var jumlah = 0;
+    var harga = 0;
     $.each($('.jumlah'), function(index, val) {
 
-      total += Number($(this).val());;
+      jumlah += Number($(this).val());
+      harga += Number($(this).closest('tr').find('.harga').val());
 
     });
 
     //qty akhir
-    $('#total').val(total);
+    $('#total').val(jumlah * harga);
 
     //border none
     $('td').css('border-top', 'none');

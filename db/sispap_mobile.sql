@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2024 at 05:55 AM
+-- Generation Time: Mar 19, 2024 at 03:29 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -591,7 +591,7 @@ CREATE TABLE `t_level` (
 --
 
 INSERT INTO `t_level` (`level_id`, `level_nama`, `level_doc`, `level_telur`, `level_ayam`, `level_pakan`, `level_obat`, `level_tampilan`, `level_hapus`, `level_tanggal`) VALUES
-(1, 'Admin', '1', '1', '1', '1', '1', 'desktop', 0, '2023-05-13'),
+(1, 'Admin', '1', '1', '1', '1', '1', 'tablet', 0, '2023-05-13'),
 (6, 'Gudang', '0', '0', '1', '0', '0', 'tablet', 0, '2023-05-13');
 
 -- --------------------------------------------------------
@@ -617,7 +617,7 @@ CREATE TABLE `t_notif` (
 --
 
 INSERT INTO `t_notif` (`notif_id`, `notif_api`, `notif_tujuan`, `notif_pembelian`, `notif_penjualan`, `notif_pengeluaran`, `notif_vaksin`, `notif_recording`, `notif_tanggal`) VALUES
-(2, '85dd8e1ba30f5f4270c839f6ddce4e624050a8cf', '085855011542', 'on', 'on', '', 'on', 'on', '2024-02-07');
+(2, '85dd8e1ba30f5f4270c839f6ddce4e624050a8cf', '085855011542', 'on', 'on', 'on', 'on', 'on', '2024-02-07');
 
 -- --------------------------------------------------------
 
@@ -816,8 +816,9 @@ CREATE TABLE `t_pengeluaran` (
 --
 
 INSERT INTO `t_pengeluaran` (`pengeluaran_id`, `pengeluaran_user`, `pengeluaran_nomor`, `pengeluaran_keterangan`, `pengeluaran_lampiran`, `pengeluaran_total`, `pengeluaran_tanggal`, `pengeluaran_hapus`) VALUES
-(13, '2', 'PG-160324-1', 'Beli makan siang', '6d4527f25bc4d4a8491e6c2ebe625f57.jpg', '62000', '2024-03-16', 0),
-(14, '2', 'PG-160324-2', 'Peralatan sulap', '', '10000', '2024-03-16', 0);
+(16, '2', 'PG-190324-1', 'Beli makan siang', '1a4ec9870d310a26b53937eaeecdabac.jpg', '120000', '2024-03-19', 0),
+(17, '2', 'PG-190324-2', '-', '', '150000', '2024-03-19', 0),
+(18, '2', 'PG-190324-3', 'beli makan malam', '', '540000', '2024-03-19', 0);
 
 -- --------------------------------------------------------
 
@@ -831,6 +832,7 @@ CREATE TABLE `t_pengeluaran_barang` (
   `pengeluaran_barang_kategori` text DEFAULT NULL,
   `pengeluaran_barang_barang` text DEFAULT NULL,
   `pengeluaran_barang_jumlah` text DEFAULT NULL,
+  `pengeluaran_barang_harga` text DEFAULT NULL,
   `pengeluaran_barang_subtotal` text DEFAULT NULL,
   `pengeluaran_barang_tanggal` date DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -839,10 +841,12 @@ CREATE TABLE `t_pengeluaran_barang` (
 -- Dumping data for table `t_pengeluaran_barang`
 --
 
-INSERT INTO `t_pengeluaran_barang` (`pengeluaran_barang_id`, `pengeluaran_barang_nomor`, `pengeluaran_barang_kategori`, `pengeluaran_barang_barang`, `pengeluaran_barang_jumlah`, `pengeluaran_barang_subtotal`, `pengeluaran_barang_tanggal`) VALUES
-(16, 'PG-160324-1', '3', 'Teh poci', '12000', NULL, '2024-03-16'),
-(17, 'PG-160324-1', '2', 'Nasi Goreng', '50000', NULL, '2024-03-16'),
-(18, 'PG-160324-2', '2', 'Menyan', '10000', NULL, '2024-03-16');
+INSERT INTO `t_pengeluaran_barang` (`pengeluaran_barang_id`, `pengeluaran_barang_nomor`, `pengeluaran_barang_kategori`, `pengeluaran_barang_barang`, `pengeluaran_barang_jumlah`, `pengeluaran_barang_harga`, `pengeluaran_barang_subtotal`, `pengeluaran_barang_tanggal`) VALUES
+(21, 'PG-190324-1', '2', 'Nasi Goreng', '10', '12000', NULL, '2024-03-19'),
+(22, 'PG-190324-2', '3', 'Teh poci', '10', '4000', NULL, '2024-03-19'),
+(23, 'PG-190324-2', '2', 'Gorengan', '20', '1000', NULL, '2024-03-19'),
+(24, 'PG-190324-3', '3', 'Smoothies', '10', '10000', NULL, '2024-03-19'),
+(25, 'PG-190324-3', '2', 'Ayam geprek', '10', '17000', NULL, '2024-03-19');
 
 -- --------------------------------------------------------
 
@@ -1540,13 +1544,13 @@ ALTER TABLE `t_pembelian_barang`
 -- AUTO_INCREMENT for table `t_pengeluaran`
 --
 ALTER TABLE `t_pengeluaran`
-  MODIFY `pengeluaran_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `pengeluaran_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `t_pengeluaran_barang`
 --
 ALTER TABLE `t_pengeluaran_barang`
-  MODIFY `pengeluaran_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `pengeluaran_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `t_pengeluaran_kategori`

@@ -3,7 +3,7 @@
 class Notif {
   protected $url; 
 
-  function __construct(){
+  function __construct(){ 
         $this->url = &get_instance();
     }
 
@@ -477,9 +477,10 @@ class Notif {
         $text .= '--------------------------';
 
         foreach ($db as $v) {
-          
+
           $text .= '%0a';
-          $text .= $v['pengeluaran_barang_barang'].' : '.number_format($v['pengeluaran_barang_jumlah']);
+          $text .= $v['pengeluaran_barang_jumlah'].' x ';
+          $text .= $v['pengeluaran_barang_barang'].' : '.number_format($v['pengeluaran_barang_harga']);
 
         }
 
