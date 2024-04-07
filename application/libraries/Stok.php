@@ -4,7 +4,7 @@ class Stok{
   function __construct(){ 
         $this->sql = &get_instance();
   }
-  function update_kandang(){
+  function update_kandang(){ 
 
       $kandang = $this->sql->db->query("SELECT SUM(kandang_log_jumlah) AS jumlah, kandang_log_barang AS barang, kandang_log_kandang AS kandang FROM t_kandang_log WHERE kandang_log_hapus = 0 GROUP BY kandang_log_kandang")->result_array();
 
@@ -141,6 +141,12 @@ class Stok{
 
         switch ($kategori) {
           case 'ayam':
+            
+            $this->sql->db->query("UPDATE t_barang SET barang_stok = barang_stok + {$jumlah} WHERE barang_id = {$barang}");
+
+            break;
+
+          case 'afkir':
             
             $this->sql->db->query("UPDATE t_barang SET barang_stok = barang_stok + {$jumlah} WHERE barang_id = {$barang}");
 

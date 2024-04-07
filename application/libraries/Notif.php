@@ -13,51 +13,43 @@ class Notif {
 
       return $cek; 
     }
+ 
+    function send($tujuan, $text){ 
 
-    function send($text){ 
+      $cek = $this->cek();
+      $apikey= $cek['notif_api'];
 
-      $db = $this->url->db->query("SELECT * FROM t_notif")->row_array();
+      //send mesage
 
-      $arr = explode(',', $db['notif_tujuan']);
+      $curl = curl_init();
 
-      if (@$db) {
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://starsender.online/api/sendText?message='.rawurlencode($text).'&tujuan='.rawurlencode($tujuan.'@s.whatsapp.net'),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_HTTPHEADER => array(
+          'apikey: '.$apikey
+        ),
+      ));
 
-        foreach ($arr as $v) {
-            
-          $apikey= $db['notif_api'];
-          $tujuan= $v;
-          $pesan= $text;
+      $response = curl_exec($curl);
 
-          $curl = curl_init();
-
-          curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://starsender.online/api/sendText?message='.rawurlencode($pesan).'&tujuan='.rawurlencode($tujuan.'@s.whatsapp.net'),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_HTTPHEADER => array(
-              'apikey: '.$apikey
-            ),
-          ));
-
-          $response = curl_exec($curl);
-
-          curl_close($curl);
-
-        }
-
-      }
+      curl_close($curl);
 
       return;
+
+      //end
     }
 
     function pembelian($nomor) {
 
       $cek = $this->cek();
+      $arr = explode(',', $cek['notif_tujuan']);
 
       if ($cek['notif_pembelian'] == 'on') {
         
@@ -102,7 +94,13 @@ class Notif {
         $text .= '%0a';
         $text .= 'Total : '.number_format($db[0]['pembelian_total']);
 
-        $this->send($text);
+        foreach ($arr as $v) {
+          
+          //loop send message
+          $tujuan= $v;
+          $this->send($tujuan, $text);
+
+        }
 
       }else{
 
@@ -113,6 +111,7 @@ class Notif {
     function penjualan($nomor) {
 
       $cek = $this->cek();
+      $arr = explode(',', $cek['notif_tujuan']);
 
       if ($cek['notif_penjualan'] == 'on') {
       
@@ -157,7 +156,13 @@ class Notif {
         $text .= '%0a';
         $text .= 'Total : '.number_format($db[0]['penjualan_total']);
 
-        $this->send($text);
+        foreach ($arr as $v) {
+          
+          //loop send message
+          $tujuan= $v;
+          $this->send($tujuan, $text);
+
+        }
 
       }else{
 
@@ -168,6 +173,7 @@ class Notif {
     function vaksin($kandang, $ayam, $jadwal) {
       
       $cek = $this->cek();
+      $arr = explode(',', $cek['notif_tujuan']);
 
       if ($cek['notif_vaksin'] == 'on') {
 
@@ -180,9 +186,15 @@ class Notif {
         $text_ayam = $db2['barang_nama'];
         $text_jadwal = date_format(date_create($jadwal) ,'d/m/Y');
 
-        $pesan = 'Transaksi : '.$transaksi.'%0a'.'Kandang : '.$text_kandang.'%0a'.'Jenis Ayam : '.$text_ayam.'%0a'.'Tanggal : '.$text_jadwal.'%0a';
+        $text = 'Transaksi : '.$transaksi.'%0a'.'Kandang : '.$text_kandang.'%0a'.'Jenis Ayam : '.$text_ayam.'%0a'.'Tanggal : '.$text_jadwal.'%0a';
 
-        $this->send($pesan);
+        foreach ($arr as $v) {
+          
+          //loop send message
+          $tujuan= $v;
+          $this->send($tujuan, $text);
+
+        }
 
       }else{
 
@@ -193,6 +205,7 @@ class Notif {
     function recording($nomor) { 
 
       $cek = $this->cek();
+      $arr = explode(',', $cek['notif_tujuan']);
 
       if ($cek['notif_recording'] == 'on') {
       
@@ -285,7 +298,13 @@ class Notif {
         }
         $text .= '--------------------------';
 
-        $this->send($text);
+        foreach ($arr as $v) {
+          
+          //loop send message
+          $tujuan= $v;
+          $this->send($tujuan, $text);
+
+        }
 
       }else{
 
@@ -316,29 +335,9 @@ class Notif {
         $text .= base_url('penjualan/transaksi_print/'.$id);
       }
 
-      $db2 = $this->url->db->query("SELECT * FROM t_notif")->row_array();
-
-      $apikey= $db2['notif_api'];
       $tujuan= $db1['kontak_tlp'];
-      $pesan= $text;
 
-      $curl = curl_init();
-
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://starsender.online/api/sendText?message='.rawurlencode($pesan).'&tujuan='.rawurlencode($tujuan.'@s.whatsapp.net'),
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_HTTPHEADER => array(
-          'apikey: '.$apikey
-        ),
-      ));
-
-      $response = curl_exec($curl);
+      $this->send($tujuan, $text);
 
     }
     function struk_pembelian($nomor) {
@@ -371,29 +370,9 @@ class Notif {
 
       ///////////////////////// API WA ///////////////////////////////////
 
-      $db2 = $this->url->db->query("SELECT * FROM t_notif")->row_array();
-
-      $apikey= $db2['notif_api'];
       $tujuan= $db1[0]['kontak_tlp'];
-      $pesan= $text;
 
-      $curl = curl_init();
-
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://starsender.online/api/sendText?message='.rawurlencode($pesan).'&tujuan='.rawurlencode($tujuan.'@s.whatsapp.net'),
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_HTTPHEADER => array(
-          'apikey: '.$apikey
-        ),
-      ));
-
-      $response = curl_exec($curl);
+      $this->send($tujuan, $text);
 
   }
 
@@ -427,34 +406,15 @@ class Notif {
 
       ///////////////////////// API WA ///////////////////////////////////
 
-      $db2 = $this->url->db->query("SELECT * FROM t_notif")->row_array();
-
-      $apikey= $db2['notif_api'];
       $tujuan= $db1[0]['kontak_tlp'];
-      $pesan= $text;
 
-      $curl = curl_init();
-
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://starsender.online/api/sendText?message='.rawurlencode($pesan).'&tujuan='.rawurlencode($tujuan.'@s.whatsapp.net'),
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_HTTPHEADER => array(
-          'apikey: '.$apikey
-        ),
-      ));
-
-      $response = curl_exec($curl);
+      $this->send($tujuan, $text);
 
   }
   function pengeluaran($nomor) {
 
       $cek = $this->cek();
+      $arr = explode(',', $cek['notif_tujuan']);
 
       if ($cek['notif_pengeluaran'] == 'on') {
       
@@ -489,7 +449,13 @@ class Notif {
         $text .= '%0a';
         $text .= 'Total : '.number_format($db[0]['pengeluaran_total']);
 
-        $this->send($text);
+        foreach ($arr as $v) {
+          
+          //loop send message
+          $tujuan= $v;
+          $this->send($tujuan, $text);
+
+        }
 
       }else{
 
