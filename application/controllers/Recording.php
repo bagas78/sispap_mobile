@@ -2,7 +2,7 @@
 class Recording extends CI_Controller{
 
 	function __construct(){ 
-		parent::__construct();
+		parent::__construct(); 
 		$this->load->model('m_recording');
 	}  
 	function harian(){ 
@@ -61,6 +61,9 @@ class Recording extends CI_Controller{
 		//obat
 		$data['obat_data'] = $this->query_builder->view("SELECT * FROM t_barang WHERE barang_hapus = 0 AND barang_kategori = 4 AND barang_stok > 0");
 
+		//satuan telur pecah
+		$data['pecah'] = $this->query_builder->view_row("SELECT b.satuan_singkatan AS satuan FROM t_barang AS a JOIN t_satuan AS b ON a.barang_satuan = b.satuan_id WHERE a.barang_hapus = 0 AND a.barang_kategori = 6");
+
 		//generate nomor
 		$get = $this->query_builder->count("SELECT * FROM t_recording");
 		$data['nomor'] = 'RC-'.date('dmy').'-'.($get + 1);
@@ -112,6 +115,7 @@ class Recording extends CI_Controller{
 						'recording_populasi' => strip_tags(@$_POST['populasi']),
 						'recording_suhu' => strip_tags(@$_POST['suhu']),
 						'recording_kondisi' => strip_tags(@$_POST['kondisi']),
+						'recording_telur_pecah' => strip_tags(@$_POST['telur_pecah']),
 					);
 
 		$db = $this->query_builder->add('t_recording', $set);
@@ -241,6 +245,9 @@ class Recording extends CI_Controller{
 		//obat
 		$data['obat_data'] = $this->query_builder->view("SELECT * FROM t_barang WHERE barang_hapus = 0 AND barang_kategori = 4");
 
+		//satuan telur pecah
+		$data['pecah'] = $this->query_builder->view_row("SELECT b.satuan_singkatan AS satuan FROM t_barang AS a JOIN t_satuan AS b ON a.barang_satuan = b.satuan_id WHERE a.barang_hapus = 0 AND a.barang_kategori = 6");
+
 		$data['title'] = 'Recording Harian';
 
 	    $this->load->view('v_template_admin/admin_header',$data);
@@ -280,6 +287,9 @@ class Recording extends CI_Controller{
 		//obat
 		$data['obat_data'] = $this->query_builder->view("SELECT * FROM t_barang WHERE barang_hapus = 0 AND barang_kategori = 4");
 
+		//satuan telur pecah
+		$data['pecah'] = $this->query_builder->view_row("SELECT b.satuan_singkatan AS satuan FROM t_barang AS a JOIN t_satuan AS b ON a.barang_satuan = b.satuan_id WHERE a.barang_hapus = 0 AND a.barang_kategori = 6");
+
 		$data['title'] = 'Recording Harian';
 
 		$data['edit'] = 1;
@@ -301,6 +311,7 @@ class Recording extends CI_Controller{
 						'recording_populasi' => strip_tags(@$_POST['populasi']),
 						'recording_suhu' => strip_tags(@$_POST['suhu']),
 						'recording_kondisi' => strip_tags(@$_POST['kondisi']),
+						'recording_telur_pecah' => strip_tags(@$_POST['telur_pecah']),
 					);
 
 		$where = ['recording_id' => $id];

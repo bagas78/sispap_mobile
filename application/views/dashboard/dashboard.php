@@ -206,7 +206,7 @@
         <!-- /.box-body -->
       </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="<?=base_url('assets/js/chart.js')?>"></script>
 
 <script>
   const ctx = document.getElementById('myChart');

@@ -7,7 +7,7 @@ class Barang extends CI_Controller{
 		$this->load->model('m_stok_gudang');
 		$this->load->model('m_stok_kandang');
 	}
-	function index($id){ 
+	function index($id){  
 
 		$get = $this->query_builder->view_row("SELECT * FROM t_barang_kategori WHERE barang_kategori_id = '$id'");
 
@@ -148,6 +148,21 @@ class Barang extends CI_Controller{
 		$this->edit($id);
 	}
 	function telur_detail($id, $kategori){
+		$this->detail($id, $kategori);
+	}
+
+	/////////////////////////////////////////////////
+
+	function telur_pecah(){
+		$this->index(6);
+	}
+	function telur_pecah_add(){
+		$this->add(6);
+	}
+	function telur_pecah_edit($id){
+		$this->edit($id);
+	}
+	function telur_pecah_detail($id, $kategori){
 		$this->detail($id, $kategori);
 	}
 

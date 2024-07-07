@@ -9,7 +9,7 @@
     padding: 1%;
   }
 </style>
-
+ 
     <!-- Main content --> 
     <section class="content">
  
@@ -78,6 +78,15 @@
               <div class="form-group">
                 <label>Suhu</label>
                 <input id="suhu" type="text" name="suhu" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-6"> 
+              <div class="form-group">
+                <label>Telur Pecah / Rusak</label>
+                <div class="input-group">
+                  <input id="telur_pecah" type="number" name="telur_pecah" class="form-control" required value="0">
+                  <span class="input-group-addon"><?=@$pecah['satuan']?></span>
+                </div>
               </div>
             </div>
             <div class="col-md-6">

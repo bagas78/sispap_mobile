@@ -9,7 +9,7 @@
     padding: 1%;
   }
   .bg-card{
-    background: #f4f4f4;
+    background: #f4f4f4; 
     margin-top: 10px;
     margin-right: 1px;
     margin-left: 1px;
@@ -69,6 +69,21 @@
               <div class="form-group">
                 <label>Populasi</label>
                 <input id="populasi" readonly type="number" name="populasi" class="form-control" required value="0" min="0">
+              </div>
+            </div>
+            <div class="col-md-6"> 
+              <div class="form-group">
+                <label>Suhu</label>
+                <input id="suhu" type="text" name="suhu" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-6"> 
+              <div class="form-group">
+                <label>Telur Pecah / Rusak</label>
+                <div class="input-group">
+                  <input id="telur_pecah" type="number" name="telur_pecah" class="form-control" required value="0">
+                  <span class="input-group-addon"><?=@$pecah['satuan']?></span>
+                </div>
               </div>
             </div>
             <div class="col-md-6">

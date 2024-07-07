@@ -134,9 +134,7 @@
       <div class="user-panel">
         <div class="pull-left image">
 
-          <img src="<?=@$this->server->online()?>assets/gambar/user/<?php echo $this->session->userdata('foto'); ?>" class="img-circle" alt="User Image"  style="height: 45px;">
-
-          <!-- <img src="<?php echo base_url() ?>assets/gambar/user/<?php echo $this->session->userdata('foto'); ?>" class="img-circle" alt="User Image"  style="height: 45px;"> -->
+          <img src="<?php echo base_url() ?>assets/gambar/user/<?php echo $this->session->userdata('foto'); ?>" class="img-circle" alt="User Image"  style="height: 45px;">
           
         </div>
         <div class="pull-left info">
@@ -229,6 +227,7 @@
               <li class="doc_sub"><a href="<?=base_url('barang/doc')?>"><i class="fa fa-circle-o"></i> DOC</a></li>
               <li class="ayam_sub"><a href="<?=base_url('barang/ayam')?>"><i class="fa fa-circle-o"></i> Ayam</a></li>
               <li class="telur_sub"><a href="<?=base_url('barang/telur')?>"><i class="fa fa-circle-o"></i> Telur</a></li>
+              <li class="telur_pecah_sub"><a href="<?=base_url('barang/telur_pecah')?>"><i class="fa fa-circle-o"></i> Telur Pecah / Rusak</a></li>
               <li class="pakan_sub"><a href="<?=base_url('barang/pakan')?>"><i class="fa fa-circle-o"></i> Pakan</a></li>
               <li class="obat_sub"><a href="<?=base_url('barang/obat')?>"><i class="fa fa-circle-o"></i> Obat</a></li>
             </ul>

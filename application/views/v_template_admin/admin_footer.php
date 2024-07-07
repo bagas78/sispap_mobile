@@ -277,23 +277,24 @@ function notif(){
     if ('<?=$this->session->userdata('level');?>' != 1) {
 
         //hide menu
-        $('.kontak').remove();
-        $('.kandang').remove();
-        $('.absensi').remove();
-        $('.gaji').remove();
         $('.user').remove();
-        $('.pembelian').remove();
-        $('.penjualan').remove();
-        $('.laporan').remove();
 
         //hide submenu persedian gudang
         <?php $akses = @$this->session->userdata('akses'); ?>
 
-        if (1 != '<?=@$akses['level_doc']?>') { $('.doc_sub').remove(); }
-        if (1 != '<?=@$akses['level_ayam']?>') { $('.ayam_sub').remove(); }
-        if (1 != '<?=@$akses['level_telur']?>') { $('.telur_sub').remove(); }
-        if (1 != '<?=@$akses['level_pakan']?>') { $('.pakan_sub').remove(); }
-        if (1 != '<?=@$akses['level_obat']?>') { $('.obat_sub').remove(); }
+        if (1 != '<?=@$akses['level_kandang']?>') { $('.kandang').remove(); }
+        if (1 != '<?=@$akses['level_absensi']?>') { $('.absensi').remove(); }
+        if (1 != '<?=@$akses['level_gaji']?>') { $('.gaji').remove(); }
+        if (1 != '<?=@$akses['level_user']?>') { $('.user').remove(); }
+        if (1 != '<?=@$akses['level_pembelian']?>') { $('.pembelian').remove(); }
+        if (1 != '<?=@$akses['level_penjualan']?>') { $('.penjualan').remove(); }
+        if (1 != '<?=@$akses['level_laporan']?>') { $('.laporan').remove(); }
+        if (1 != '<?=@$akses['level_whatsapp']?>') { $('.whatsapp').remove(); }
+        if (1 != '<?=@$akses['level_vaksinasi']?>') { $('.vaksinasi').remove(); }
+        if (1 != '<?=@$akses['level_satuan']?>') { $('.satuan').remove(); }
+        if (1 != '<?=@$akses['level_gudang']?>') { $('.gudang').remove(); }
+        if (1 != '<?=@$akses['level_pengeluaran']?>') { $('.pengeluaran').remove(); }
+        if (1 != '<?=@$akses['level_recording']?>') { $('.recording').remove(); }
 
     }
 
@@ -310,7 +311,7 @@ function notif(){
     }, 100);
 }
 
-//notif();
+notif();
 
 function refresh(){
     location.reload();

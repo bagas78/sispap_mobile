@@ -7,9 +7,9 @@
           <div class="box ">
             <div class="box-body box-profile">
               <?php if (@$data[0]['user_foto'] == ''): ?>
-                <img class="profile-user-img img-responsive" src="<?php echo @$this->server->online()?>assets/gambar/noimage.gif" alt="User profile picture" style="margin-bottom: 5%;">
+                <img class="profile-user-img img-responsive" src="<?php echo base_url()?>assets/gambar/noimage.gif" alt="User profile picture" style="margin-bottom: 5%;">
               <?php else: ?>
-                <img class="profile-user-img img-responsive" src="<?php echo @$this->server->online()?>assets/gambar/user/<?php echo @$data[0]['user_foto']; ?>" alt="User profile picture" style="margin-bottom: 5%;">
+                <img class="profile-user-img img-responsive" src="<?php echo base_url()?>assets/gambar/user/<?php echo @$data[0]['user_foto']; ?>" alt="User profile picture" style="margin-bottom: 5%;">
               <?php endif ?>
 
               <ul class="list-group list-group-unbordered">

@@ -1,7 +1,7 @@
 <?php
 class penjualan extends CI_Controller{
 
-	function __construct(){
+	function __construct(){ 
 		parent::__construct();
 		$this->load->model('m_penjualan');
 		$this->load->model('m_piutang');
@@ -57,7 +57,7 @@ class penjualan extends CI_Controller{
 			$data['kontak_data'] = $this->query_builder->view("SELECT * FROM t_kontak WHERE kontak_jenis = 'p' AND kontak_hapus = 0");
 
 			//kategori
-			$data['kategori_data'] = $this->query_builder->view("SELECT * FROM t_barang_kategori WHERE barang_kategori_id < 3");
+			$data['kategori_data'] = $this->query_builder->view("SELECT * FROM t_barang_kategori WHERE barang_kategori_id IN(1,2,6)");
 
 		    $this->load->view('v_template_admin/admin_header',$data);
 		    $this->load->view('penjualan/'.$this->ui->view('transaksi_add'));

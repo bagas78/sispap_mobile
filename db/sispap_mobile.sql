@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2024 at 04:52 PM
+-- Generation Time: Jul 07, 2024 at 06:41 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -247,7 +247,8 @@ INSERT INTO `t_barang` (`barang_id`, `barang_kode`, `barang_kategori`, `barang_s
 (154, 'KB0015', '4', '5', 'FLAVOR', '4', '2024-03-05', 0),
 (155, 'KB0016', '4', '0', 'FORTEVIT', '4', '2024-03-05', 0),
 (156, 'KB0017', '4', '0', 'SODIUM BIKARBONAT', '4', '2024-03-05', 0),
-(157, 'KB0018', '4', '0', 'MEDIVAC ND GMB', '4', '2024-03-05', 0);
+(157, 'KB0018', '4', '0', 'MEDIVAC ND GMB', '4', '2024-03-05', 0),
+(158, 'KB0019', '6', '3', 'Telur Pecah / Rusak', '2', '2024-07-07', 0);
 
 -- --------------------------------------------------------
 
@@ -271,7 +272,8 @@ INSERT INTO `t_barang_kategori` (`barang_kategori_id`, `barang_kategori_menu`, `
 (2, 'Ayam', 'ayam', '2023-02-27'),
 (3, 'Pakan', 'pakan', '2023-02-27'),
 (4, 'Obat', 'obat', '2023-02-27'),
-(5, 'Doc', 'doc', '2023-05-03');
+(5, 'Doc', 'doc', '2023-05-03'),
+(6, 'Pecah', 'telur_pecah', '2024-07-06');
 
 -- --------------------------------------------------------
 
@@ -576,23 +578,32 @@ INSERT INTO `t_kontak` (`kontak_id`, `kontak_jenis`, `kontak_kode`, `kontak_nama
 CREATE TABLE `t_level` (
   `level_id` int(11) NOT NULL,
   `level_nama` text NOT NULL,
-  `level_doc` text NOT NULL,
-  `level_telur` text DEFAULT '0',
-  `level_ayam` text DEFAULT '0',
-  `level_pakan` text DEFAULT '0',
-  `level_obat` text DEFAULT '0',
+  `level_whatsapp` text NOT NULL,
+  `level_kontak` text DEFAULT '0',
+  `level_vaksinasi` text DEFAULT '0',
+  `level_kandang` text DEFAULT '0',
+  `level_satuan` text DEFAULT '0',
+  `level_gudang` text DEFAULT '0',
+  `level_produksi` text DEFAULT '0',
+  `level_pembelian` text DEFAULT '0',
+  `level_pengeluaran` text DEFAULT '0',
+  `level_recording` text DEFAULT '0',
+  `level_penjualan` text DEFAULT '0',
+  `level_laporan` text DEFAULT '0',
+  `level_absensi` text DEFAULT '0',
+  `level_gaji` text DEFAULT '0',
   `level_tampilan` set('desktop','tablet') DEFAULT NULL,
-  `level_hapus` int(11) DEFAULT 0,
-  `level_tanggal` date DEFAULT curdate()
+  `level_tanggal` date DEFAULT curdate(),
+  `level_hapus` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `t_level`
 --
 
-INSERT INTO `t_level` (`level_id`, `level_nama`, `level_doc`, `level_telur`, `level_ayam`, `level_pakan`, `level_obat`, `level_tampilan`, `level_hapus`, `level_tanggal`) VALUES
-(1, 'Admin', '1', '1', '1', '1', '1', 'desktop', 0, '2023-05-13'),
-(6, 'Gudang', '0', '0', '1', '0', '0', 'tablet', 0, '2023-05-13');
+INSERT INTO `t_level` (`level_id`, `level_nama`, `level_whatsapp`, `level_kontak`, `level_vaksinasi`, `level_kandang`, `level_satuan`, `level_gudang`, `level_produksi`, `level_pembelian`, `level_pengeluaran`, `level_recording`, `level_penjualan`, `level_laporan`, `level_absensi`, `level_gaji`, `level_tampilan`, `level_tanggal`, `level_hapus`) VALUES
+(1, 'Admin', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'desktop', '2023-05-13', 0),
+(6, 'Gudang', '0', '0', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', 'tablet', '2023-05-13', 0);
 
 -- --------------------------------------------------------
 
@@ -886,7 +897,8 @@ CREATE TABLE `t_penjualan` (
 --
 
 INSERT INTO `t_penjualan` (`penjualan_id`, `penjualan_user`, `penjualan_kontak`, `penjualan_nomor`, `penjualan_status`, `penjualan_jatuh_tempo`, `penjualan_keterangan`, `penjualan_qty`, `penjualan_ppn`, `penjualan_total`, `penjualan_tanggal`, `penjualan_hapus`) VALUES
-(45, 2, '4', 'PJ-070424-1', 'lunas', '2024-04-07', '-', '15', 0, '95000', '2024-04-07', 0);
+(45, 2, '4', 'PJ-070424-1', 'lunas', '2024-04-07', '-', '15', 0, '95000', '2024-04-07', 0),
+(46, 2, '4', 'PJ-070724-2', 'lunas', '2024-07-07', 'test telur pecah', '2', 0, '50000', '2024-07-07', 0);
 
 -- --------------------------------------------------------
 
@@ -913,7 +925,8 @@ CREATE TABLE `t_penjualan_barang` (
 
 INSERT INTO `t_penjualan_barang` (`penjualan_barang_id`, `penjualan_barang_nomor`, `penjualan_barang_kategori`, `penjualan_barang_barang`, `penjualan_barang_harga`, `penjualan_barang_diskon`, `penjualan_barang_stok`, `penjualan_barang_qty`, `penjualan_barang_subtotal`, `penjualan_barang_tanggal`) VALUES
 (50, 'PJ-070424-1', '2', '143', '5000', '0', '  10', '5', '25000', '2024-04-07'),
-(51, 'PJ-070424-1', '1', '145', '7000', '0', '  100', '10', '70000', '2024-04-07');
+(51, 'PJ-070424-1', '1', '145', '7000', '0', '  100', '10', '70000', '2024-04-07'),
+(52, 'PJ-070724-2', '6', '158', '25000', '0', '  5', '2', '50000', '2024-07-07');
 
 -- --------------------------------------------------------
 
@@ -1010,6 +1023,7 @@ CREATE TABLE `t_recording` (
   `recording_user` text NOT NULL,
   `recording_tanggal` date DEFAULT NULL,
   `recording_kandang` text NOT NULL,
+  `recording_telur_pecah` text NOT NULL DEFAULT '0',
   `recording_bobot` text NOT NULL,
   `recording_populasi` text NOT NULL,
   `recording_suhu` text NOT NULL,
@@ -1021,8 +1035,8 @@ CREATE TABLE `t_recording` (
 -- Dumping data for table `t_recording`
 --
 
-INSERT INTO `t_recording` (`recording_id`, `recording_nomor`, `recording_user`, `recording_tanggal`, `recording_kandang`, `recording_bobot`, `recording_populasi`, `recording_suhu`, `recording_kondisi`, `recording_hapus`) VALUES
-(293, 'RC-070424-1', '2', '2024-04-07', '4', '2', '100', '30 Derajat', 'Bersih', 0);
+INSERT INTO `t_recording` (`recording_id`, `recording_nomor`, `recording_user`, `recording_tanggal`, `recording_kandang`, `recording_telur_pecah`, `recording_bobot`, `recording_populasi`, `recording_suhu`, `recording_kondisi`, `recording_hapus`) VALUES
+(293, 'RC-070424-1', '2', '2024-04-07', '4', '5', '2', '100', '30 Derajat', '', 0);
 
 -- --------------------------------------------------------
 
@@ -1049,11 +1063,11 @@ CREATE TABLE `t_recording_barang` (
 --
 
 INSERT INTO `t_recording_barang` (`recording_barang_id`, `recording_barang_nomor`, `recording_barang_barang`, `recording_barang_stok`, `recording_barang_jumlah`, `recording_barang_kategori`, `recording_barang_berat`, `recording_barang_gejala`, `recording_barang_obat`, `recording_barang_obat_jumlah`, `recording_barang_tanggal`) VALUES
-(602, 'RC-070424-1', '140', '0', '0', 'ayam', '2', 'tipes', '154', 5, '2024-04-07'),
-(603, 'RC-070424-1', '144', '0', '5', 'afkir', NULL, NULL, NULL, 0, '2024-04-07'),
-(604, 'RC-070424-1', '143', '0', '10', 'afkir', NULL, NULL, NULL, 0, '2024-04-07'),
-(605, 'RC-070424-1', '145', '0', '100', 'telur', NULL, NULL, NULL, 0, '2024-04-07'),
-(606, 'RC-070424-1', '24', '95', '5', 'pakan', NULL, NULL, NULL, 0, '2024-04-07');
+(627, 'RC-070424-1', '140', '0', '0', 'ayam', '2', 'tipes', '154', 5, '2024-07-07'),
+(628, 'RC-070424-1', '144', '0', '5', 'afkir', NULL, NULL, NULL, 0, '2024-07-07'),
+(629, 'RC-070424-1', '143', '0', '10', 'afkir', NULL, NULL, NULL, 0, '2024-07-07'),
+(630, 'RC-070424-1', '145', '0', '100', 'telur', NULL, NULL, NULL, 0, '2024-07-07'),
+(631, 'RC-070424-1', '24', '95', '5', 'pakan', NULL, NULL, NULL, 0, '2024-07-07');
 
 -- --------------------------------------------------------
 
@@ -1129,7 +1143,7 @@ CREATE TABLE `t_user` (
 --
 
 INSERT INTO `t_user` (`user_id`, `user_nama`, `user_email`, `user_password`, `user_level`, `user_foto`, `user_hapus`, `user_tanggal`) VALUES
-(2, 'Admin SPAP', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', 1, 'Admin-Profile-PNG-Clipart.png', 0, '2020-05-10'),
+(2, 'Admin SPAP', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', 1, '457c999127c1904526bb1e537a50d7b4.png', 0, '2020-05-10'),
 (3, 'User 1', 'user@user.com', 'ee11cbb19052e40b07aac0ca060c23ee', 6, NULL, 0, '2024-02-05');
 
 -- --------------------------------------------------------
@@ -1425,7 +1439,7 @@ ALTER TABLE `t_bank`
 -- AUTO_INCREMENT for table `t_barang`
 --
 ALTER TABLE `t_barang`
-  MODIFY `barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+  MODIFY `barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 
 --
 -- AUTO_INCREMENT for table `t_barang_kategori`
@@ -1479,7 +1493,7 @@ ALTER TABLE `t_kontak`
 -- AUTO_INCREMENT for table `t_level`
 --
 ALTER TABLE `t_level`
-  MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `t_notif`
@@ -1551,13 +1565,13 @@ ALTER TABLE `t_pengeluaran_kategori`
 -- AUTO_INCREMENT for table `t_penjualan`
 --
 ALTER TABLE `t_penjualan`
-  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `penjualan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `t_penjualan_barang`
 --
 ALTER TABLE `t_penjualan_barang`
-  MODIFY `penjualan_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `penjualan_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `t_piutang`
@@ -1599,7 +1613,7 @@ ALTER TABLE `t_recording`
 -- AUTO_INCREMENT for table `t_recording_barang`
 --
 ALTER TABLE `t_recording_barang`
-  MODIFY `recording_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=607;
+  MODIFY `recording_barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=632;
 
 --
 -- AUTO_INCREMENT for table `t_report`

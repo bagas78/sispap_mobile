@@ -10,6 +10,7 @@ $('#afkir').val('<?=@$data['recording_afkir']?>');
 $('#bobot').val('<?=@$data['recording_bobot']?>');
 $('#suhu').val('<?=@$data['recording_suhu']?>');
 $('#kondisi').val('<?=@$data['recording_kondisi']?>');
+$('#telur_pecah').val('<?=@$data['recording_telur_pecah']?>');
 $('form').attr('action', '<?=base_url('recording/update/'.@$data['recording_id'])?>');
 
 //index loop 

@@ -4,10 +4,10 @@
 
       <!-- Default box -->
       <div class="box"> 
-        <div class="box-header with-border">
+        <div class="box-header with-border"> 
  
             <div align="left">
-              <a href="<?= base_url('barang/'.@$kategori.'_add/'.@$kategori) ?>"><button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</button></a>
+              <a href="<?= base_url('barang/'.@$kategori.'_add/'.@$kategori) ?>"><button class="add btn btn-primary"><i class="fa fa-plus"></i> Tambah</button></a>
             </div>
 
           <div class="box-tools pull-right">
@@ -26,7 +26,7 @@
               <th>Nama</th> 
               <th>Stok</th>
               <th>Satuan</th>
-              <th width="40">Action</th>
+              <th width="40" class="action">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -66,7 +66,7 @@
                         "render": 
                         function( data ) {
                             return "<a href='<?php echo base_url('barang/'.@$kategori.'_edit/')?>"+data+"'><button class='btn btn-xs btn-primary'><i class='fa fa-edit'></i></button></a> "+
-                            "<button onclick=del('<?php echo base_url('barang/delete/')?>"+data+"/<?=@$kategori?>') class='btn btn-xs btn-danger'><i class='fa fa-trash'></i></button>";
+                            "<button onclick=del('<?php echo base_url('barang/delete/')?>"+data+"/<?=@$kategori?>') class='btn_delete btn btn-xs btn-danger'><i class='fa fa-trash'></i></button>";
                           }
                         },
                         
@@ -74,4 +74,22 @@
         });
 
     });
+
+
+//otomatis
+function remove_x(){
+
+  if (<?=@$kategori_id?> == 6) {
+
+    $('.btn_delete').remove();
+    $('.add').remove();
+  }
+
+  setTimeout(function() {
+      remove_x();
+  }, 100);
+}
+
+remove_x();
+
 </script>

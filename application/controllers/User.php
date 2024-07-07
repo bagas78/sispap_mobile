@@ -134,14 +134,31 @@ class User extends CI_Controller{
 	}
 	function level_add(){
 
+		$data['title'] = 'Level';
+	    
+	    $this->load->view('v_template_admin/admin_header',$data);
+	    $this->load->view('user/level_add');
+	    $this->load->view('v_template_admin/admin_footer');
+	}
+	function level_save(){
+
 		$set = array(
-			'level_nama' => $_POST['level_nama'], 
-			'level_doc' => $_POST['level_doc'],
-			'level_telur' => $_POST['level_telur'], 
-			'level_ayam' => $_POST['level_ayam'],
-			'level_pakan' => $_POST['level_pakan'],
-			'level_obat' => $_POST['level_obat'],
-			'level_tampilan' => $_POST['level_tampilan'],
+			'level_nama' => $_POST['nama'],
+			'level_tampilan' => $_POST['tampilan'], 
+			'level_whatsapp' => $_POST['whatsapp'],
+			'level_kontak' => $_POST['kontak'], 
+			'level_vaksinasi' => $_POST['vaksinasi'],
+			'level_kandang' => $_POST['kandang'],
+			'level_satuan' => $_POST['satuan'],
+			'level_gudang' => $_POST['gudang'],
+			'level_produksi' => $_POST['produksi'],
+			'level_pembelian' => $_POST['pembelian'],
+			'level_pengeluaran' => $_POST['pengeluaran'],
+			'level_recording' => $_POST['recording'],
+			'level_penjualan' => $_POST['penjualan'],
+			'level_laporan' => $_POST['laporan'],
+			'level_absensi' => $_POST['absensi'],
+			'level_gaji' => $_POST['gaji'],
 		);
 
 		$db = $this->query_builder->add('t_level',$set);
@@ -155,16 +172,35 @@ class User extends CI_Controller{
 
 		redirect(base_url('user/level'));
 	}
+	function level_edit($id){
+		$data['title'] = 'Level';
+	    
+	    $data['data'] = $this->query_builder->view_row("SELECT * FROM t_level WHERE level_id = '$id'");
+
+	    $this->load->view('v_template_admin/admin_header',$data);
+	    $this->load->view('user/level_add');
+	    $this->load->view('user/level_edit');
+	    $this->load->view('v_template_admin/admin_footer');
+	}
 	function level_update($id){
 
 		$set = array(
-			'level_nama' => $_POST['level_nama'], 
-			'level_doc' => $_POST['level_doc'],
-			'level_telur' => $_POST['level_telur'], 
-			'level_ayam' => $_POST['level_ayam'],
-			'level_pakan' => $_POST['level_pakan'],
-			'level_obat' => $_POST['level_obat'],
-			'level_tampilan' => $_POST['level_tampilan'],
+			'level_nama' => $_POST['nama'],
+			'level_tampilan' => $_POST['tampilan'], 
+			'level_whatsapp' => $_POST['whatsapp'],
+			'level_kontak' => $_POST['kontak'], 
+			'level_vaksinasi' => $_POST['vaksinasi'],
+			'level_kandang' => $_POST['kandang'],
+			'level_satuan' => $_POST['satuan'],
+			'level_gudang' => $_POST['gudang'],
+			'level_produksi' => $_POST['produksi'],
+			'level_pembelian' => $_POST['pembelian'],
+			'level_pengeluaran' => $_POST['pengeluaran'],
+			'level_recording' => $_POST['recording'],
+			'level_penjualan' => $_POST['penjualan'],
+			'level_laporan' => $_POST['laporan'],
+			'level_absensi' => $_POST['absensi'],
+			'level_gaji' => $_POST['gaji'],
 		);
 
 		$db = $this->query_builder->update('t_level',$set,['level_id' => $id]);
