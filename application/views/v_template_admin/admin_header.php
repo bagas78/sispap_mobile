@@ -144,7 +144,7 @@
       </div>
       
       <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
+      <ul class="sidebar-menu" data-widget="tree" hidden>
         <li class="header">MAIN NAVIGATION</li>
 
           <li class="dashboard">

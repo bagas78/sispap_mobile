@@ -282,6 +282,7 @@ function notif(){
         //hide submenu persedian gudang
         <?php $akses = @$this->session->userdata('akses'); ?>
 
+        if (1 != '<?=@$akses['level_kontak']?>') { $('.kontak').remove(); }
         if (1 != '<?=@$akses['level_kandang']?>') { $('.kandang').remove(); }
         if (1 != '<?=@$akses['level_absensi']?>') { $('.absensi').remove(); }
         if (1 != '<?=@$akses['level_gaji']?>') { $('.gaji').remove(); }
@@ -297,6 +298,9 @@ function notif(){
         if (1 != '<?=@$akses['level_recording']?>') { $('.recording').remove(); }
 
     }
+
+    //delete sidebar hidden
+    $('.sidebar-menu').removeAttr('hidden');
 
     //reminder vaksin
     $.get('<?=base_url('vaksin/add_reminder')?>', function(data) {});

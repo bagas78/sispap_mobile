@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2024 at 06:41 AM
+-- Generation Time: Jul 11, 2024 at 04:40 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -248,7 +248,7 @@ INSERT INTO `t_barang` (`barang_id`, `barang_kode`, `barang_kategori`, `barang_s
 (155, 'KB0016', '4', '0', 'FORTEVIT', '4', '2024-03-05', 0),
 (156, 'KB0017', '4', '0', 'SODIUM BIKARBONAT', '4', '2024-03-05', 0),
 (157, 'KB0018', '4', '0', 'MEDIVAC ND GMB', '4', '2024-03-05', 0),
-(158, 'KB0019', '6', '3', 'Telur Pecah / Rusak', '2', '2024-07-07', 0);
+(158, 'KB0019', '6', '3', 'Telur Pecah / Rusak', '5', '2024-07-07', 0);
 
 -- --------------------------------------------------------
 
@@ -603,7 +603,7 @@ CREATE TABLE `t_level` (
 
 INSERT INTO `t_level` (`level_id`, `level_nama`, `level_whatsapp`, `level_kontak`, `level_vaksinasi`, `level_kandang`, `level_satuan`, `level_gudang`, `level_produksi`, `level_pembelian`, `level_pengeluaran`, `level_recording`, `level_penjualan`, `level_laporan`, `level_absensi`, `level_gaji`, `level_tampilan`, `level_tanggal`, `level_hapus`) VALUES
 (1, 'Admin', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 'desktop', '2023-05-13', 0),
-(6, 'Gudang', '0', '0', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', 'tablet', '2023-05-13', 0);
+(6, 'Gudang', '0', '0', '1', '0', '0', '0', '0', '0', '1', '1', '1', '0', '0', '0', 'tablet', '2023-05-13', 0);
 
 -- --------------------------------------------------------
 
